@@ -1,0 +1,56 @@
+<html>
+
+    <head>
+        <title>Login</title>
+        <!--Common CSS-->
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <!--Page Specific CSS-->
+        <link rel="stylesheet" type="text/css" href="../css/login.css">
+        <!--File Speicifc JS-->
+        <script type="module" src="../js/helper.js"></script>
+        <script type="module" src="../js/login.js"></script>
+
+    </head>
+
+    <body>
+        <div class="maindiv">
+            <div class="leftside">
+                <div class="loginContainer">
+                    <span class="titleText">Sahas</span>
+                    <span class="welcomeText">Welcome Back !</span>
+                    <span class="SigntitleText">Sign in to continue... </span>
+                </div>
+                <div class="google_signin">
+                    <button type="button" class="login-with-google-btn" >
+                        <span><img src="D:\Github\electron_Sahas\assets\img\google.png" alt="Google icon" class="google_symbol"></span>
+                        Sign in with Google
+                    </button>
+                
+                </div>
+            </div>
+            <div class="rightside">
+                <div class="login-container">
+                    <form class="login-form">
+                        <h1>Login</h1>
+                        <div class="input-group">
+                            <input type="text" id="email" name="email"  placeholder="Email" required>
+                        </div>            
+                        <div class="input-group">
+                            <input type="password" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="options">
+                            <label class="rememberText">
+                                <input type="checkbox" name="remember" class="rememberMe_design">RememberMe
+                            </label>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+            
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+
+</html>
