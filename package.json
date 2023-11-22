@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-linux":"electron-packager /home/nisarg/WorkSpace/Electron/electron_Sahas/ sahas --appname=Sahas --platform=linux --arch=x64 --icon=./sahas.ico --overwrite --out dist/linux",
+    "build-win":"electron-packager /home/nisarg/WorkSpace/Electron/electron_Sahas/ sahas --appname=Sahas --platform=win32 --arch=x86_64 --icon=./sahas.ico --overwrite --out dist/win"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/rocketstriker999/electron_Sahas#readme",
   "devDependencies": {
+    "@electron/packager": "^18.0.0",
     "electron": "^27.1.0"
   }
 }

@@ -1,0 +1,43 @@
+.container_splash {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-size: 12px;
+}
+
+.container_version{
+    padding: 16px;
+}
+
+.container_version p{
+    text-align: end;
+}
+
+.container_info{
+    background-color: aliceblue;
+    padding: 16px;
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+
+.container_info img{
+    width: 32vh;
+    height: auto;
+}
+
+.container_copyright{
+    padding: 16px;
+    display: inline-block;
+    margin: auto;
+    font-size: 10px;
+}
+
+.progressbar_splash{
+    margin-top: 2vh;
+    height: 1vh;
+    width: 16vw;
+}
+

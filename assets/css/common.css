@@ -1,4 +1,46 @@
+
 *{
     margin: 0;
-    padding: 0;
+    padding : 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.progressbar_purple{
+    width: 200px;
+    height: 12px;
+    border: 2px solid #4527A0;
+    border-radius: 8px ;
+}
+.progressbar_purple .progress{
+    background-color: #673AB7;
+    width: 0px;
+    height: 100%;
+    animation: progres 4s forwards linear;
+}
+
+@keyframes progres{
+    0%{
+      width: 0%;
+    }
+    25%{
+        width: 50%;
+    }
+    50%{
+        width: 75%;
+    }
+    75%{
+        width: 85%;
+    }
+    100%{
+        width: 100%;
+    }
+};
+
+
+.card{
+    background-color: aliceblue;
+    padding: 16px;
+    margin-top: 64px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
 }
