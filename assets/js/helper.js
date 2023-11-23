@@ -1,42 +1,62 @@
+
 let requestHelper = {};
 
-requestHelper.requestServer = ({ requestHeaders = { "Authorization": "Bearer " + requestHelper.getToken() }, requestPath = "/", requestMethod = "GET", requestGetQuery = false, requestPostBody = {}, requestCallBack = false } = {}) => {
+requestHelper.requestServer = async ({ requestHeaders = {}, requestPath = "/", requestMethod = "GET", requestGetQuery = false, requestPostBody = false } = {}) => {
+
+    requestHeaders["Content-Type"] = "application/json";
+
+    requestPath = "https://sahasinstitute.com/" + requestPath;
+
     requestMethod = requestMethod.toUpperCase();
-    requestPostBody = JSON.stringify(requestPostBody);
 
     if (requestGetQuery) {
         requestPath = requestPath + '?'
         requestPath = requestPath + Object.keys(requestGetQuery).map(key => encodeURIComponent(key) + "=" + encodeURIComponent(requestGetQuery[key])).join('&');
     }
 
-    let apiRequest = new XMLHttpRequest();
-    apiRequest.open(requestMethod, requestPath, true);
-    apiRequest.setRequestHeader("Content-type", "application/json");
-    Object.keys(requestHeaders).map(headerKey => apiRequest.setRequestHeader(headerKey, requestHeaders[headerKey]));
-    apiRequest.onreadystatechange = () => {
-        if (apiRequest.readyState == XMLHttpRequest.DONE) {
-
-            //uiHelper.updateUI(apiRequest.getResponseHeader('content-type').split('/')[1] != "json" ? apiRequest.responseText : false)
-
-            let parsedResponse = JSON.parse(apiRequest.responseText)
-
-            uiHelper.loadTemplateView(parsedResponse)
-
-            if (requestCallBack)
-                requestCallBack(apiRequest.status, JSON.parse(apiRequest.responseText));
-        }
+    let fetchOptions = {
+        // Adding headers to the request
+        headers: requestHeaders,
+        // Adding method type
+        method: requestMethod,
+        //Adding Cookies as well
+        credentials: "same-origin",
     }
-    apiRequest.send(requestPostBody);
+
+    // Adding body or contents to send
+    //body: JSON.stringify(requestPostBody),
+    
+    if (requestPostBody){
+        fetchOptions.body = JSON.stringify(requestPostBody)
+    } 
+
+    return fetch(requestPath, fetchOptions)
 }
 
+
 //returns current authentication token
-requestHelper.getToken = () => {
-    return localStorage.getItem("token") === null ? false : localStorage.getItem("token");
+requestHelper.getData = (key) => {
+    return localStorage.getItem(key) === null ? false : localStorage.getItem(key);
 }
 
 //sets current authentication token
-requestHelper.setToken = (token) => {
-    localStorage.setItem("token", token);
+requestHelper.saveData = (key,value) => { localStorage.setItem(key, value) };
+
+
+//Check Device Id Or Generate It
+requestHelper.checkDeviceId = () =>{
+
+
+    window.electron.getDeviceID((deviceId) => {
+        requestHelper.saveData ("DEVICEID",deviceId);
+    });
+
+    requestHelper.saveData ("DEVICEID",requestHelper.getData("DEVICEID")?requestHelper.getData("DEVICEID"): window.electron.generateDeviceID());
+
+
+
 }
+
+requestHelper.checkDeviceId();
 
 export { requestHelper }

@@ -1,6 +1,6 @@
 const libElectron = require("electron");
 const libPath = require("path");
-
+const crypto = require('crypto');
 
 //Electron App Instance
 let electronApp = libElectron.app;
@@ -33,8 +33,6 @@ electronApp.on("ready", () => {
 //All Window Close Event
 electronApp.on('window-all-closed', () => electronApp.quit());
 
-electronApp.ipcMain.on("entity1:event1", (event, data) => {
-    console.log(data);
-    event.sender.send("entity1:event1", data);
-
+electronApp.ipcMain.on("deviceId:req", (event, data) => {
+    event.sender.send("deviceId:res",`${process.platform}_${crypto.createHash('sha256').update(Date.now().toString()).digest('hex').slice(0,12)}`);
 });
