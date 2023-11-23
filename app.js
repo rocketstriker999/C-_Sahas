@@ -13,6 +13,7 @@ electronApp.on("ready", () => {
     //Electron App Window
     electronApp.window = new libElectron.BrowserWindow({
         autoHideMenuBar:true,
+        show: false, //Keep Window initially hidden
         minWidth:1024,
         minHeight:768,
         webPreferences: {
@@ -22,6 +23,13 @@ electronApp.on("ready", () => {
             preload: libPath.join(__dirname, "preload.js"),
         },
     });
+
+
+    //once window is ready maximize it
+    electronApp.window.maximize();
+    //show the window
+    electronApp.window.show();
+    
     //In case User Quit
     electronApp.window.on('closed', () => { electronApp.window = null; });
     //load initial template
@@ -29,6 +37,7 @@ electronApp.on("ready", () => {
     //Open Dev Tools , Remove Below Line While Production
     electronApp.window.webContents.openDevTools();
 });
+
 
 //All Window Close Event
 electronApp.on('window-all-closed', () => electronApp.quit());
