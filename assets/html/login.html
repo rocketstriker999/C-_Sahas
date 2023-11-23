@@ -1,56 +1,53 @@
+<!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Login</title>
-        <!--Common CSS-->
-        <link rel="stylesheet" type="text/css" href="../css/common.css">
-        <!--Page Specific CSS-->
-        <link rel="stylesheet" type="text/css" href="../css/login.css">
-        <!--File Speicifc JS-->
-        <script type="module" src="../js/helper.js"></script>
-        <script type="module" src="../js/login.js"></script>
+<head>
+    <title>Login</title>
+    <!--Common CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <!--Page Specific CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <!--File Speicifc JS-->
+    <script type="module" src="../js/helper.js"></script>
+    <script type="module" src="../js/login.js"></script>
 
-    </head>
+</head>
 
-    <body>
-        <div class="maindiv">
-            <div class="leftside">
-                <div class="loginContainer">
-                    <span class="titleText">Sahas</span>
-                    <span class="welcomeText">Welcome Back !</span>
-                    <span class="SigntitleText">Sign in to continue... </span>
-                </div>
-                <div class="google_signin">
-                    <button type="button" class="login-with-google-btn" >
-                        <span><img src="D:\Github\electron_Sahas\assets\img\google.png" alt="Google icon" class="google_symbol"></span>
-                        Sign in with Google
-                    </button>
-                
-                </div>
+<body>
+    <div class="container_login">
+
+        <div class="container_info">
+
+            <img class="logo_sahas" src = "../img/logo.svg" alt="Sahas"/>
+
+            <p class="titlePrimary margin_top">Welcome Back !</p>
+            <p class="titleSecondary margin_top">Sign in to continue</p>
+            <div class="container_device margin_top">
+                <img src = "../img/device.png" alt="Device"/>
+                <p id="DEVICE_ID">Your Device Id : 75daw2423</p>
             </div>
-            <div class="rightside">
-                <div class="login-container">
-                    <form class="login-form">
-                        <h1>Login</h1>
-                        <div class="input-group">
-                            <input type="text" id="email" name="email"  placeholder="Email" required>
-                        </div>            
-                        <div class="input-group">
-                            <input type="password" id="password" name="password" placeholder="Password" required>
-                        </div>
-                        <div class="options">
-                            <label class="rememberText">
-                                <input type="checkbox" name="remember" class="rememberMe_design">RememberMe
-                            </label>
-                            <a href="#" class="forgot-password">Forgot Password?</a>
-                        </div>
             
-                        <button type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
+
         </div>
-        
-    </body>
+
+        <div class = "container_credentials card">
+            <form>
+                <h4 class="titleSecondary">Login</h4>
+                <input class="edittext margin_top" type="email" placeholder="Email"/>
+                <input class="edittext margin_top" type="password" placeholder="Password"/>
+                <button class="btn_purple margin_top" type="submit">Login</button>
+                <button class="btn_pink margin_top" type="submit">Create Account</button>
+                <div class="divider margin_top"></div>
+                <div class="btn_google margin_top center_horizontal">
+                    <img src = "../img/google.png" alt="Google"/>
+                    Singin With Google
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</body>
 
 </html>

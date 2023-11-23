@@ -45,16 +45,10 @@ requestHelper.saveData = (key,value) => { localStorage.setItem(key, value) };
 
 //Check Device Id Or Generate It
 requestHelper.checkDeviceId = () =>{
-
-
     window.electron.getDeviceID((deviceId) => {
         requestHelper.saveData ("DEVICEID",deviceId);
     });
-
     requestHelper.saveData ("DEVICEID",requestHelper.getData("DEVICEID")?requestHelper.getData("DEVICEID"): window.electron.generateDeviceID());
-
-
-
 }
 
 requestHelper.checkDeviceId();

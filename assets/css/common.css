@@ -4,6 +4,17 @@
     padding : 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    color: #191919;
+}
+
+li,
+a,
+button,
+input {
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .progressbar_purple{
@@ -12,6 +23,7 @@
     border: 2px solid #4527A0;
     border-radius: 8px ;
 }
+
 .progressbar_purple .progress{
     background-color: #673AB7;
     width: 0px;
@@ -35,12 +47,102 @@
     100%{
         width: 100%;
     }
-};
-
+}
 
 .card{
-    background-color: aliceblue;
-    padding: 16px;
-    margin-top: 64px;
+    padding: 2rem;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background-color: #FAFAFA;
+    border: 1px solid #E1E1E1;
+    
 }
+
+.card:hover{
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.center_horizontal{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.edittext{
+    padding: 0.8rem;
+    background-color: #FAFAFA;
+    border-radius: 4px;
+    border: 1px solid #BDBDBD;
+    font-weight: bold;
+}
+
+.titlePrimary{
+    font-size: 3rem;
+}
+
+.titleSecondary{
+    font-size: 2rem;
+    color: #323232;
+}
+
+.btn_purple{
+    background-color: #673AB7;
+    border-radius: 4px;
+    padding: 8px 16px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #5E35B1;
+    color: #FAFAFA;
+    font-weight: bold;
+}
+
+.btn_purple:hover{
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn_pink{
+    background-color: #E91E63;
+    border-radius: 4px;
+    padding: 8px 16px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #D81B60;
+    color: #FAFAFA;
+    font-weight: bold;
+}
+
+.btn_pink:hover{
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+.btn_google{
+    border-radius: 8rem;
+    padding: 8px 16px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #7D7D7D;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 1rem;
+}
+
+
+.btn_google:hover{
+    padding: 8px 16px;
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.divider{
+    height: 1px;
+    border: none;
+    background: #BDBDBD;
+}
+
+
+.margin_top{
+    margin-top: 1rem;
+}
+
+.padding_2{
+    padding: 2rem;
+}
+
+

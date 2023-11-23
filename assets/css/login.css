@@ -1,165 +1,54 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
+.container_login{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    gap: 2rem;
 }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-    margin-top: 10px;
+
+.container_info{
+    padding: 2rem;
+    width: 28rem;
 }
 
-button {
-    background-color: #4527A0;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.container_info *{
+    float: right;
+    clear: right;
 }
 
-button:hover {
-    background-color: #5b45a0;
-}
-
-.maindiv{
-    flex: 1;
-    display:flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items:center;
-}
-.leftside{
-    padding: 20px;
-    padding-right: 10%;
-}
-.login-with-google-btn{
-    background-color: white;
-    color: black;
-    border-radius: 20px;
-    border: 1px solid black;
-    font-size: 0.9em;
-    width: max-content;
+.logo_sahas{
+    width: 18rem;
     height: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-}
-.login-with-google-btn:hover{
-    background-color: #5b45a0;
-    color: white;
-}
-.google_symbol{
-    width: auto;
-    height: 20px;
-    padding-right: 16px;
-    padding-left: 10px;
-}
-.options {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-}
-.forgot-password {
-    color: #4527A0;
-    text-decoration: none;
-    font-size: 14px;
-}
-.forgot-password:hover {
-    text-decoration: underline;
-}
-.rememberText{
-    display: flex;
-    margin-bottom: 8px;
-    color: #555;
-    font-size: 0.8rem;
-    align-items: center;
-}
-.rememberMe_design{
-    margin-top: 0px !important;
-    margin-left: 0px;
-    margin-right: 4px;
 }
 
-
-.login-container {
-    width: 300px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px 0px #000000;
-    background-color: #ffffff;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-}
-
-h1 {
-    text-align: center;
-    color: #4527A0;
-    margin-bottom: 16px;
-}
-
-.input-group {
-    margin-bottom: 16px;
-}
-
-input {
-    padding: 10px;
+.edittext{
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 12px;
+    display: block;
 }
-.google_signin{
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items:center;
-    padding: 10%;
-    font-size: 1.2rem;
+
+.container_credentials{
+    text-align: center;
+    width: 22rem;
 }
-.loginContainer{
-    flex: 1;
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items:center;
+
+.btn_purple{
+    width: 100%;
 }
-.titleText{
-    font-size: 5rem;
-    padding: 10%;
-    color: #4527A0;
+
+.btn_pink{
+    width: 100%;
 }
-.welcomeText{
-    font-size: 1.2rem;
-    padding: 6%;  
+
+.btn_google{
+    width: 75%;
 }
-.SigntitleText{
-    font-size: 1.2rem;   
+
+.container_device{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    font-weight: bold;
 }
-.google_signin{
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items:center;
-    padding: 10%;
-    font-size: 1.2rem;
-}
+
