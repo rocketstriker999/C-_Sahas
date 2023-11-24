@@ -75,6 +75,13 @@ input {
     font-weight: bold;
 }
 
+
+
+.edittext:focus{
+    outline: none;
+    border: 2px solid #673AB7;
+}
+
 .input_icon {
     padding: 0.88rem;
     color: #673AB7;
