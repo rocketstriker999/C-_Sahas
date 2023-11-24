@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="../css/common.css">
         <!--Page Specific CSS-->
         <link rel="stylesheet" type="text/css" href="../css/createAccount.css">
+        <!--Font Awesome CSS-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
         <!--File Speicifc JS-->
         <script type="module" src="../js/helper.js"></script>
@@ -14,7 +16,56 @@
     </head>
 
     <body>
-        <h1>Create Account</h1>
+        <div class="container_create_account">
+            <div class="container_info">
+               <img class="logo_sahas" src = "../img/logo.svg" alt="Sahas"/>
+               <p class="title_primary margin_top">Create Account !</p>
+               <p class="title_secondary margin_top">Let's Start Digital...</p>
+               <div class="container_device margin_top">
+                  <img src = "../img/device.png" alt="Device"/>
+                  <p id="DEVICE_ID">Your Device Id : 75daw2423</p>
+               </div>
+            </div>
+            <div class = "container_account_details card">
+               <form>
+                  <h4 class="title_secondary">Create Account</h4>
+                  <div class="container_input margin_top">
+                     <i class="input_icon fas fa-user"></i>
+                     <input class="edittext" type="text" id="ETX_USERNAME" maxlength="22" placeholder="Full Name"/>
+                  </div>
+                  <div id="COUNTER_USERNAME" class="character_counter">0 / 22 characters</div>
+
+                  <div class="container_input margin_top">
+                     <i class="input_icon fas fa-envelope"></i>
+                     <input class="edittext" type="email" id="ETX_EMAIL" maxlength="32" placeholder="Email"/>
+                  </div>
+                  <div id="COUNTER_EMAIL" class="character_counter">0 / 32 characters</div>
+
+                  <div class="container_input margin_top">
+                     <i class="input_icon fas fa-lock"></i>
+                     <input class="edittext" type="password" id="ETX_PASSWORD" maxlength="16" placeholder="Password"/>
+                  </div>
+                  <div id="COUNTER_PASSWORD" class="character_counter">0 / 16 characters</div>
+
+                  <div class="container_input margin_top">
+                     <i class="input_icon fa fa-phone" aria-hidden="true"></i>
+                     <input class="edittext" type="tel" id="ETX_PHONE" maxlength="10" pattern="[0-9]{3}[0-9]{2}[0-9]{5}"  placeholder="Phone number"/>
+                  </div>
+                  <div id="COUNTER_PHONE" class="character_counter">0 / 10 characters</div>
+
+                  <div class="container_input margin_top">
+                     <i class="input_icon fas fa-user-friends"></i>
+                     <input class="edittext" type="text" id="ETX_REFERCODE" maxlength="10" placeholder="Refer Code"/>
+                  </div>
+                  <div id="COUNTER_REFERCODE" class="character_counter">0 / 10 characters</div>
+                  <p id="ERROR" class="error margin_top">This is Error</p>
+
+                  <button id="BTN_SIGNUP" class="btn_purple margin_top">Create Account</button>            
+                  <button id="BTN_LOGIN" class="btn_pink margin_top">Back To Login</button>             
+                  
+               </form>
+            </div>
+         </div>
     </body>
 
 </html>

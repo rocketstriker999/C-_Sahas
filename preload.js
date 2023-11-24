@@ -9,4 +9,7 @@ contextBridge.exposeInMainWorld("electron", {
       callback(deviceId);
     });
   },
+  setCurrentUser:(userData)=>{
+    ipcRenderer.send("user:req",userData);
+  }
 });

@@ -75,11 +75,11 @@ input {
     font-weight: bold;
 }
 
-.titlePrimary{
+.title_primary{
     font-size: 3rem;
 }
 
-.titleSecondary{
+.title_secondary{
     font-size: 2rem;
     color: #323232;
 }
@@ -143,6 +143,10 @@ input {
 
 .padding_2{
     padding: 2rem;
+}
+
+.error{
+    color: #F44336
 }
 
 

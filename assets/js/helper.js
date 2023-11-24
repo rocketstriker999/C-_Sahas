@@ -3,9 +3,11 @@ let requestHelper = {};
 
 requestHelper.requestServer = async ({ requestHeaders = {}, requestPath = "/", requestMethod = "GET", requestGetQuery = false, requestPostBody = false } = {}) => {
 
-    requestHeaders["Content-Type"] = "application/json";
+    requestHeaders["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8";
 
-    requestPath = "https://sahasinstitute.com/" + requestPath;
+
+
+    requestPath = "https://sahasinstitute.com/adminportal/mobileApis/" + requestPath;
 
     requestMethod = requestMethod.toUpperCase();
 
@@ -25,10 +27,16 @@ requestHelper.requestServer = async ({ requestHeaders = {}, requestPath = "/", r
 
     // Adding body or contents to send
     //body: JSON.stringify(requestPostBody),
-    
-    if (requestPostBody){
-        fetchOptions.body = JSON.stringify(requestPostBody)
-    } 
+
+    if (requestPostBody) {
+
+        let postBodyContent = [];
+        for (let key in requestPostBody)
+            postBodyContent.push(encodeURIComponent(key) + "=" + encodeURIComponent(requestPostBody[key]));
+        postBodyContent = postBodyContent.join("&");
+
+        fetchOptions.body = postBodyContent
+    }
 
     return fetch(requestPath, fetchOptions)
 }
@@ -40,15 +48,13 @@ requestHelper.getData = (key) => {
 }
 
 //sets current authentication token
-requestHelper.saveData = (key,value) => { localStorage.setItem(key, value) };
+requestHelper.saveData = (key, value) => { localStorage.setItem(key, value) };
 
 
 //Check Device Id Or Generate It
-requestHelper.checkDeviceId = () =>{
-    window.electron.getDeviceID((deviceId) => {
-        requestHelper.saveData ("DEVICEID",deviceId);
-    });
-    requestHelper.saveData ("DEVICEID",requestHelper.getData("DEVICEID")?requestHelper.getData("DEVICEID"): window.electron.generateDeviceID());
+requestHelper.checkDeviceId = () => {
+    window.electron.getDeviceID((deviceId) => requestHelper.saveData("DEVICEID", deviceId));
+    requestHelper.saveData("DEVICEID", requestHelper.getData("DEVICEID") ? requestHelper.getData("DEVICEID") : window.electron.generateDeviceID());
 }
 
 requestHelper.checkDeviceId();

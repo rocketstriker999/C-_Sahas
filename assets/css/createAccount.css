@@ -1,0 +1,64 @@
+.container_create_account{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 2rem;
+}
+
+.container_info{
+    padding: 2rem;
+    width: 28rem;
+}
+
+.container_info *{
+    float: right;
+    clear: right;
+}
+
+.logo_sahas{
+    width: 18rem;
+    height: auto;
+}
+.container_account_details{
+    text-align: center;
+    width: 25rem;
+}
+
+.container_device{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+
+.edittext{
+    display: block;
+    width: 100%;
+    padding-left: 2.5rem;
+}
+
+
+.character_counter {
+    text-align: right;
+    margin-top: 2px;
+}
+
+
+.container_input {
+    position: relative;
+    text-align: left;
+}
+
+.input_icon {
+    padding: 0.8rem;
+    color: #673AB7;
+    float: left;    
+    position: absolute;
+}
+
+.error{
+    display: none;
+}
