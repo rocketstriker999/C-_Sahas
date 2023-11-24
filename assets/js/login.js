@@ -7,7 +7,10 @@ loginHandler.deviceId = document.getElementById("DEVICE_ID");
 
 loginHandler.etxEmail = document.getElementById("ETX_EMAIL");
 loginHandler.etxPassWord = document.getElementById("ETX_PASSWORD");
+loginHandler.error = document.getElementById("ERROR");
 
+loginHandler.counterEmail = document.getElementById("COUNTER_EMAIL");
+loginHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD");
 
 loginHandler.btnLogin = document.getElementById("BTN_LOGIN");
 loginHandler.btnCreateAccout = document.getElementById("BTN_CREATE_ACCOUNT");
@@ -15,9 +18,22 @@ loginHandler.btnCreateAccout = document.getElementById("BTN_CREATE_ACCOUNT");
 //Set Device Id From Storage Initially
 loginHandler.deviceId.innerHTML = `Your Device Id : ${requestHelper.getData("DEVICEID")}`;
 
+loginHandler.etxEmail.addEventListener("input", (e) => {
+    loginHandler.counterEmail.innerText = e.target.value.length + " / 32 characters";
+});
+
+loginHandler.etxPassWord.addEventListener("input", (e) => {
+    loginHandler.counterPassWord.innerText = e.target.value.length + " / 16 characters";
+});
+
 //Login Feild Validation
 loginHandler.validateInputs = () => {
     return true;
+}
+
+loginHandler.setError = (error) => {
+    loginHandler.error.style.display = "block";
+    loginHandler.error.innerHTML = error;
 }
 
 loginHandler.btnLogin.addEventListener("click", (e) => {
@@ -37,13 +53,9 @@ loginHandler.btnLogin.addEventListener("click", (e) => {
                 window.electron.setCurrentUser(jsonResponse.userAccData);
                 window.location.href = 'dashBoard.html';
             }
-            else {
-                throw new Error("Create Account Failed : " + jsonResponse.response_msg);
-            }
-        }).catch(error => {
-            console.log(error)
-            //window.location.href = 'login.html';
-        });
+            else
+                throw new Error(jsonResponse.response_msg);
+        }).catch(error => loginHandler.setError(error));
 
     }
 

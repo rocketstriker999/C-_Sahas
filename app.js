@@ -45,10 +45,9 @@ electronApp.ipcMain.on("deviceId:req", (event, data) => {
     event.sender.send("deviceId:res",`${process.platform}_${crypto.createHash('sha256').update(Date.now().toString()).digest('hex').slice(0,12)}`);
 });
 
-//User Data
-let currentUser={}
 
 //Save The User
 electronApp.ipcMain.on("user:req", (event, userData) => {
-    currentUser=userData;
+    //save current user
+    electronApp.currentUser=userData;
 });

@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <!--Page Specific CSS-->
     <link rel="stylesheet" type="text/css" href="../css/login.css">
+     <!--Font Awesome CSS-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!--File Speicifc JS-->
     <script type="module" src="../js/helper.js"></script>
     <script type="module" src="../js/login.js"></script>
@@ -33,10 +35,20 @@
         <div class = "container_credentials card">
             <form >
                 <h4 class="title_secondary">Login</h4>
-                <input id="ETX_EMAIL" class="edittext margin_top" type="email" placeholder="Email"/>
-                <input id="ETX_PASSWORD" class="edittext margin_top" type="password" placeholder="Password"/>
+                <div class="container_input margin_top">
+                    <i class="input_icon fas fa-envelope"></i>
+                    <input class="edittext" type="email" id="ETX_EMAIL" maxlength="32" placeholder="Email"/>
+                 </div>
+                 <div id="COUNTER_EMAIL" class="character_counter">0 / 32 characters</div>
+
+                 <div class="container_input margin_top">
+                    <i class="input_icon fas fa-lock"></i>
+                    <input class="edittext" type="password" id="ETX_PASSWORD" maxlength="16" placeholder="Password"/>
+                 </div>
+                 <div id="COUNTER_PASSWORD" class="character_counter">0 / 16 characters</div>
                 <button id="BTN_LOGIN" class="btn_purple margin_top" type="submit">Login</button>
                 <button id="BTN_CREATE_ACCOUNT" class="btn_pink margin_top">Create Account</button>
+                <p id="ERROR" class="error margin_top">This is Error</p>
                 <div class="divider margin_top"></div>
                 <div class="btn_google margin_top center_horizontal">
                     <img src = "../img/google.png" alt="Google"/>

@@ -28,7 +28,6 @@ createAccountHandler.deviceId.innerHTML = `Your Device Id : ${requestHelper.getD
 
 createAccountHandler.etxUserName.addEventListener("input", (e) => {
     createAccountHandler.counterUserName.innerText = e.target.value.length + " / 22 characters";
-    console.log("CALLED")
 });
 
 createAccountHandler.etxEmail.addEventListener("input", (e) => {
@@ -77,17 +76,15 @@ createAccountHandler.btnCreateAccout.addEventListener("click", (e) => {
                 user_device: requestHelper.getData("DEVICEID")
             }
         }).then(response=> response.json()).then(jsonResponse => {
-            console.log(jsonResponse.isTaskSuccess)
             if (jsonResponse.isTaskSuccess=='true') {
                 window.electron.setCurrentUser(jsonResponse.userAccData);
                 window.location.href = 'dashBoard.html';
             }
             else {
-                throw new Error("Create Account Failed : "+jsonResponse.response_msg);
+                throw new Error(jsonResponse.response_msg);
             }
         }).catch(error => {
-            console.log(error)
-            //window.location.href = 'login.html';
+            createAccountHandler.setError(error);
         });
     }
 });

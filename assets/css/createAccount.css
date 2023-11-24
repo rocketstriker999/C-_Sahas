@@ -37,20 +37,8 @@
 .edittext{
     display: block;
     width: 100%;
-    padding-left: 2.5rem;
 }
 
-
-.character_counter {
-    text-align: right;
-    margin-top: 2px;
-}
-
-
-.container_input {
-    position: relative;
-    text-align: left;
-}
 
 .input_icon {
     padding: 0.8rem;

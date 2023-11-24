@@ -23,8 +23,8 @@
 }
 
 .edittext{
-    width: 100%;
     display: block;
+    width: 100%;
 }
 
 .container_credentials{
@@ -40,9 +40,7 @@
     width: 100%;
 }
 
-.btn_google{
-    width: 75%;
-}
+
 
 .container_device{
     display: flex;
@@ -52,3 +50,6 @@
     font-weight: bold;
 }
 
+.error{
+    display: none;
+}
