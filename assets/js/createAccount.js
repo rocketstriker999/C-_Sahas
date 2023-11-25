@@ -64,23 +64,23 @@ createAccountHandler.setSignUpError=(error)=>{
 createAccountHandler.setInputError=(error,validationArea,etx)=>{
     validationArea.textContent=error;
     validationArea.style.display='block'
-    etx.classList.add('invalid-input');
+    etx.classList.add('input_invalid');
 }
 
 createAccountHandler.validateInputs = () => {
     
         // Reset previous validation messages
-        createAccountHandler.validationUsername.textContent = '';
-        createAccountHandler.validationEmail.textContent = '';
-        createAccountHandler.validationPassword.textContent = '';
-        createAccountHandler.validationPhone.textContent = '';
-        createAccountHandler.validationRefercode.textContent = '';
+        createAccountHandler.validationUsername.style.display = "none";
+        createAccountHandler.validationEmail.style.display = "none"
+        createAccountHandler.validationPassword.style.display = "none"
+        createAccountHandler.validationPhone.style.display = "none"
+        createAccountHandler.validationRefercode.style.display = "none"
 
-        createAccountHandler.etxUserName.classList.remove('invalid-input');
-        createAccountHandler.etxEmail.classList.remove('invalid-input');
-        createAccountHandler.etxPassWord.classList.remove('invalid-input');
-        createAccountHandler.etxPhone.classList.remove('invalid-input');
-        createAccountHandler.etxReferCode.classList.remove('invalid-input');
+        createAccountHandler.etxUserName.classList.remove('input_invalid');
+        createAccountHandler.etxEmail.classList.remove('input_invalid');
+        createAccountHandler.etxPassWord.classList.remove('input_invalid');
+        createAccountHandler.etxPhone.classList.remove('input_invalid');
+        createAccountHandler.etxReferCode.classList.remove('input_invalid');
 
         // Perform validation
         
@@ -99,7 +99,7 @@ createAccountHandler.validateInputs = () => {
             return false;
         }
 
-        if (createAccountHandler.etxPhone.value.length < 8) {
+        if (createAccountHandler.etxPhone.value.length < 10) {
             createAccountHandler.setInputError('Please enter valid phone number',createAccountHandler.validationPhone,createAccountHandler.etxPhone);
             return false;
         }
@@ -108,10 +108,8 @@ createAccountHandler.validateInputs = () => {
             createAccountHandler.setInputError('Please enter refer code',createAccountHandler.validationRefercode,createAccountHandler.etxReferCode);
             return false;
         }
-
-        else{
-            return true;
-        }
+        return true;
+        
 }
 
 createAccountHandler.btnCreateAccout.addEventListener("click", (e) => {

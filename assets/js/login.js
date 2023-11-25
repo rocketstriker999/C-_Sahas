@@ -32,22 +32,16 @@ loginHandler.etxPassWord.addEventListener("input", (e) => {
 //Login Feild Validation
 loginHandler.validateInputs = () => {
     // Reset previous validation messages
-    loginHandler.validationEmail.innerHTML = '';
-    loginHandler.validationPassword.innerHTML = '';
-    loginHandler.etxEmail.classList.remove('invalid-input');
-    loginHandler.etxPassWord.classList.remove('invalid-input');
+    loginHandler.validationEmail.style.display = "none";
+    loginHandler.validationPassword.style.display = "none";
+    loginHandler.etxEmail.classList.remove('input_invalid');
+    loginHandler.etxPassWord.classList.remove('input_invalid');
 
-            if(loginHandler.etxEmail.value == ''){
-                loginHandler.setInputError('Please enter email address.',loginHandler.validationEmail,loginHandler.etxEmail)
+            if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginHandler.etxEmail.value)){
+                loginHandler.setInputError('Please enter valid email address.',loginHandler.validationEmail,loginHandler.etxEmail)
                 return false;
             }
-            else{
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginHandler.etxEmail.value)) {
-                    loginHandler.setInputError('Invalid email address.',loginHandler.validationEmail,loginHandler.etxEmail)
-                    return false;
-                }
-            }
-            
+
             if (loginHandler.etxPassWord.value.length < 8) {
                 loginHandler.setInputError('Please enter Valid Password',loginHandler.validationPassword,loginHandler.etxPassWord)
                 return false;
@@ -59,7 +53,7 @@ loginHandler.validateInputs = () => {
 loginHandler.setInputError=(error,validationArea,etx)=>{
     validationArea.innerHTML=error;
     validationArea.style.display='block'
-    etx.classList.add('invalid-input')
+    etx.classList.add('input_invalid')
 }
 
 loginHandler.setAuthenticationError = (error) => {

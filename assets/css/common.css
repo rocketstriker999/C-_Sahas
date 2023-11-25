@@ -177,6 +177,9 @@ input {
 .error{
     color: #F44336
 }
+.input_invalid {
+    border:1px solid #F44336;
+}
 
 
 
