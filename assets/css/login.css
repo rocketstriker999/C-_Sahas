@@ -53,3 +53,6 @@
 .error{
     display: none;
 }
+.invalid-input {
+    border:1px solid #F44336;
+}

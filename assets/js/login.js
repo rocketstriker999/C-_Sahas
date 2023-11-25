@@ -14,6 +14,9 @@ loginHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD");
 
 loginHandler.btnLogin = document.getElementById("BTN_LOGIN");
 loginHandler.btnCreateAccout = document.getElementById("BTN_CREATE_ACCOUNT");
+loginHandler.validationEmail = document.getElementById('VALIDATION_EMAIL');
+loginHandler.validationPassword = document.getElementById('VALIDATION_PASSWORD');
+
 
 //Set Device Id From Storage Initially
 loginHandler.deviceId.innerHTML = `Your Device Id : ${requestHelper.getData("DEVICEID")}`;
@@ -28,10 +31,38 @@ loginHandler.etxPassWord.addEventListener("input", (e) => {
 
 //Login Feild Validation
 loginHandler.validateInputs = () => {
-    return true;
+    // Reset previous validation messages
+    loginHandler.validationEmail.innerHTML = '';
+    loginHandler.validationPassword.innerHTML = '';
+    loginHandler.etxEmail.classList.remove('invalid-input');
+    loginHandler.etxPassWord.classList.remove('invalid-input');
+
+            if(loginHandler.etxEmail.value == ''){
+                loginHandler.setInputError('Please enter email address.',loginHandler.validationEmail,loginHandler.etxEmail)
+                return false;
+            }
+            else{
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginHandler.etxEmail.value)) {
+                    loginHandler.setInputError('Invalid email address.',loginHandler.validationEmail,loginHandler.etxEmail)
+                    return false;
+                }
+            }
+            
+            if (loginHandler.etxPassWord.value.length < 8) {
+                loginHandler.setInputError('Please enter Valid Password',loginHandler.validationPassword,loginHandler.etxPassWord)
+                return false;
+            }
+
+            return true;
 }
 
-loginHandler.setError = (error) => {
+loginHandler.setInputError=(error,validationArea,etx)=>{
+    validationArea.innerHTML=error;
+    validationArea.style.display='block'
+    etx.classList.add('invalid-input')
+}
+
+loginHandler.setAuthenticationError = (error) => {
     loginHandler.error.style.display = "block";
     loginHandler.error.innerHTML = error;
 }
@@ -55,7 +86,7 @@ loginHandler.btnLogin.addEventListener("click", (e) => {
             }
             else
                 throw new Error(jsonResponse.response_msg);
-        }).catch(error => loginHandler.setError(error));
+        }).catch(error => loginHandler.setAuthenticationError(error));
 
     }
 
