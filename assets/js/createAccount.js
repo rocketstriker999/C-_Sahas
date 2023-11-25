@@ -18,6 +18,12 @@ createAccountHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD
 createAccountHandler.counterPhone = document.getElementById("COUNTER_PHONE");
 createAccountHandler.counterReferCode = document.getElementById("COUNTER_REFERCODE");
 
+createAccountHandler.validationUsername = document.getElementById('VALIDATION_USERNAME');
+createAccountHandler.validationEmail = document.getElementById('VALIDATION_EMAIL');
+createAccountHandler.validationPassword = document.getElementById('VALIDATION_PASSWORD');
+createAccountHandler.validationPhone = document.getElementById('VALIDATION_PHONE');
+createAccountHandler.validationRefercode = document.getElementById('VALIDATION_REFERCODE');
+
 createAccountHandler.error = document.getElementById("ERROR");
 
 createAccountHandler.btnLogin = document.getElementById("BTN_LOGIN");
@@ -46,19 +52,64 @@ createAccountHandler.etxReferCode.addEventListener("input", (e) => {
     createAccountHandler.counterReferCode.innerText = e.target.value.length + " / 10 characters";
 });
 
-
 createAccountHandler.btnLogin.addEventListener("click", (e) => {
     e.preventDefault(); //Stop Form Submission
     window.location.href = 'login.html'
 });
 
-createAccountHandler.setError=(error)=>{
+createAccountHandler.setSignUpError=(error)=>{
     createAccountHandler.error.style.display="block";
     createAccountHandler.error.innerHTML=error;
 }
+createAccountHandler.setInputError=(error,validationArea,etx)=>{
+    validationArea.textContent=error;
+    validationArea.style.display='block'
+    etx.classList.add('input_invalid');
+}
 
 createAccountHandler.validateInputs = () => {
-    return true;
+    
+        // Reset previous validation messages
+        createAccountHandler.validationUsername.style.display = "none";
+        createAccountHandler.validationEmail.style.display = "none"
+        createAccountHandler.validationPassword.style.display = "none"
+        createAccountHandler.validationPhone.style.display = "none"
+        createAccountHandler.validationRefercode.style.display = "none"
+
+        createAccountHandler.etxUserName.classList.remove('input_invalid');
+        createAccountHandler.etxEmail.classList.remove('input_invalid');
+        createAccountHandler.etxPassWord.classList.remove('input_invalid');
+        createAccountHandler.etxPhone.classList.remove('input_invalid');
+        createAccountHandler.etxReferCode.classList.remove('input_invalid');
+
+        // Perform validation
+        
+        if (createAccountHandler.etxUserName.value == '') {
+            createAccountHandler.setInputError('Please enter your Full name',createAccountHandler.validationUsername,createAccountHandler.etxUserName);
+            return false;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(createAccountHandler.etxEmail.value)) {
+            createAccountHandler.setInputError('Please enter a valid email address',createAccountHandler.validationEmail,createAccountHandler.etxEmail);
+            return false;
+        }
+
+        if (createAccountHandler.etxPassWord.value.length < 8) {
+            createAccountHandler.setInputError('Password must be at least 8 characters long',createAccountHandler.validationPassword,createAccountHandler.etxPassWord);
+            return false;
+        }
+
+        if (createAccountHandler.etxPhone.value.length < 10) {
+            createAccountHandler.setInputError('Please enter valid phone number',createAccountHandler.validationPhone,createAccountHandler.etxPhone);
+            return false;
+        }
+
+        if (createAccountHandler.counterReferCode.value == '') {
+            createAccountHandler.setInputError('Please enter refer code',createAccountHandler.validationRefercode,createAccountHandler.etxReferCode);
+            return false;
+        }
+        return true;
+        
 }
 
 createAccountHandler.btnCreateAccout.addEventListener("click", (e) => {
@@ -84,7 +135,7 @@ createAccountHandler.btnCreateAccout.addEventListener("click", (e) => {
                 throw new Error(jsonResponse.response_msg);
             }
         }).catch(error => {
-            createAccountHandler.setError(error);
+            createAccountHandler.setSignUpError(error);
         });
     }
 });
