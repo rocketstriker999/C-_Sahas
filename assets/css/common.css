@@ -82,7 +82,12 @@ input {
     border: 2px solid #673AB7;
 }
 
-.input_icon {
+.invalid_edittext {
+    border:1px solid #F44336;
+}
+
+
+.icon_edittext {
     padding: 0.88rem;
     color: #673AB7;
     float: left;    
@@ -96,7 +101,7 @@ input {
 }
 
 
-.container_input {
+.container_edittext {
     position: relative;
     text-align: left;
 }
@@ -139,7 +144,6 @@ input {
     box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.25);
 }
 
-
 .btn_google{
     border-radius: 8rem;
     padding: 8px 16px;
@@ -165,7 +169,6 @@ input {
     background: #BDBDBD;
 }
 
-
 .margin_top{
     margin-top: 1rem;
 }
@@ -176,9 +179,6 @@ input {
 
 .error{
     color: #F44336
-}
-.input_invalid {
-    border:1px solid #F44336;
 }
 
 

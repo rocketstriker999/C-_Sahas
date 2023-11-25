@@ -34,8 +34,8 @@ loginHandler.validateInputs = () => {
     // Reset previous validation messages
     loginHandler.validationEmail.style.display = "none";
     loginHandler.validationPassword.style.display = "none";
-    loginHandler.etxEmail.classList.remove('input_invalid');
-    loginHandler.etxPassWord.classList.remove('input_invalid');
+    loginHandler.etxEmail.classList.remove('invalid_edittext');
+    loginHandler.etxPassWord.classList.remove('invalid_edittext');
 
             if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginHandler.etxEmail.value)){
                 loginHandler.setInputError('Please enter valid email address.',loginHandler.validationEmail,loginHandler.etxEmail)
@@ -53,7 +53,7 @@ loginHandler.validateInputs = () => {
 loginHandler.setInputError=(error,validationArea,etx)=>{
     validationArea.innerHTML=error;
     validationArea.style.display='block'
-    etx.classList.add('input_invalid')
+    etx.classList.add('invalid_edittext')
 }
 
 loginHandler.setAuthenticationError = (error) => {

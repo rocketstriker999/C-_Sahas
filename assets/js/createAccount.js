@@ -64,7 +64,7 @@ createAccountHandler.setSignUpError=(error)=>{
 createAccountHandler.setInputError=(error,validationArea,etx)=>{
     validationArea.textContent=error;
     validationArea.style.display='block'
-    etx.classList.add('input_invalid');
+    etx.classList.add('invalid_edittext');
 }
 
 createAccountHandler.validateInputs = () => {
@@ -76,11 +76,11 @@ createAccountHandler.validateInputs = () => {
         createAccountHandler.validationPhone.style.display = "none"
         createAccountHandler.validationRefercode.style.display = "none"
 
-        createAccountHandler.etxUserName.classList.remove('input_invalid');
-        createAccountHandler.etxEmail.classList.remove('input_invalid');
-        createAccountHandler.etxPassWord.classList.remove('input_invalid');
-        createAccountHandler.etxPhone.classList.remove('input_invalid');
-        createAccountHandler.etxReferCode.classList.remove('input_invalid');
+        createAccountHandler.etxUserName.classList.remove('invalid_edittext');
+        createAccountHandler.etxEmail.classList.remove('invalid_edittext');
+        createAccountHandler.etxPassWord.classList.remove('invalid_edittext');
+        createAccountHandler.etxPhone.classList.remove('invalid_edittext');
+        createAccountHandler.etxReferCode.classList.remove('invalid_edittext');
 
         // Perform validation
         
