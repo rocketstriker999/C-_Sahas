@@ -64,7 +64,7 @@ loginHandler.setAuthenticationError = (error) => {
 
 //google Login redirect to Google Signin Via Sahas Website
 loginHandler.btnGoogleLogin.addEventListener("click", (e) => {
-    require("shell").openExternal("http://www.sahasinstitute.com/google_login.html")
+    window.electron.openGoogleLogin();
 })
 
 loginHandler.btnLogin.addEventListener("click", (e) => {

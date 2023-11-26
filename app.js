@@ -37,16 +37,13 @@ electronApp.on("ready", () => {
             arg.startsWith("sahas://")
           });
 
-          console.log(deepLinkingUrl);
+          console.log("URL :"+deepLinkingUrl);
 
           // Someone tried to run a second instance, we should focus our window.
           if (electronApp.window) 
             electronApp.window.focus()
         })
-      
       }
-
-
 
     //once window is ready maximize it
     electronApp.window.maximize();
@@ -65,6 +62,11 @@ electronApp.on("ready", () => {
 
 //All Window Close Event
 electronApp.on('window-all-closed', () => electronApp.quit());
+
+
+electronApp.ipcMain.on("googleLogin:req",(event,data)=>{
+  libElectron.shell.openExternal("https://sahasinstitute.com/google_login.html");
+});
 
 //Request For Device ID
 electronApp.ipcMain.on("deviceId:req", (event, data) => {

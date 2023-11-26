@@ -9,6 +9,9 @@ contextBridge.exposeInMainWorld("electron", {
       callback(deviceId);
     });
   },
+  openGoogleLogin:()=>{
+    ipcRenderer.send("googleLogin:req");
+  },
   setCurrentUser:(userData)=>{
     ipcRenderer.send("user:req",userData);
   }
