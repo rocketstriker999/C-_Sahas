@@ -9,7 +9,14 @@ let electronApp = libElectron.app;
 electronApp.ipcMain = libElectron.ipcMain;
 
 //Register For Deeplinking
-electronApp.setAsDefaultProtocolClient('sahas')
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [path.resolve(process.argv[1])])
+  }
+} else {
+  electronApp.setAsDefaultProtocolClient('sahas')
+}
+
 
 //APP Ready Event
 electronApp.on("ready", () => {
