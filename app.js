@@ -1,6 +1,7 @@
 const libElectron = require("electron");
 const libPath = require("path");
 const crypto = require('crypto');
+const commonUtil = require('./utils/common.js');
 
 //Electron App Instance
 let electronApp = libElectron.app;
@@ -9,13 +10,7 @@ let electronApp = libElectron.app;
 electronApp.ipcMain = libElectron.ipcMain;
 
 //Register For Deeplinking
-if (process.defaultApp) {
-  if (process.argv.length >= 2) {
-    electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [path.resolve(process.argv[1])])
-  }
-} else {
-  electronApp.setAsDefaultProtocolClient('sahas')
-}
+electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resolve(process.argv[1])])
 
 
 //APP Ready Event
@@ -41,10 +36,12 @@ electronApp.on("ready", () => {
         electronApp.on('second-instance', (event, args, workingDirectory) => {
 
           const deepLinkingUrl= args.find(arg=>{
-            arg.startsWith("sahas://")
+            return arg.startsWith("sahas://")
           });
 
-          console.log("URL :"+deepLinkingUrl);
+          const userDetails=commonUtil.decodeGoogleLoginToken(new URL(deepLinkingUrl).searchParams.get("token"));
+
+          console.log(userDetails.email);
 
           // Someone tried to run a second instance, we should focus our window.
           if (electronApp.window) 
