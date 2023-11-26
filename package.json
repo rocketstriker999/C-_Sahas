@@ -25,8 +25,5 @@
   "devDependencies": {
     "@electron/packager": "^18.0.0",
     "electron": "^27.1.0"
-  },
-  "dependencies": {
-    "electron-deeplink": "^1.0.10"
   }
 }

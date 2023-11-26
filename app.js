@@ -8,16 +8,8 @@ let electronApp = libElectron.app;
 //Ipc To Communicate With View JS Files 
 electronApp.ipcMain = libElectron.ipcMain;
 
-
-
-if (process.defaultApp) {
-    if (process.argv.length >= 2) {
-        electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resolve(process.argv[1])])
-    }
-  } else {
-    electronApp.setAsDefaultProtocolClient('sahas')
-  }
-
+//Register For Deeplinking
+electronApp.setAsDefaultProtocolClient('sahas')
 
 //APP Ready Event
 electronApp.on("ready", () => {
@@ -36,29 +28,23 @@ electronApp.on("ready", () => {
         },
     });
 
-
-    const gotTheLock = electronApp.requestSingleInstanceLock();
-
-    if (!gotTheLock) {
+    if (!electronApp.requestSingleInstanceLock()) {
         electronApp.quit()
       } else {
-        electronApp.on('second-instance', (event, commandLine, workingDirectory) => {
+        electronApp.on('second-instance', (event, args, workingDirectory) => {
+
+          const deepLinkingUrl= args.find(arg=>{
+            arg.startsWith("sahas://")
+          });
+
+          console.log(deepLinkingUrl);
+
           // Someone tried to run a second instance, we should focus our window.
-          if (electronApp.window) {
-            if (electronApp.window.isMinimized()) electronApp.window.restore()
+          if (electronApp.window) 
             electronApp.window.focus()
-          }
-          // the commandLine is array of strings in which last element is deep link url
-          dialog.showErrorBox('Welcome Back', `You arrived from: ${commandLine.pop()}`)
         })
       
       }
-
-
-    electronApp.on('open-url', (event, url) => {
-        dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
-      })
-    
 
 
 

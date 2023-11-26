@@ -13,6 +13,7 @@ loginHandler.counterEmail = document.getElementById("COUNTER_EMAIL");
 loginHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD");
 
 loginHandler.btnLogin = document.getElementById("BTN_LOGIN");
+loginHandler.btnGoogleLogin = document.getElementById("BTN_GOOGLE_LOGIN");
 loginHandler.btnCreateAccout = document.getElementById("BTN_CREATE_ACCOUNT");
 loginHandler.validationEmail = document.getElementById('VALIDATION_EMAIL');
 loginHandler.validationPassword = document.getElementById('VALIDATION_PASSWORD');
@@ -60,6 +61,11 @@ loginHandler.setAuthenticationError = (error) => {
     loginHandler.error.style.display = "block";
     loginHandler.error.innerHTML = error;
 }
+
+//google Login redirect to Google Signin Via Sahas Website
+loginHandler.btnGoogleLogin.addEventListener("click", (e) => {
+    require("shell").openExternal("http://www.sahasinstitute.com/google_login.html")
+})
 
 loginHandler.btnLogin.addEventListener("click", (e) => {
     e.preventDefault(); //Stop Form Submission
