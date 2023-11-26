@@ -39,9 +39,7 @@ electronApp.on("ready", () => {
             return arg.startsWith("sahas://")
           });
 
-          const userDetails=commonUtil.decodeGoogleLoginToken(new URL(deepLinkingUrl).searchParams.get("token"));
-
-          console.log(userDetails.email);
+          const userDetails=commonUtil.decodeGoogleLoginToken(new URL(deepLinkingUrl).searchParams.get("signin_token"));
 
           // Someone tried to run a second instance, we should focus our window.
           if (electronApp.window) 
