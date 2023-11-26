@@ -8,8 +8,20 @@ let electronApp = libElectron.app;
 //Ipc To Communicate With View JS Files 
 electronApp.ipcMain = libElectron.ipcMain;
 
+
+
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resolve(process.argv[1])])
+    }
+  } else {
+    electronApp.setAsDefaultProtocolClient('sahas')
+  }
+
+
 //APP Ready Event
 electronApp.on("ready", () => {
+
     //Electron App Window
     electronApp.window = new libElectron.BrowserWindow({
         autoHideMenuBar:true,
@@ -24,6 +36,32 @@ electronApp.on("ready", () => {
         },
     });
 
+
+    const gotTheLock = electronApp.requestSingleInstanceLock();
+
+    if (!gotTheLock) {
+        electronApp.quit()
+      } else {
+        electronApp.on('second-instance', (event, commandLine, workingDirectory) => {
+          // Someone tried to run a second instance, we should focus our window.
+          if (electronApp.window) {
+            if (electronApp.window.isMinimized()) electronApp.window.restore()
+            electronApp.window.focus()
+          }
+          // the commandLine is array of strings in which last element is deep link url
+          dialog.showErrorBox('Welcome Back', `You arrived from: ${commandLine.pop()}`)
+        })
+      
+      }
+
+
+    electronApp.on('open-url', (event, url) => {
+        dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
+      })
+    
+
+
+
     //once window is ready maximize it
     electronApp.window.maximize();
     //show the window
@@ -35,16 +73,17 @@ electronApp.on("ready", () => {
     electronApp.window.loadURL(`file://${__dirname}/assets/html/splash.html`);
     //Open Dev Tools , Remove Below Line While Production
     electronApp.window.webContents.openDevTools();
+
 });
 
 
 //All Window Close Event
 electronApp.on('window-all-closed', () => electronApp.quit());
 
+//Request For Device ID
 electronApp.ipcMain.on("deviceId:req", (event, data) => {
     event.sender.send("deviceId:res",`${process.platform}_${crypto.createHash('sha256').update(Date.now().toString()).digest('hex').slice(0,12)}`);
 });
-
 
 //Save The User
 electronApp.ipcMain.on("user:req", (event, userData) => {
