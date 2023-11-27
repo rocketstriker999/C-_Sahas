@@ -1,0 +1,27 @@
+.container_courses{
+
+}
+
+.card_course{
+    margin: 1rem;
+    display: inline-block;
+    border-radius: 4px;
+    width: 16rem;
+}
+
+.course_img{
+    width: 100%;
+    height: 14rem;
+}
+
+.course_price{
+    display: inline-block;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #323232;
+}
+
+.course_subjects{
+    margin-left: 1rem;
+}
+

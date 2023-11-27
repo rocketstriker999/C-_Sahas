@@ -1,13 +1,13 @@
 
 let requestHelper = {};
 
+requestHelper.serverAddress = "https://sahasinstitute.com/adminportal";
+
 requestHelper.requestServer = async ({ requestHeaders = {}, requestPath = "/", requestMethod = "GET", requestGetQuery = false, requestPostBody = false } = {}) => {
 
     requestHeaders["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8";
 
-
-
-    requestPath = "https://sahasinstitute.com/adminportal/mobileApis/" + requestPath;
+    requestPath = `${requestHelper.serverAddress}/mobileApis/${requestPath}`;
 
     requestMethod = requestMethod.toUpperCase();
 
@@ -51,12 +51,9 @@ requestHelper.getData = (key) => {
 requestHelper.saveData = (key, value) => { localStorage.setItem(key, value) };
 
 
-//Check Device Id Or Generate It
-requestHelper.checkDeviceId = () => {
+//Check Device Id 
+if(!requestHelper.getData("DEVICEID"))
     window.electron.getDeviceID((deviceId) => requestHelper.saveData("DEVICEID", deviceId));
-    requestHelper.saveData("DEVICEID", requestHelper.getData("DEVICEID") ? requestHelper.getData("DEVICEID") : window.electron.generateDeviceID());
-}
 
-requestHelper.checkDeviceId();
 
 export { requestHelper }

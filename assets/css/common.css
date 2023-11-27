@@ -50,7 +50,6 @@ input {
 }
 
 .card{
-    padding: 2rem;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     background-color: #FAFAFA;
@@ -116,6 +115,19 @@ input {
     color: #323232;
 }
 
+.text_normal{
+    font-size: 1rem;
+}
+
+.text_disable{
+    font-size: 1rem;
+    color: #BDBDBD;
+}
+
+.bold{
+    font-weight: bold;
+}
+
 .btn_purple{
     background-color: #673AB7;
     border-radius: 4px;
@@ -177,9 +189,15 @@ input {
     padding: 2rem;
 }
 
+.padding_1{
+    padding: 1rem;
+}
+
 .error{
     color: #F44336
 }
+
+
 
 
 

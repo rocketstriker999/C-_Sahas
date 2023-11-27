@@ -9,9 +9,9 @@ let electronApp = libElectron.app;
 //Ipc To Communicate With View JS Files 
 electronApp.ipcMain = libElectron.ipcMain;
 
-//Register For Deeplinking
-electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resolve(process.argv[1])])
 
+//Register For Deeplinking
+electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resolve(process.argv[1])]);
 
 //APP Ready Event
 electronApp.on("ready", () => {
@@ -30,23 +30,6 @@ electronApp.on("ready", () => {
         },
     });
 
-    if (!electronApp.requestSingleInstanceLock()) {
-        electronApp.quit()
-      } else {
-        electronApp.on('second-instance', (event, args, workingDirectory) => {
-
-          const deepLinkingUrl= args.find(arg=>{
-            return arg.startsWith("sahas://")
-          });
-
-          const userDetails=commonUtil.decodeGoogleLoginToken(new URL(deepLinkingUrl).searchParams.get("signin_token"));
-
-          // Someone tried to run a second instance, we should focus our window.
-          if (electronApp.window) 
-            electronApp.window.focus()
-        })
-      }
-
     //once window is ready maximize it
     electronApp.window.maximize();
     //show the window
@@ -58,25 +41,71 @@ electronApp.on("ready", () => {
     electronApp.window.loadURL(`file://${__dirname}/assets/html/splash.html`);
     //Open Dev Tools , Remove Below Line While Production
     electronApp.window.webContents.openDevTools();
-
+    //Disable Right Click Due to Youtube Video Privacy
+    electronApp.window.on("system-context-menu", (event, _point) => event.preventDefault());
 });
 
+//Google Login Browser Request
+//Try To Acquire Single Instance Lock
+if (!electronApp.requestSingleInstanceLock()) {
+  electronApp.quit()
+} else {
+  //In case browser throw back response starting from sahas://
+  electronApp.on('second-instance', (event, args, workingDirectory) => {
+    const googleLoginUrl= args.find(arg=>{
+      return arg.startsWith("sahas://")
+    });
+
+    if(googleLoginUrl){
+        const googleLoginUser=commonUtil.decodeGoogleLoginToken(new URL(googleLoginUrl).searchParams.get("signin_token"));
+        electronApp.currentUser.user_name=googleLoginUser.name;
+        electronApp.currentUser.user_email=googleLoginUser.email;
+        electronApp.currentUser.user_pass=googleLoginUser.sub;
+        console.log(electronApp.currentUser.user_pass);
+        electronApp.currentUser.user_phone="1111111111";
+        electronApp.currentUser.signup_refer_user_index ="0";
+
+        //Return Google Signin Reponse
+        electronApp.googleLoginEvent.sender.send("google_login_get_res",electronApp.currentUser);
+
+    }
+
+
+    // Someone tried to run a second instance, we should focus our window.
+    if (electronApp.window) 
+      electronApp.window.focus()
+  })
+}
 
 //All Window Close Event
 electronApp.on('window-all-closed', () => electronApp.quit());
 
-
-electronApp.ipcMain.on("googleLogin:req",(event,data)=>{
+// --- IPC Handling Section ---//
+//User requested For Google Login
+electronApp.ipcMain.on("google_login_get",(event,data)=>{
   libElectron.shell.openExternal("https://sahasinstitute.com/google_login.html");
+  electronApp.googleLoginEvent =  event;
 });
 
+
 //Request For Device ID
-electronApp.ipcMain.on("deviceId:req", (event, data) => {
-    event.sender.send("deviceId:res",`${process.platform}_${crypto.createHash('sha256').update(Date.now().toString()).digest('hex').slice(0,12)}`);
+electronApp.ipcMain.on("device_id_get", (event) => {
+    event.sender.send("device_id_get_res",`${process.platform}_${crypto.createHash('sha256').update(Date.now().toString()).digest('hex').slice(0,12)}`);
 });
 
 //Save The User
-electronApp.ipcMain.on("user:req", (event, userData) => {
+electronApp.ipcMain.on("user:set", (event, userData) => {
     //save current user
     electronApp.currentUser=userData;
+});
+
+//Send User Data
+electronApp.ipcMain.on("user_get", (event) => {
+  //save current user
+  event.sender.send("user_get_res",electronApp.currentUser);
+});
+
+//Back Button
+electronApp.ipcMain.on("back:req", (event) => {
+  electronApp.window.webContents.goBack();
 });

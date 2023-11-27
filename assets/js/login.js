@@ -64,8 +64,33 @@ loginHandler.setAuthenticationError = (error) => {
 
 //google Login redirect to Google Signin Via Sahas Website
 loginHandler.btnGoogleLogin.addEventListener("click", (e) => {
-    window.electron.openGoogleLogin();
-})
+    window.electron.googleLogin((currentUser) => {
+
+        requestHelper.requestServer({
+            requestPath: "googleSignIn.php", requestMethod: "POST", requestPostBody: {
+                user_name: currentUser.user_name,
+                user_email: currentUser.user_email,
+                user_phone: currentUser.user_phone,
+                user_pass: currentUser.user_pass,
+                refer_id: currentUser.signup_refer_user_index,
+                user_device: requestHelper.getData("DEVICEID")
+            }
+        }).then(response => response.json()).then(jsonResponse => {
+            if (jsonResponse.isTaskSuccess == 'true') {
+                //save current user for next app run
+                requestHelper.saveData("LOGGEDINUSEREMAIL",currentUser.user_email);
+                requestHelper.saveData("LOGGEDINUSERPASSWORD",currentUser.user_pass);
+                //save into current app memory
+                window.electron.setCurrentUser(jsonResponse.userAccData);
+                //redirect to dashboard
+                window.location.href = 'dashBoard.html';
+            }
+            else
+                throw new Error(jsonResponse.response_msg);
+        }).catch(error => loginHandler.setAuthenticationError(error));
+        
+    });
+});
 
 loginHandler.btnLogin.addEventListener("click", (e) => {
     e.preventDefault(); //Stop Form Submission
@@ -79,9 +104,13 @@ loginHandler.btnLogin.addEventListener("click", (e) => {
                 user_device: requestHelper.getData("DEVICEID")
             }
         }).then(response => response.json()).then(jsonResponse => {
-            console.log(jsonResponse.isTaskSuccess)
             if (jsonResponse.isTaskSuccess == 'true') {
+                //save current user for next app run
+                requestHelper.saveData("LOGGEDINUSEREMAIL",loginHandler.etxEmail.value);
+                requestHelper.saveData("LOGGEDINUSERPASSWORD",loginHandler.etxPassWord.value);
+                //save into current app memory
                 window.electron.setCurrentUser(jsonResponse.userAccData);
+                //redirect to dashboard
                 window.location.href = 'dashBoard.html';
             }
             else
