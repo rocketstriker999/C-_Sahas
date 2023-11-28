@@ -14,7 +14,7 @@ contextBridge.exposeInMainWorld("electron", {
     });
   },
   setCurrentUser:(userData)=>{
-    ipcRenderer.send("user:set",userData);
+    ipcRenderer.send("user_set",userData);
   },
   getCurrentUser: (callback) => {
     ipcRenderer.send("user_get");
@@ -22,6 +22,6 @@ contextBridge.exposeInMainWorld("electron", {
   },
 
   back:()=>{
-    ipcRenderer.send("back:req");
+    ipcRenderer.send("back_get");
   }
 });

@@ -61,7 +61,6 @@ if (!electronApp.requestSingleInstanceLock()) {
         electronApp.currentUser.user_name=googleLoginUser.name;
         electronApp.currentUser.user_email=googleLoginUser.email;
         electronApp.currentUser.user_pass=googleLoginUser.sub;
-        console.log(electronApp.currentUser.user_pass);
         electronApp.currentUser.user_phone="1111111111";
         electronApp.currentUser.signup_refer_user_index ="0";
 
@@ -94,7 +93,7 @@ electronApp.ipcMain.on("device_id_get", (event) => {
 });
 
 //Save The User
-electronApp.ipcMain.on("user:set", (event, userData) => {
+electronApp.ipcMain.on("user_set", (event, userData) => {
     //save current user
     electronApp.currentUser=userData;
 });
@@ -106,6 +105,6 @@ electronApp.ipcMain.on("user_get", (event) => {
 });
 
 //Back Button
-electronApp.ipcMain.on("back:req", (event) => {
+electronApp.ipcMain.on("back_get", (event) => {
   electronApp.window.webContents.goBack();
 });

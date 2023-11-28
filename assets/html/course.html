@@ -19,24 +19,50 @@
 
 <body>
 
+    <div id="CONTAINER_ROOT" class="container_root">
 
-    <div class="container_course padding_1">
-        <img class="course_img" id="COURSE_IMG">
-        <div class="container_course_info">
-            <p id="COURSE_NAME" class="title_secondary"></p>
-            <p id="COURSE_DESCRIPTION" class="text_normal margin_top"></p>
-            <p id="COURSE_SUBJECTS" class="text_normal bold margin_top"></p>
-            <p id="COURSE_PURCHASE_INFO" class="course_purchase_info text_disable bold margin_top"></p>
-            <div>
-                <button class="btn_pink margin_top" id="BTN_BACK">Back To Dashboard</button>
-                <button class="btn_purple margin_top" id="BTN_BUY">Buy Course</button>
+        <div id="CONTAINER_DEMO" class="container_demo">
+
+            <div class="container_manage_demo_sheet">
+                <p class="title_secondary padding_2 title_demo">Demos</p>
+                <button class="btn_pink btn_close_demo" id="BTN_CLOSE_DEMO">Close</button>
+                <div class="divider"></div>
+                <div id="CONTAINER_TABS" class="container_tabs">
+                    <p class="bold tab">Videos</p>
+                    <p class="bold tab">PDFs</p>
+                    <p class="bold tab">Audios</p>
+                </div>
+            </div>
+            <div id="CONTAINER_DEMO_DATA">
+
+                <div class="container_video">
+                    <img src="https://www.gstatic.com/webp/gallery3/1.png" class="video_image"/>
+                    <p class="video_title margin_top">daw</p>
+                </div>
+
             </div>
         </div>
+
+        <div class="container_course padding_1">
+            <img class="course_img" id="COURSE_IMG">
+            <div class="container_course_info">
+                <p id="COURSE_NAME" class="title_secondary"></p>
+                <p id="COURSE_DESCRIPTION" class="text_normal margin_top"></p>
+                <p id="COURSE_SUBJECTS" class="text_normal bold margin_top"></p>
+                <p id="COURSE_PURCHASE_INFO" class="course_purchase_info text_disable bold margin_top"></p>
+                <div>
+                    <button class="btn_pink margin_top" id="BTN_BACK">Back To Dashboard</button>
+                    <button class="btn_purple margin_top" id="BTN_BUY">Buy Course</button>
+                </div>
+            </div>
+        </div>
+
+        <p class="title_secondary padding_2">Subjects</p>
+
+        <div id="CONTAINER_SUBJECTS" class="container_subjects"></div>
+
+
     </div>
-
-    <p class="title_secondary padding_2">Subjects</p>
-
-    <div id="CONTAINER_SUBJECTS" class="container_subjects"></div>
 
 </body>
 

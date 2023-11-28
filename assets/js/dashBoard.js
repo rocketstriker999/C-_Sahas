@@ -25,9 +25,6 @@ requestHelper.requestServer({
             throw new Error(jsonResponse.response_msg);
     }).catch(error => console.warn(error));
 
-
-
-
 //Load All Courses
 dashBoardHandler.fetchAllCourses = () => {
 
@@ -71,9 +68,6 @@ dashBoardHandler.fetchMyCourses = () => {
 }
 
 dashBoardHandler.loadCourses=(coursesData)=>{
-
-    console.log(JSON.stringify(coursesData));
-
     //Clear All Content from Container
     dashBoardHandler.courseContainer.innerHTML="";
 
