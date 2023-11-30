@@ -15,16 +15,17 @@ courseHandler.containerDemo = document.getElementById("CONTAINER_DEMO");
 courseHandler.btnCloseDemo = document.getElementById("BTN_CLOSE_DEMO");
 courseHandler.containerDemoData = document.getElementById("CONTAINER_DEMO_DATA");
 
-
-
 //extract and generate get object passed from dashboard
 courseHandler.course = Object.fromEntries(new URLSearchParams(window.location.search));
 
 //Set Image For Course
 courseHandler.courseImage.src = `${requestHelper.serverAddress}/thumbnails/${courseHandler.course.std_image}`;
+
 //set name
 courseHandler.courseName.innerHTML = courseHandler.course.std_name;
+//set description
 courseHandler.courseDescription.innerHTML = courseHandler.course.std_desc;
+//set number of subject
 courseHandler.courseSubjects.innerHTML = `${courseHandler.course.sub_count} Subjects`;
 
 //Back Button Click
@@ -42,41 +43,181 @@ courseHandler.containerTabs.forEach((tab) => {
         //add active class to selected tab only
         e.target.classList.add("active");
 
-        switch(e.target.innerHTML){
+        //Clear the existing Demo Data
+        courseHandler.containerDemoData.innerHTML = "";
+
+        switch (e.target.innerHTML) {
 
             case "Videos":
                 courseHandler.showDemoVideos()
-            break;
+                break;
 
             case "Audios":
                 courseHandler.showDemoAudios()
-            break;
+                break;
 
             case "PDFs":
                 courseHandler.showDemoPDFs()
-            break;
+                break;
 
         }
-
-        
-
     });
 });
 
-courseHandler.showDemoVideos=()=>{
+courseHandler.showNoDemoContentFound=()=>{
+    const noContentFound = document.createElement("p");
+    noContentFound.classList.add("title_secondary");
+    noContentFound.classList.add("padding_2");
+    noContentFound.innerText = "No Content Found Here"
+    courseHandler.containerDemoData.appendChild(noContentFound)
 
+}
+
+courseHandler.showDemoVideos = () => {
+
+    if(courseHandler.demoVideos.length>0){
+
+        courseHandler.demoVideos.forEach(video => {
+
+            const containerVideo = document.createElement("div");
+            containerVideo.classList.add("container_demo_item");
     
+            //Image Of The Course
+            const videoImage = document.createElement("img");
+            videoImage.classList.add("demo_item_image");
+            videoImage.src = `http://img.youtube.com/vi/${video.vid_file}/0.jpg`;
+    
+            //container of video text
+            const containerVideoInfo = document.createElement("div");
+            containerVideoInfo.classList.add("container_demo_item_info");
+    
+            //Video Title
+            const videoTitle = document.createElement("p");
+            videoTitle.classList.add("demo_item_title");
+            videoTitle.innerText = video.vid_name
+    
+            //Video Text
+            const videoDescription = document.createElement("p");
+            videoDescription.classList.add("margin_top");
+            videoDescription.innerText = video.vid_desc
+    
+            //Adding text into video text container
+            containerVideoInfo.appendChild(videoTitle)
+            containerVideoInfo.appendChild(videoDescription)
+    
+            containerVideo.appendChild(videoImage);
+            containerVideo.appendChild(containerVideoInfo);
+    
+            //Add Video To Container
+            courseHandler.containerDemoData.appendChild(containerVideo);
 
+            //click handler
+            containerVideo.addEventListener("click",(e)=>{
+                window.location.href = `videoPlayer.html?${new URLSearchParams(video).toString()}`;
+            })
+    
+        });
+    }
+    else
+        courseHandler.showNoDemoContentFound()
 }
 
-courseHandler.showDemoPDFs=()=>{
-    console.log("PDF")
+courseHandler.showDemoPDFs = () => {
+    if(courseHandler.demoPdfs.length>0){
 
+        courseHandler.demoPdfs.forEach(pdf => {
+
+            const containerPdf = document.createElement("div");
+            containerPdf.classList.add("container_demo_item");
+    
+            //Image Of The Course
+            const pdfImage = document.createElement("img");
+            pdfImage.classList.add("demo_item_image");
+            pdfImage.src = `../img/pdf.png`;
+    
+            //container of pdf text
+            const containerPdfInfo = document.createElement("div");
+            containerPdfInfo.classList.add("container_demo_item_info");
+    
+            //pdf Title
+            const pdfTitle = document.createElement("p");
+            pdfTitle.classList.add("demo_item_title");
+            pdfTitle.innerText = pdf.pdf_name
+    
+            //pdf Text
+            const pdfDescription = document.createElement("p");
+            pdfDescription.classList.add("margin_top");
+            pdfDescription.innerText = pdf.pdf_desc
+    
+            //Adding text into pdf text container
+            containerPdfInfo.appendChild(pdfTitle)
+            containerPdfInfo.appendChild(pdfDescription)
+    
+            containerPdf.appendChild(pdfImage);
+            containerPdf.appendChild(containerPdfInfo);
+    
+            //Add pdf To Container
+            courseHandler.containerDemoData.appendChild(containerPdf);
+
+            //click handler
+            containerPdf.addEventListener("click",(e)=>{
+                
+            })
+    
+        });
+    }
+    else
+        courseHandler.showNoDemoContentFound()
 }
 
-courseHandler.showDemoAudios=()=>{
-    console.log("AUD")
+courseHandler.showDemoAudios = () => {
 
+    if(courseHandler.demoAudios.length>0){
+
+        courseHandler.demoAudios.forEach(audio => {
+
+            const containerAudio = document.createElement("div");
+            containerAudio.classList.add("container_demo_item");
+    
+            //Image Of The Course
+            const audioImage = document.createElement("img");
+            audioImage.classList.add("demo_item_image");
+            audioImage.src = `../img/audio.png`;
+    
+            //container of audio text
+            const containerAudioInfo = document.createElement("div");
+            containerAudioInfo.classList.add("container_demo_item_info");
+    
+            //audio Title
+            const audioTitle = document.createElement("p");
+            audioTitle.classList.add("demo_item_title");
+            audioTitle.innerText = audio.aud_name
+    
+            //audio Text
+            const audioDescription = document.createElement("p");
+            audioDescription.classList.add("margin_top");
+            audioDescription.innerText = audio.aud_desc
+    
+            //Adding text into audio text container
+            containerAudioInfo.appendChild(audioTitle)
+            containerAudioInfo.appendChild(audioDescription)
+    
+            containerAudio.appendChild(audioImage);
+            containerAudio.appendChild(containerAudioInfo);
+    
+            //Add audio To Container
+            courseHandler.containerDemoData.appendChild(containerAudio);
+
+            //click handler
+            containerAudio.addEventListener("click",(e)=>{
+                
+            })
+    
+        });
+    }
+    else
+        courseHandler.showNoDemoContentFound()
+    
 }
 
 //Close Demo Window
@@ -115,10 +256,6 @@ window.electron.getCurrentUser((currentUser) => {
         console.warn(error);
     })
 });
-
-
-
-
 
 //Get Subject List
 courseHandler.loadSubjects = () => {
@@ -181,10 +318,13 @@ courseHandler.loadSubjects = () => {
                     btnShowDemo.classList.add("btn_demo");
 
                     btnShowDemo.addEventListener("click", e => {
-                        courseHandler.demoVideos=subject.demoVideos;
-                        courseHandler.demoPdfs=subject.demoPdfs;
-                        courseHandler.demoAudios=subject.demoAudios;
+                        courseHandler.demoVideos = subject.demoVideos;
+                        courseHandler.demoPdfs = subject.demoPdfs;
+                        courseHandler.demoAudios = subject.demoAudios;
                         courseHandler.containerDemo.style.left = 0
+                        
+                        //Load Demo Video Defaultly
+                        courseHandler.containerTabs[0].click();
                     });
 
                     divSubjectManager.appendChild(btnChapters)

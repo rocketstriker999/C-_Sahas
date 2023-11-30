@@ -1,19 +1,22 @@
+.container_root{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
 .container_course {
     width: 100vw;
     display: flex;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-    overflow: auto;
     justify-content: center;
     gap: 2rem;
 }
-
 
 .course_img {
     border-radius: 4px;
     border: 2px solid #000;
     height: auto;
     width: 30vw;
-    ;
 }
 
 .container_course_info {
@@ -22,6 +25,11 @@
     justify-content: center;
     align-items: start;
     max-width: 40vw;
+}
+
+.container_subjects{
+    flex: 1;
+    overflow-y: scroll;
 }
 
 .btn_purple {
@@ -33,7 +41,6 @@
     height: auto;
     display: inline-block;
     margin: 1rem;
-  
 }
 
 .card_subject img {
@@ -56,21 +63,26 @@
     display: none;
 }
 
-
 .container_root {
     overflow: hidden;
     position: relative;
 }
 
 .container_demo {
-    background-color: #FAFAFA;
     position: absolute;
-    height: 100vh;
     width: 100vw;
     left: 100vw;
     top: 0;
-    transition: all 1s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container_demo_data{
+    flex: 1;
     overflow-y: scroll;
+    background-color: #FAFAFA;
 }
 
 
@@ -104,26 +116,31 @@
     background-color: #E91E63;
 }
 
-.container_video{
+.container_demo_item{
     margin: 1rem;
     border: 1px solid #E1E1E1;
     padding: 1rem;
-    height: 8rem;
-
+    border-radius: 4px;
+    display: flex;
 }
 
-.container_video:hover{
+.container_demo_item:hover{
     cursor: pointer;
+    border: 1px solid #000;
+
 }
 
-.video_title{
-    padding-left: 2rem;
-    display: block;
+.demo_item_image{
+    height: 8rem;
+    width: 10rem;
+}
+
+.container_demo_item_info{
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.demo_item_title{
     font-size: 1.4rem;
 }
 
-.video_image{
-    height: 100%;
-    width: auto;
-    float: left;
-}
