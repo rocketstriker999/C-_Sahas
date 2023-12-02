@@ -29,14 +29,12 @@ electronApp.on("ready", () => {
             preload: libPath.join(__dirname, "preload.js"),
         },
     });
-
     //once window is ready maximize it
     electronApp.window.maximize();
     //show the window
     electronApp.window.show();
     //Secure Against Screenshot and Recording
     electronApp.window.setContentProtection(true)
-    
     //In case User Quit
     electronApp.window.on('closed', () => { electronApp.window = null; });
     //load initial template
@@ -60,6 +58,7 @@ if (!electronApp.requestSingleInstanceLock()) {
 
     if(googleLoginUrl){
         const googleLoginUser=commonUtil.decodeGoogleLoginToken(new URL(googleLoginUrl).searchParams.get("signin_token"));
+        electronApp.currentUser={}
         electronApp.currentUser.user_name=googleLoginUser.name;
         electronApp.currentUser.user_email=googleLoginUser.email;
         electronApp.currentUser.user_pass=googleLoginUser.sub;
