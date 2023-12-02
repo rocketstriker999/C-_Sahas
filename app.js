@@ -34,6 +34,8 @@ electronApp.on("ready", () => {
     electronApp.window.maximize();
     //show the window
     electronApp.window.show();
+    //Secure Against Screenshot and Recording
+    electronApp.window.setContentProtection(true)
     
     //In case User Quit
     electronApp.window.on('closed', () => { electronApp.window = null; });
