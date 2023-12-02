@@ -5,12 +5,22 @@ dashBoardHandler.loggedInUserEmail=null;
 
 dashBoardHandler.userName = document.getElementById("USER_NAME");
 dashBoardHandler.courseContainer = document.getElementById("CONTAINER_COURSES");
+dashBoardHandler.btnLogOut = document.getElementById("BTN_LOG_OUT");
+
 
 //Set UserName From Storage Initially
 window.electron.getCurrentUser((currentUser) => {
     dashBoardHandler.userName.innerHTML = `Welcome ${currentUser.user_name}`;
     dashBoardHandler.loggedInUserEmail = currentUser.user_email
 });
+
+//User Logout    
+dashBoardHandler.btnLogOut.addEventListener("click",(e)=>{
+    //remove user data from electron window
+    requestHelper.saveData("LOGGEDINUSEREMAIL","");
+    requestHelper.saveData("LOGGEDINUSERPASSWORD","");
+    window.electron.logOutCurrentUser();
+})
 
 //Set Carousel Images From API
 requestHelper.requestServer({
@@ -121,16 +131,7 @@ dashBoardHandler.loadCourses=(coursesData)=>{
 
         //Add Card For Course In Container
         dashBoardHandler.courseContainer.appendChild(divCourse);
-
-        
     });
-
 }
 
 dashBoardHandler.fetchAllCourses();
-
-
-
-
-
-

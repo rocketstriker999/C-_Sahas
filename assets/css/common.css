@@ -167,6 +167,7 @@ input {
     gap: 1rem;
     width: 60%;
     font-weight: bold;
+    cursor: pointer;
 }
 
 

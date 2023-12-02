@@ -66,9 +66,7 @@ if (!electronApp.requestSingleInstanceLock()) {
 
         //Return Google Signin Reponse
         electronApp.googleLoginEvent.sender.send("google_login_get_res",electronApp.currentUser);
-
     }
-
 
     // Someone tried to run a second instance, we should focus our window.
     if (electronApp.window) 
@@ -85,7 +83,6 @@ electronApp.ipcMain.on("google_login_get",(event,data)=>{
   libElectron.shell.openExternal("https://sahasinstitute.com/google_login.html");
   electronApp.googleLoginEvent =  event;
 });
-
 
 //Request For Device ID
 electronApp.ipcMain.on("device_id_get", (event) => {
@@ -106,5 +103,12 @@ electronApp.ipcMain.on("user_get", (event) => {
 
 //Back Button
 electronApp.ipcMain.on("back_get", (event) => {
+  electronApp.window.webContents.goBack();
+});
+
+//Logout
+electronApp.ipcMain.on("user_logout_get", (event) => {
+  //Remove Currnt User From Memory
+  electronApp.currentUser={}
   electronApp.window.webContents.goBack();
 });
