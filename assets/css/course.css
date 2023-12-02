@@ -95,31 +95,4 @@
 }
 
 
-.container_demo_item{
-    margin: 1rem;
-    border: 1px solid #E1E1E1;
-    padding: 1rem;
-    border-radius: 4px;
-    display: flex;
-}
-
-.container_demo_item:hover{
-    cursor: pointer;
-    border: 1px solid #000;
-
-}
-
-.demo_item_image{
-    height: 8rem;
-    width: 10rem;
-}
-
-.container_demo_item_info{
-    flex: 1;
-    margin-left: 2rem;
-}
-
-.demo_item_title{
-    font-size: 1.4rem;
-}
 

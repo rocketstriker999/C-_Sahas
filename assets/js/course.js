@@ -80,20 +80,20 @@ courseHandler.showDemoVideos = () => {
         courseHandler.demoVideos.forEach(video => {
 
             const containerVideo = document.createElement("div");
-            containerVideo.classList.add("container_demo_item");
+            containerVideo.classList.add("container_content_item");
     
             //Image Of The Course
             const videoImage = document.createElement("img");
-            videoImage.classList.add("demo_item_image");
+            videoImage.classList.add("content_item_image");
             videoImage.src = `http://img.youtube.com/vi/${video.vid_file}/0.jpg`;
     
             //container of video text
             const containerVideoInfo = document.createElement("div");
-            containerVideoInfo.classList.add("container_demo_item_info");
+            containerVideoInfo.classList.add("container_content_item_info");
     
             //Video Title
             const videoTitle = document.createElement("p");
-            videoTitle.classList.add("demo_item_title");
+            videoTitle.classList.add("content_item_title");
             videoTitle.innerText = video.vid_name
     
             //Video Text
@@ -128,20 +128,20 @@ courseHandler.showDemoPDFs = () => {
         courseHandler.demoPdfs.forEach(pdf => {
 
             const containerPdf = document.createElement("div");
-            containerPdf.classList.add("container_demo_item");
+            containerPdf.classList.add("container_content_item");
     
             //Image Of The Course
             const pdfImage = document.createElement("img");
-            pdfImage.classList.add("demo_item_image");
+            pdfImage.classList.add("content_item_image");
             pdfImage.src = `../img/pdf.png`;
     
             //container of pdf text
             const containerPdfInfo = document.createElement("div");
-            containerPdfInfo.classList.add("container_demo_item_info");
+            containerPdfInfo.classList.add("container_content_item_info");
     
             //pdf Title
             const pdfTitle = document.createElement("p");
-            pdfTitle.classList.add("demo_item_title");
+            pdfTitle.classList.add("content_item_title");
             pdfTitle.innerText = pdf.pdf_name
     
             //pdf Text
@@ -177,20 +177,20 @@ courseHandler.showDemoAudios = () => {
         courseHandler.demoAudios.forEach(audio => {
 
             const containerAudio = document.createElement("div");
-            containerAudio.classList.add("container_demo_item");
+            containerAudio.classList.add("container_content_item");
     
             //Image Of The Course
             const audioImage = document.createElement("img");
-            audioImage.classList.add("demo_item_image");
+            audioImage.classList.add("content_item_image");
             audioImage.src = `../img/audio.png`;
     
             //container of audio text
             const containerAudioInfo = document.createElement("div");
-            containerAudioInfo.classList.add("container_demo_item_info");
+            containerAudioInfo.classList.add("container_content_item_info");
     
             //audio Title
             const audioTitle = document.createElement("p");
-            audioTitle.classList.add("demo_item_title");
+            audioTitle.classList.add("content_item_title");
             audioTitle.innerText = audio.aud_name
     
             //audio Text

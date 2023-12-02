@@ -17,6 +17,7 @@
     border: 2px solid #000;
     height: auto;
     width: 30vw;
+    max-height: 30vh;
 }
 
 .container_subject_info {
