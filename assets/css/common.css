@@ -197,8 +197,30 @@ input {
     color: #F44336
 }
 
+.container_purple{
+    background-color: #7B1FA2;
+    overflow: auto;
+}
 
+.container_tabs{
+    background-color: #6A1B9A;
+}
 
+.tab{
+    font-size: 1.2rem;
+    color: #FAFAFA;
+    display: inline-block;
+    padding: 1rem;
+    cursor: pointer;
+}
 
+.tab:hover{
+    color: #191919;
+    background-color: #F8BBD0;
+}
+
+.active{
+    background-color: #E91E63;
+}
 
 

@@ -161,7 +161,7 @@ courseHandler.showDemoPDFs = () => {
 
             //click handler
             containerPdf.addEventListener("click",(e)=>{
-                
+                window.location.href = `pdfPlayer.html?${new URLSearchParams(pdf).toString()}`;
             })
     
         });
@@ -236,9 +236,9 @@ window.electron.getCurrentUser((currentUser) => {
         }
     }).then(response => response.json()).then(jsonResponse => {
         //Check If Course Is Been Purchased By User
-        courseHandler.isCoursePurchased = jsonResponse.isTaskSuccess == 'true';
+        courseHandler.course.isCoursePurchased = jsonResponse.isTaskSuccess == 'true';
 
-        if (courseHandler.isCoursePurchased) {
+        if (courseHandler.course.isCoursePurchased) {
             //User Has Already Purchased This Course
             courseHandler.btnPurchaseCourse.style.display = "none"
             courseHandler.showPurchaseInfo(jsonResponse.purchaseData);
@@ -276,8 +276,8 @@ courseHandler.loadSubjects = () => {
                 courseHandler.containerSubjects.innerHTML = "";
                 //Iterate through all subjects
                 courseHandler.subjectData.forEach((subject) => {
-                    //generate and add subject element to container
 
+                    //generate and add subject element to container
                     const divSubject = document.createElement("div");
                     divSubject.classList.add("card");
                     divSubject.classList.add("card_subject");
@@ -309,7 +309,8 @@ courseHandler.loadSubjects = () => {
                     btnChapters.classList.add("btn_chapters");
 
                     btnChapters.addEventListener("click", e => {
-                        window.location.href = `subject.html?purchase=${courseHandler.isCoursePurchased}`;
+                        subject.isCoursePurchased = courseHandler.course.isCoursePurchased
+                        window.location.href = `subject.html?${new URLSearchParams(subject).toString()}`;
                     });
 
                     const btnShowDemo = document.createElement("a");
@@ -327,8 +328,10 @@ courseHandler.loadSubjects = () => {
                         courseHandler.containerTabs[0].click();
                     });
 
-                    divSubjectManager.appendChild(btnChapters)
-                    divSubjectManager.appendChild(btnShowDemo)
+                    divSubjectManager.appendChild(btnChapters);
+
+                    if(!courseHandler.course.isCoursePurchased)
+                        divSubjectManager.appendChild(btnShowDemo)
 
                     divSubjectInfo.appendChild(subjectName);
                     divSubjectInfo.appendChild(subjectDescription);

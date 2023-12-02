@@ -8,32 +8,25 @@
     <!--Page Specific CSS-->
     <link rel="stylesheet" type="text/css" href="../css/videoPlayer.css">
     <!--Plyr Video Player CSS-->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/demo.css" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/demo.css" />
     <!--File Speicifc JS-->
     <script type="module" src="../js/helper.js"></script>
     <script type="module" src="../js/videoPlayer.js"></script>
-    <script type="module" src="https://cdn.plyr.io/3.7.8/demo.js"></script>
 
 
 </head>
 
 <body>
-    <div id="CONTAINER_COURSES" class="container_courses padding_2">
 
-        <div style="width: 500px;height:500px" class="plyr__video-embed" id="player">
-
-            <iframe id="VIDEO_PLAYER"  allowfullscreen allowtransparency>
-
-            </iframe>
-
-        </div>
-        <!--Plyer Video Player JS-->
-        
-
+    <div style="width: 60vw;height:60vh" class="plyr__video-embed padding_2" id="player">
+        <iframe id="YOUTUBE_IFRAME" allowfullscreen allowtransparency allow=”autoplay”></iframe>
     </div>
+
+    <button id="BTN_BACK" class="btn_purple">Back</button>
+
+    <!--Plyer Video Player JS-->
+    <script src="https://cdn.plyr.io/3.6.3/demo.js"></script>
 
 </body>
 
 </html>
-
-

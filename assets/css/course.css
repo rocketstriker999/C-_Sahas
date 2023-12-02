@@ -56,7 +56,6 @@
 .btn_demo {
     margin-left: 0.5rem;
     color: #673AB7;
-    ;
 }
 
 .course_purchase_info {
@@ -85,7 +84,6 @@
     background-color: #FAFAFA;
 }
 
-
 .btn_close_demo{
     float: right;
     margin: 2rem;
@@ -95,26 +93,7 @@
     color: #FAFAFA;
     display: inline-block;
 }
-.container_manage_demo_sheet{
-    background-color: #673AB7;
-}
 
-.tab{
-    font-size: 1.2rem;
-    color: #FAFAFA;
-    display: inline-block;
-    padding: 1rem;
-    cursor: pointer;
-}
-
-.tab:hover{
-    color: #191919;
-    background-color: #F8BBD0;
-}
-
-.active{
-    background-color: #E91E63;
-}
 
 .container_demo_item{
     margin: 1rem;

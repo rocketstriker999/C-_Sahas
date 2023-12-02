@@ -1,0 +1,13 @@
+.container_chapter_info{
+    padding:2rem;
+}
+
+.btn_back{
+    float: right;
+    top: 0;
+    margin: 1rem;
+}
+
+.title_chapter , .chapter_description{
+    color: #FAFAFA;
+}

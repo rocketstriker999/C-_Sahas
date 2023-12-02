@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Subject</title>
+    <!--Common CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <!--Page Specific CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/chapter.css">
+    <!--Font Awesome CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!--File Speicifc JS-->
+    <script type="module" src="../js/helper.js"></script>
+    <script type="module" src="../js/chapter.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container_purple">
+        <button class="btn_pink btn_back" id="BTN_BACK">Close</button>
+
+        <div class="container_chapter_info">
+            <p class="title_secondary title_chapter" id="CHAPTER_NAME"></p>
+            <p class="text_normal margin_top chapter_description" id="CHAPTER_DESCRIPTION"></p>
+        </div>
+        
+
+        <div id="CONTAINER_TABS" class="container_tabs">
+            <p class="bold tab">Videos</p>
+            <p class="bold tab">PDFs</p>
+            <p class="bold tab">Audios</p>
+        </div>
+    </div>
+    <div id="CONTAINER_CHAPTER_DATA" class="container_chapter_data">
+    </div>
+
+</body>
+
+</html>

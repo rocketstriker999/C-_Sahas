@@ -1,0 +1,16 @@
+.container_pdf_viewer {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    padding: 1rem;
+}
+
+.btn_back {
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 1;
+    margin: 1rem;
+}
