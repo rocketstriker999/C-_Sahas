@@ -1,5 +1,13 @@
-.container_courses{
+.container_user_info{
+    overflow: hidden;
+    background-color: aliceblue;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+}
 
+.btn_log_out{
+    float: right;
+    top: 0;
+    font-size: 2rem;
 }
 
 .card_course{
