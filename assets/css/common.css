@@ -20,12 +20,12 @@ input {
 .progressbar_purple{
     width: 200px;
     height: 12px;
-    border: 2px solid #4527A0;
+    border: 2px solid #283593;
     border-radius: 8px ;
 }
 
 .progressbar_purple .progress{
-    background-color: #673AB7;
+    background-color: #3F51B5;
     width: 0px;
     height: 100%;
     animation: progres 4s forwards linear;
@@ -78,7 +78,7 @@ input {
 
 .edittext:focus{
     outline: none;
-    border: 2px solid #673AB7;
+    border: 2px solid #3F51B5;
 }
 
 .invalid_edittext {
@@ -88,7 +88,7 @@ input {
 
 .icon_edittext {
     padding: 0.88rem;
-    color: #673AB7;
+    color: #3F51B5;
     float: left;    
     position: absolute;
 }
@@ -129,11 +129,11 @@ input {
 }
 
 .btn_purple{
-    background-color: #673AB7;
+    background-color: #3F51B5;
     border-radius: 4px;
     padding: 8px 16px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid #5E35B1;
+    border: 1px solid #3949AB;
     color: #FAFAFA;
     font-weight: bold;
 }
@@ -199,12 +199,12 @@ input {
 }
 
 .container_purple{
-    background-color: #7B1FA2;
+    background-color: #303F9F;
     overflow: auto;
 }
 
 .container_tabs{
-    background-color: #6A1B9A;
+    background-color: #283593;
 }
 
 .tab{

@@ -14,3 +14,12 @@
     z-index: 1;
     margin: 1rem;
 }
+
+.btn_download {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    margin: 1rem;
+    display: none;
+}

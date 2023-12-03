@@ -27,7 +27,6 @@ dashBoardHandler.containerTabs.forEach((tab) => {
             case "My Courses":
                 dashBoardHandler.fetchMyCourses()
                 break;
-
         }
     });
 });
@@ -44,7 +43,7 @@ dashBoardHandler.btnLogOut.addEventListener("click",(e)=>{
     requestHelper.saveData("LOGGEDINUSEREMAIL","");
     requestHelper.saveData("LOGGEDINUSERPASSWORD","");
     window.electron.logOutCurrentUser();
-})
+});
 
 //Set Carousel Images From API
 requestHelper.requestServer({
@@ -151,8 +150,6 @@ dashBoardHandler.loadCourses=(coursesData)=>{
     else{
         dashBoardHandler.showNoCoursesFound()
     }
-
-   
 }
 
 dashBoardHandler.showNoCoursesFound = () => {
@@ -161,10 +158,7 @@ dashBoardHandler.showNoCoursesFound = () => {
     noContentFound.classList.add("padding_2");
     noContentFound.innerText = "No Content Found Here"
     dashBoardHandler.courseContainer.appendChild(noContentFound)
-
 }
-
-
 
 //Select All Courses Defaultly
 dashBoardHandler.containerTabs[0].click();
