@@ -1,7 +1,9 @@
 .container_user_info{
     overflow: hidden;
-    background-color: aliceblue;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.title_user_name{
+    color:#FAFAFA;
 }
 
 .btn_log_out{
@@ -9,6 +11,7 @@
     top: 0;
     font-size: 2rem;
     cursor: pointer;
+    color: #FAFAFA;
 }
 
 .card_course{

@@ -7,7 +7,6 @@ chapterHandler.btnBack = document.getElementById("BTN_BACK");
 chapterHandler.chapterName = document.getElementById("CHAPTER_NAME");
 chapterHandler.chapterDescription = document.getElementById("CHAPTER_DESCRIPTION");
 chapterHandler.containerTabs = document.querySelectorAll('.tab');
-
 chapterHandler.containerChapterData = document.getElementById("CONTAINER_CHAPTER_DATA");
 
 
@@ -17,7 +16,6 @@ chapterHandler.chapter = Object.fromEntries(new URLSearchParams(window.location.
 //set up details
 chapterHandler.chapterName.innerHTML = chapterHandler.chapter.chap_name
 chapterHandler.chapterDescription.innerHTML = chapterHandler.chapter.chap_sub_name
-
 
 //Back Button Click
 chapterHandler.btnBack.addEventListener("click", (e) => {

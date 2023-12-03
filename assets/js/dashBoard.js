@@ -6,6 +6,32 @@ dashBoardHandler.loggedInUserEmail=null;
 dashBoardHandler.userName = document.getElementById("USER_NAME");
 dashBoardHandler.courseContainer = document.getElementById("CONTAINER_COURSES");
 dashBoardHandler.btnLogOut = document.getElementById("BTN_LOG_OUT");
+dashBoardHandler.containerTabs = document.querySelectorAll('.tab');
+
+//Tab click Handler
+dashBoardHandler.containerTabs.forEach((tab) => {
+    tab.addEventListener("click", (e) => {
+        //Remove Active Class from all tab
+        dashBoardHandler.containerTabs.forEach((tab) => {
+            tab.classList.remove("active");
+        })
+        //add active class to selected tab only
+        e.target.classList.add("active");
+
+        switch (e.target.innerHTML) {
+
+            case "All Courses":
+                dashBoardHandler.fetchAllCourses()
+                break;
+
+            case "My Courses":
+                dashBoardHandler.fetchMyCourses()
+                break;
+
+        }
+    });
+});
+
 
 
 //Set UserName From Storage Initially
@@ -25,8 +51,7 @@ dashBoardHandler.btnLogOut.addEventListener("click",(e)=>{
 //Set Carousel Images From API
 requestHelper.requestServer({
     requestPath: "getCaroUsels.php", requestMethod: "GET"
-})
-    .then(response => response.json()).then(jsonResponse => {
+}).then(response => response.json()).then(jsonResponse => {
         if (jsonResponse.isTaskSuccess == 'true') {
             //set carousel data
             jsonResponse.caroUselData
@@ -53,14 +78,10 @@ dashBoardHandler.fetchAllCourses = () => {
 
 }
 
-document.oncontextmenu = function() { 
-    return false; 
-};
-
-//Load All Courses
+//Load My Courses
 dashBoardHandler.fetchMyCourses = () => {
 
-    //Set Carousel Images From API
+    //Fetch Courses From My Courses
     requestHelper.requestServer({
         requestPath: "getStds.php", requestMethod: "POST", requestPostBody: {
             user_email: dashBoardHandler.loggedInUserEmail,
@@ -74,7 +95,6 @@ dashBoardHandler.fetchMyCourses = () => {
             else
                 throw new Error(jsonResponse.response_msg);
         }).catch(error => console.warn(error));
-
 }
 
 dashBoardHandler.loadCourses=(coursesData)=>{
@@ -134,4 +154,7 @@ dashBoardHandler.loadCourses=(coursesData)=>{
     });
 }
 
-dashBoardHandler.fetchAllCourses();
+
+
+//Select All Courses Defaultly
+dashBoardHandler.containerTabs[0].click();
