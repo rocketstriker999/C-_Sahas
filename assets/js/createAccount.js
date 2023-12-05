@@ -61,12 +61,12 @@ createAccountHandler.etxPhone.addEventListener("input", (e) => {
 createAccountHandler.setSignUpError=(error)=>{
     createAccountHandler.error.style.display="block";
     createAccountHandler.error.innerHTML=error;
-}
+}*/
 createAccountHandler.setInputError=(error,validationArea,etx)=>{
     validationArea.textContent=error;
     validationArea.style.display='block'
     etx.classList.add('invalid_edittext');
-}*/
+}
 
 createAccountHandler.validateInputs = () => {
 
@@ -149,9 +149,7 @@ createAccountHandler.btnGoogleLogin.addEventListener("click", (e) => {
 
     if (createAccountHandler.validateInputs()) {
 
-
         window.electron.googleLogin((currentUser) => {
-
             requestHelper.requestServer({
                 requestPath: "googleSignIn.php", requestMethod: "POST", requestPostBody: {
                     user_name: currentUser.user_name,
@@ -174,7 +172,6 @@ createAccountHandler.btnGoogleLogin.addEventListener("click", (e) => {
                 else
                     throw new Error(jsonResponse.response_msg);
             }).catch(error => createAccountHandler.setAuthenticationError(error));
-
         });
 
     }
