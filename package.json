@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
+    "build-win": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-linux": "electron-packager /home/nisarg/WorkSpace/Electron/electron_Sahas/ sahas --appname=Sahas --platform=linux --arch=x64 --icon=./sahas.ico --overwrite --out dist/linux",
-    "build-win": "electron-packager /home/nisarg/WorkSpace/Electron/electron_Sahas/ sahas --appname=Sahas --platform=win32 --arch=x86_64 --icon=./sahas.ico --overwrite --out dist/win"
+    "package-linux": "electron-packager . sahas --appname=Sahas --platform=linux --arch=x64 --icon=./assets/img/sahas.png --overwrite --out dist/linux",
+    "package-win": "electron-packager . sahas --appname=Sahas --platform=win32 --arch=x86_64 --icon=./assets/img/sahas.png --overwrite --out dist/win"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,16 @@
   "keywords": [
     "Sahas"
   ],
-  "author": "Nisarg Jani",
+  "build": {
+    "productName": "Sahas",
+    "directories": {
+      "output": "build/win"
+    },
+    "win": {
+      "icon": "./assets/img/sahas.png"
+    }
+  },
+  "author": "HammerByte",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rocketstriker999/electron_Sahas/issues"
@@ -24,6 +34,7 @@
   "homepage": "https://github.com/rocketstriker999/electron_Sahas#readme",
   "devDependencies": {
     "@electron/packager": "^18.0.0",
+    "electron-builder": "^24.9.1",
     "electron": "^27.1.0"
   }
 }
