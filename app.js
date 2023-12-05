@@ -15,14 +15,13 @@ electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resol
 
 //APP Ready Event
 electronApp.on("ready", () => {
-
     //Electron App Window
     electronApp.window = new libElectron.BrowserWindow({
         autoHideMenuBar:true,
         show: false, //Keep Window initially hidden
         minWidth:1024,
         minHeight:768,
-        icon:'sahas.ico',
+        icon:'./assets/img/sahas.ico',
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
