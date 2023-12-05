@@ -21,7 +21,7 @@ electronApp.on("ready", () => {
         show: false, //Keep Window initially hidden
         minWidth:1024,
         minHeight:768,
-        icon:'./assets/img/sahas.ico',
+        icon:'./assets/img/sahas.png',
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
