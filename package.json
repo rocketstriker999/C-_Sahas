@@ -4,8 +4,8 @@
   "description": "This is Windows app For Sahas",
   "main": "app.js",
   "scripts": {
-    "start": "electron .",
-    "build-win": "electron-builder",
+    "start": "npm install && electron .",
+    "build": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package-linux": "electron-packager . sahas --appname=Sahas --platform=linux --arch=x64 --icon=./assets/img/sahas.png --overwrite --out dist/linux",
     "package-win": "electron-packager . sahas --appname=Sahas --platform=win32 --arch=x86_64 --icon=./assets/img/sahas.png --overwrite --out dist/win"
@@ -19,18 +19,24 @@
   ],
   "build": {
     "productName": "Sahas",
+    "appId":"com.hammerbyte.sahas",
     "directories": {
-      "output": "build/win"
+      "output": "builds/"
     },
     "win": {
       "icon": "./assets/img/sahas.png"
+    },
+    "linux":{
+      "icon": "./assets/img/sahas.png",
+      "category":"Utility",
+      "target":"deb"
     }
   },
   "author": "HammerByte",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rocketstriker999/electron_Sahas/issues"
-  },
+    },
   "homepage": "https://github.com/rocketstriker999/electron_Sahas#readme",
   "devDependencies": {
     "@electron/packager": "^18.0.0",
