@@ -59,7 +59,6 @@ courseHandler.containerTabs.forEach((tab) => {
             case "PDFs":
                 courseHandler.showDemoPDFs()
                 break;
-
         }
     });
 });
@@ -268,8 +267,6 @@ courseHandler.loadSubjects = () => {
     })
         .then(response => response.json()).then(jsonResponse => {
             if (jsonResponse.isTaskSuccess == 'true') {
-                //Load Subject List
-                console.log(JSON.stringify(jsonResponse));
                 //Put In Global Varibale To Access Later
                 courseHandler.subjectData = jsonResponse.subData;
                 //Clear Current Subjects First
@@ -282,66 +279,77 @@ courseHandler.loadSubjects = () => {
                     divSubject.classList.add("card");
                     divSubject.classList.add("card_subject");
 
-                    //Image Of The Course
+                    //container to hold info for subject
+                    const divSubjectInfo = document.createElement("div");
+                    divSubjectInfo.classList.add("container_subject_info")
+
+                    //Image Of The subject
                     const imgSubject = document.createElement("img");
                     imgSubject.src = `${requestHelper.serverAddress}/thumbnails/${subject.sub_img}`;
-
-                    const divSubjectInfo = document.createElement("div");
-                    divSubjectInfo.classList.add("padding_1");
 
                     //Subject Name
                     const subjectName = document.createElement("p");
                     subjectName.classList.add("text_normal");
+                    subjectName.classList.add("margin_top");
+                    subjectName.classList.add("margin_left");
+                    subjectName.classList.add("margin_right");
                     subjectName.classList.add("bold");
                     subjectName.innerHTML = subject.sub_name;
 
                     //Subject Name
                     const subjectDescription = document.createElement("p");
                     subjectDescription.classList.add("margin_top");
+                    subjectDescription.classList.add("margin_left");
+                    subjectDescription.classList.add("margin_right");
                     subjectDescription.innerHTML = subject.sub_desc;
+                   
+                    //Number Of Chapters
+                    const chapters = document.createElement("p");
+                    chapters.innerHTML = `${subject.chapCount} Chapters`;
+                    chapters.classList.add("bold");
+                    chapters.classList.add("margin_top");
+                    chapters.classList.add("margin_left");
+                    chapters.classList.add("margin_right");
+                    chapters.classList.add("margin_bottom");
+                    chapters.classList.add("chapters");
 
-                    const divSubjectManager = document.createElement("div");
-                    divSubjectManager.classList.add("margin_top");
-
-                    const btnChapters = document.createElement("a");
-                    btnChapters.innerHTML = `${subject.chapCount} Chapters`;
-                    btnChapters.classList.add("bold");
-                    btnChapters.classList.add("btn_chapters");
-
-                    btnChapters.addEventListener("click", e => {
+                    divSubjectInfo.appendChild(imgSubject);
+                    divSubjectInfo.appendChild(subjectName);
+                    divSubjectInfo.appendChild(subjectDescription);
+                    divSubjectInfo.appendChild(chapters);
+                    divSubjectInfo.addEventListener("click", e => {
                         subject.isCoursePurchased = courseHandler.course.isCoursePurchased
                         window.location.href = `subject.html?${new URLSearchParams(subject).toString()}`;
                     });
 
-                    const btnShowDemo = document.createElement("a");
-                    btnShowDemo.innerHTML = `View Demo`;
-                    btnShowDemo.classList.add("bold");
-                    btnShowDemo.classList.add("btn_demo");
-
-                    btnShowDemo.addEventListener("click", e => {
-                        courseHandler.demoVideos = subject.demoVideos;
-                        courseHandler.demoPdfs = subject.demoPdfs;
-                        courseHandler.demoAudios = subject.demoAudios;
-                        courseHandler.containerDemo.style.left = 0
-                        
-                        //Load Demo Video Defaultly
-                        courseHandler.containerTabs[0].click();
-                    });
-
-                    divSubjectManager.appendChild(btnChapters);
-
-                    if(!courseHandler.course.isCoursePurchased)
-                        divSubjectManager.appendChild(btnShowDemo)
-
-                    divSubjectInfo.appendChild(subjectName);
-                    divSubjectInfo.appendChild(subjectDescription);
-                    divSubjectInfo.appendChild(divSubjectManager)
-
-                    divSubject.appendChild(imgSubject);
                     divSubject.appendChild(divSubjectInfo);
 
-                    courseHandler.containerSubjects.appendChild(divSubject);
+                    if(!courseHandler.course.isCoursePurchased){
 
+                        const divider = document.createElement("div");
+                        divider.classList.add("divider");
+
+                        const btnShowDemo = document.createElement("button");
+                        btnShowDemo.innerHTML = `View Demo`;
+                        btnShowDemo.classList.add("bold");
+                        btnShowDemo.classList.add("btn_pink");
+                        btnShowDemo.classList.add("btn_demo")
+    
+                        btnShowDemo.addEventListener("click", e => {
+                            courseHandler.demoVideos = subject.demoVideos;
+                            courseHandler.demoPdfs = subject.demoPdfs;
+                            courseHandler.demoAudios = subject.demoAudios;
+                            courseHandler.containerDemo.style.left = 0
+                            //Load Demo Video Defaultly
+                            courseHandler.containerTabs[0].click();
+                        });
+
+                        divSubject.appendChild(divider)
+                        divSubject.appendChild(btnShowDemo)
+                    }
+
+                    //adding to list itself
+                    courseHandler.containerSubjects.appendChild(divSubject);
                 });
             }
             else

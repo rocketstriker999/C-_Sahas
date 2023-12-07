@@ -199,14 +199,11 @@ chapterHandler.showAudios = () => {
 
             //click handler
             containerAudio.addEventListener("click", (e) => {
-
             })
-
         });
     }
     else
         chapterHandler.showNoDemoContentFound()
-
 }
 
 //Fetch Intially All Content
@@ -215,15 +212,11 @@ requestHelper.requestServer({
         chap_id: chapterHandler.chapter.chap_id,
     }
 }).then(response => response.json()).then(jsonResponse => {
-    console.log(JSON.stringify(jsonResponse));
-
     //Put In Global Varibale To Access Later
     chapterHandler.videos = jsonResponse.vidData;
     chapterHandler.PDFs = jsonResponse.pdfData;
     chapterHandler.audios = jsonResponse.audData;
-
     //Select Video Defaultly
     chapterHandler.containerTabs[0].click();
-
 });
 

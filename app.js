@@ -9,7 +9,6 @@ let electronApp = libElectron.app;
 //Ipc To Communicate With View JS Files 
 electronApp.ipcMain = libElectron.ipcMain;
 
-
 //Register For Deeplinking
 electronApp.setAsDefaultProtocolClient('sahas', process.execPath, [libPath.resolve(process.argv[1]?process.argv[1]:"")]);
 
@@ -40,7 +39,7 @@ electronApp.on("ready", () => {
     //load initial template
     electronApp.window.loadURL(`file://${__dirname}/assets/html/splash.html`);
     //Open Dev Tools , Remove Below Line While Production
-    //electronApp.window.webContents.openDevTools();
+    electronApp.window.webContents.openDevTools();
     //Disable Right Click Due to Youtube Video Privacy
     electronApp.window.on("system-context-menu", (event, _point) => event.preventDefault());
 });

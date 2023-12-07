@@ -22,8 +22,6 @@ subjectHandler.btnBack.addEventListener("click", (e) => {
     window.electron.back();
 });
 
-console.log(JSON.stringify(subjectHandler.subject))
-
 //set name
 subjectHandler.subjectName.innerHTML = subjectHandler.subject.sub_name;
 //set description
@@ -97,10 +95,8 @@ window.electron.getCurrentUser((currentUser) => {
     }).then(response => response.json()).then(jsonResponse => {
         //get The Chapters List
         if (jsonResponse.isTaskSuccess == "true") {
-            console.log(JSON.stringify(jsonResponse));
             //load chapter list
             subjectHandler.showChapters(jsonResponse.chapData)
-
         } else
             throw new Error(jsonResponse.response_msg);
     }).catch(error => {

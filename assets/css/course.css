@@ -48,14 +48,12 @@
     height: 9rem;
 }
 
-.btn_chapters {
+.chapters {
     color: #E91E63;
-    ;
 }
 
-.btn_demo {
-    margin-left: 0.5rem;
-    color: #3F51B5;
+.btn_demo{
+    margin:1rem
 }
 
 .course_purchase_info {
