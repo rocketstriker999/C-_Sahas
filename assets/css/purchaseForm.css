@@ -1,0 +1,23 @@
+.divider{
+    width: 100%;
+}
+
+.container_pricing{
+    width: 100%;
+    border: 1px solid #E1E1E1;
+}
+
+.error{
+    display: none;
+}
+
+.promo_code_discount{
+    display: none;
+    color: #D50000;
+}
+
+.promo_success{
+    border: 2px #4CAF50 solid;
+}
+
+

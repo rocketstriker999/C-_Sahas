@@ -1,11 +1,11 @@
 {
   "name": "electron_sahas",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "This is Windows app For Sahas",
   "main": "app.js",
   "scripts": {
     "start": "npm install && electron .",
-    "build": "electron-builder",
+    "build": "npm install && electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package-linux": "electron-packager . sahas --appname=Sahas --platform=linux --arch=x64 --icon=./assets/img/sahas.png --overwrite --out dist/linux",
     "package-win": "electron-packager . sahas --appname=Sahas --platform=win32 --arch=x86_64 --icon=./assets/img/sahas.png --overwrite --out dist/win"

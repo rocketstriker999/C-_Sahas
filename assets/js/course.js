@@ -245,7 +245,7 @@ window.electron.getCurrentUser((currentUser) => {
         else {
             //User Has Not Purchased This Course
             courseHandler.btnPurchaseCourse.innerHTML = "Purchase Course"
-            courseHandler.btnPurchaseCourse.addEventListener("click", courseHandler.startPurchaseFlow);
+            courseHandler.btnPurchaseCourse.addEventListener("click", courseHandler.openPurchaseForm);
         }
 
         //Pass Parameter if Demo Button is needed To Show Or not
@@ -347,7 +347,6 @@ courseHandler.loadSubjects = () => {
                         divSubject.appendChild(divider)
                         divSubject.appendChild(btnShowDemo)
                     }
-
                     //adding to list itself
                     courseHandler.containerSubjects.appendChild(divSubject);
                 });
@@ -357,10 +356,6 @@ courseHandler.loadSubjects = () => {
         }).catch(error => console.warn(error));
 }
 
-
-
-
-
 //show purchase info
 courseHandler.showPurchaseInfo = (purchaseData) => {
     courseHandler.coursePurchaseInfo.style.display = 'block';
@@ -368,7 +363,9 @@ courseHandler.showPurchaseInfo = (purchaseData) => {
 }
 
 //Start purchase Flow
-courseHandler.startPurchaseFlow = () => {
+courseHandler.openPurchaseForm = () => {
+
+    window.location.href = `purchaseForm.html?${new URLSearchParams(courseHandler.course).toString()}`;
 
 }
 

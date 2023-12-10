@@ -7,7 +7,7 @@ loginHandler.deviceId = document.getElementById("DEVICE_ID");
 
 //loginHandler.etxEmail = document.getElementById("ETX_EMAIL");
 //loginHandler.etxPassWord = document.getElementById("ETX_PASSWORD");
-//loginHandler.error = document.getElementById("ERROR");
+loginHandler.error = document.getElementById("ERROR");
 
 //loginHandler.counterEmail = document.getElementById("COUNTER_EMAIL");
 //loginHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD");
@@ -56,10 +56,12 @@ loginHandler.setInputError=(error,validationArea,etx)=>{
     etx.classList.add('invalid_edittext')
 }
 
+*/
+
 loginHandler.setAuthenticationError = (error) => {
     loginHandler.error.style.display = "block";
     loginHandler.error.innerHTML = error;
-}*/
+}
 
 //google Login redirect to Google Signin Via Sahas Website
 loginHandler.btnGoogleLogin.addEventListener("click", (e) => {

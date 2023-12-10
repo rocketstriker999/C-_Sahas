@@ -14,6 +14,9 @@ pdfPlayerHandler.btnBack.addEventListener("click",(e)=>{
     window.electron.back();
 })
 
+//set pdf file in player
+pdfPlayerHandler.pdfPlayer.src=`https://drive.google.com/file/d/${pdfPlayerHandler.pdf.pdf_file}/preview`
+
 //Make Button Visible if download is enabled
 if(pdfPlayerHandler.pdf.pdf_sharable == "true"){
     pdfPlayerHandler.btnDownload.style.display="block"

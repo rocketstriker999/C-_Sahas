@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Purchase</title>
+    <!--Common CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <!--Page Specific CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/purchaseForm.css">
+    <!--Font Awesome CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!--File Speicifc JS-->
+    <script type="module" src="../js/helper.js"></script>
+    <script type="module" src="../js/purchaseForm.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container_course padding_1">
+        <img class="course_img" id="COURSE_IMG">
+        <div class="container_course_info">
+            <p id="COURSE_NAME" class="title_secondary"></p>
+            <p id="COURSE_DESCRIPTION" class="text_normal margin_top"></p>
+            <p id="COURSE_SUBJECTS" class="text_normal bold margin_top"></p>
+            <div class="divider margin_top"></div>
+            <div class="container_pricing padding_1 margin_top">
+                <p id="COURSE_ORIGINAL_PRICE" class="text_normal"></p>
+                <p id="COURSE_DISCOUNT" class="margin_top bold promo_code_discount"></p>
+                <p id="COURSE_PRICE_PAY" class="margin_top bold text_normal"></p>
+
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext  fa-solid fa-ticket"></i>
+                    <input class="edittext" type="text" id="ETX_COUPON" maxlength="22" placeholder="Coupon Code" required />
+                    <p id="VALIDATION_COUPON" class="error"></p>
+                </div>
+
+                <div class="margin_top">
+                    <button class="btn_pink" id="BTN_BACK">Cancel</button>
+                    <button class="btn_purple margin_left" id="BTN_BUY">Buy</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
