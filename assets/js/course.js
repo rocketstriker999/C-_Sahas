@@ -12,7 +12,7 @@ courseHandler.btnBack = document.getElementById("BTN_BACK");
 courseHandler.btnPurchaseCourse = document.getElementById("BTN_BUY");
 courseHandler.containerTabs = document.querySelectorAll('.tab');
 courseHandler.containerDemo = document.getElementById("CONTAINER_DEMO");
-courseHandler.btnCloseDemo = document.getElementById("BTN_CLOSE_DEMO");
+courseHandler.btnCloseDemo = document.getElementById("BTN_CLOSE_SHEET");
 courseHandler.containerDemoData = document.getElementById("CONTAINER_DEMO_DATA");
 
 //extract and generate get object passed from dashboard

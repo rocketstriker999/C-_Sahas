@@ -18,34 +18,46 @@
 
 <body>
 
-    <div class="container_course padding_1">
-        <img class="course_img" id="COURSE_IMG">
-        <div class="container_course_info">
-            <p id="COURSE_NAME" class="title_secondary"></p>
-            <p id="COURSE_DESCRIPTION" class="text_normal margin_top"></p>
-            <p id="COURSE_SUBJECTS" class="text_normal bold margin_top"></p>
-            <div class="divider margin_top"></div>
-            <div class="container_pricing padding_1 margin_top">
-                <p id="COURSE_ORIGINAL_PRICE" class="text_normal"></p>
-                <p id="COURSE_DISCOUNT" class="margin_top bold promo_code_discount"></p>
-                <p id="COURSE_PRICE_PAY" class="margin_top bold text_normal"></p>
+    <div id="CONTAINER_ROOT" class="container_root">
 
-                <div class="container_edittext margin_top">
-                    <i class="icon_edittext  fa-solid fa-ticket"></i>
-                    <input class="edittext" type="text" id="ETX_COUPON" maxlength="22" placeholder="Coupon Code" required />
-                    <p id="VALIDATION_COUPON" class="error"></p>
-                </div>
+        <div id="CONTAINER_PAYU" class="container_payu container_purple">
+            <p class="title_secondary padding_2 title_sheet">Confirm Purchase Details</p>
+            <button class="btn_pink btn_close_sheet" id="BTN_CLOSE_SHEET">Close</button>
 
-                <div class="margin_top">
-                    <button class="btn_pink" id="BTN_BACK">Cancel</button>
-                    <button class="btn_purple margin_left" id="BTN_BUY">Buy</button>
+            <div class = "container_payu_details card padding_2">
+                <form id="FORM_PAYU" action='https://secure.payu.in/_payment' method='post' enctype="multipart/form-data" accept-charset="UTF-8">
+                    
+                </form>
+            </div>
+        </div>
+
+        <div class="container_course padding_2">
+            <img class="course_img" id="COURSE_IMG">
+            <div class="container_course_info">
+                <p id="COURSE_NAME" class="title_secondary"></p>
+                <p id="COURSE_DESCRIPTION" class="text_normal margin_top"></p>
+                <p id="COURSE_SUBJECTS" class="text_normal bold margin_top"></p>
+                <div class="divider margin_top"></div>
+                <div class="container_pricing padding_1 margin_top">
+                    <p id="COURSE_ORIGINAL_PRICE" class="text_normal"></p>
+                    <p id="COURSE_DISCOUNT" class="margin_top bold promo_code_discount"></p>
+                    <p id="COURSE_PRICE_PAY" class="margin_top bold text_normal"></p>
+                    <div class="container_edittext margin_top">
+                        <i class="icon_edittext  fa-solid fa-ticket"></i>
+                        <input class="edittext" type="text" id="ETX_COUPON" maxlength="22" placeholder="Coupon Code"
+                            required />
+                        <p id="VALIDATION_COUPON" class="error"></p>
+                    </div>
+                    <p id="COURSE_PURCHASE_ERROR" class="error">eee</p>
+                    <div class="margin_top">
+                        <button class="btn_pink" id="BTN_BACK">Cancel</button>
+                        <button class="btn_purple margin_left" id="BTN_BUY">Buy</button>
+                    </div>
                 </div>
             </div>
-
-
         </div>
-    </div>
 
+    </div>
 </body>
 
 </html>

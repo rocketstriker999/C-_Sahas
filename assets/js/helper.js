@@ -29,12 +29,10 @@ requestHelper.requestServer = async ({ requestHeaders = {}, requestPath = "/", r
     //body: JSON.stringify(requestPostBody),
 
     if (requestPostBody) {
-
         let postBodyContent = [];
         for (let key in requestPostBody)
             postBodyContent.push(encodeURIComponent(key) + "=" + encodeURIComponent(requestPostBody[key]));
         postBodyContent = postBodyContent.join("&");
-
         fetchOptions.body = postBodyContent
     }
 

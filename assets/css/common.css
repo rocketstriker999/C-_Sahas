@@ -74,6 +74,10 @@ input {
     font-weight: bold;
 }
 
+.edittext_disable{
+    color: #BDBDBD;
+}
+
 
 
 .edittext:focus{
@@ -290,4 +294,14 @@ input {
     justify-content: center;
     align-items: start;
     max-width: 40vw;
+}
+
+.title_sheet{
+    color: #FAFAFA;
+    display: inline-block;
+}
+
+.btn_close_sheet{
+    float: right;
+    margin: 2rem;
 }

@@ -1,3 +1,9 @@
+.container_root{
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
 .divider{
     width: 100%;
 }
@@ -19,5 +25,37 @@
 .promo_success{
     border: 2px #4CAF50 solid;
 }
+
+.container_payu {
+    position: absolute;
+    width: 100vw;
+    left: 100vw;
+    top: 0;
+    transition: all 0.5s ease-in-out;
+    height: 100%;
+    z-index: 1;
+}
+
+.container_payu_details{
+    text-align: center;
+    width: 25rem;
+    margin: auto;
+}
+
+.btn_close_payu{
+    float: right;
+    margin: 2rem;
+}
+
+.title_payu{
+    color: #FAFAFA;
+    display: inline-block;
+}
+
+.edittext{
+    display: block;
+    width: 100%;
+}
+
 
 
