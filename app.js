@@ -2,6 +2,8 @@ const libElectron = require("electron");
 const libPath = require("path");
 const crypto = require('crypto');
 const commonUtil = require('./utils/common.js');
+const configuration = require('./package.json');
+
 
 //Electron App Instance
 let electronApp = libElectron.app;
@@ -37,7 +39,7 @@ electronApp.on("ready", () => {
     //In case User Quit
     electronApp.window.on('closed', () => { electronApp.window = null; });
     //load initial template
-    electronApp.window.loadURL(`file://${__dirname}/assets/html/splash.html`);
+    electronApp.window.loadURL(`file://${__dirname}/assets/html/splash.html?version=${configuration.version}`);
     //Open Dev Tools , Remove Below Line While Production
     //electronApp.window.webContents.openDevTools();
     //Disable Right Click Due to Youtube Video Privacy

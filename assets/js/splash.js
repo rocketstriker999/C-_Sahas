@@ -3,6 +3,10 @@ import { requestHelper } from './helper.js';
 let splashHandler = {};
 
 splashHandler.progress = document.getElementById("progress_splash");
+splashHandler.appVersion = document.getElementById("APP_VERSION");
+
+//set app version
+splashHandler.appVersion.innerHTML=`V ${new URLSearchParams(window.location.search).get("version")}`;
 
 //Check If Already Authorized and Logged Priviously
 splashHandler.autoLogin = (email, password, deviceId) => {

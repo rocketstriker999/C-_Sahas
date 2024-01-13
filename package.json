@@ -1,6 +1,6 @@
 {
   "name": "electron_sahas",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "This is Windows app For Sahas",
   "main": "app.js",
   "scripts": {
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@electron/packager": "^18.0.0",
     "electron-builder": "^24.9.1",
-    "electron": "^27.1.0"
+    "electron": "^27.1.0",
+    "electron-updater": "^5.3.0"
   }
 }
