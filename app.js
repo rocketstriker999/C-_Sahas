@@ -34,8 +34,6 @@ electronApp.on("ready", () => {
     electronApp.window.maximize();
     //show the window
     electronApp.window.show();
-    //Secure Against Screenshot and Recording
-    electronApp.window.setContentProtection(true)
     //In case User Quit
     electronApp.window.on('closed', () => { electronApp.window = null; });
     //load initial template
@@ -95,6 +93,8 @@ electronApp.ipcMain.on("device_id_get", (event) => {
 electronApp.ipcMain.on("user_set", (event, userData) => {
     //save current user
     electronApp.currentUser=userData;
+    //Secure Against Screenshot and Recording    
+    electronApp.window.setContentProtection(Boolean(Number(userData.secure_screen)));
 });
 
 //Send User Data
