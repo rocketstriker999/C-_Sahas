@@ -1,1 +1,64 @@
-hello
+name: Push Updated Code
+
+on: push
+        
+jobs:
+
+  build:
+    name: build
+    permissions: write-all
+    runs-on: windows-latest
+    
+    env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    steps:
+
+    - uses: actions/checkout@v2
+      name: Checkout repository
+
+    - run: npm run build
+      name: Build Electron app
+
+    - run: Compress-Archive -Path builds/. -Destination sahas.zip
+      name: Zipping App
+
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v3
+      with:
+         name: sahas.zip
+         path: sahas.zip
+         retention-days: 5
+
+  deploy:
+        name: deploy
+        needs: build
+        permissions: write-all
+        runs-on: ubuntu-latest
+        steps:
+
+            - uses: actions/checkout@v2
+              name: Checkout repository
+
+            - name: Download math result for job 2
+              uses: actions/download-artifact@v3
+              with:
+                  name: sahas.zip
+
+            - name: Unzipping
+              run: unzip sahas.zip
+
+            - name: list
+              run: ls
+
+            - name: FTP Deploy
+              run: echo "ftp -n <<EOF" > ftp.sh;
+                   echo "open ftp.sahasinstitute.com" >> ftp.sh;
+                   echo "user u496732460.HToru kDDYWRsDE1umBNv" >> ftp.sh;
+                   echo "quote pasv" >> ftp.sh;
+                   echo "binary" >> ftp.sh;
+                   echo "prompt off" >> ftp.sh;
+                   echo "mput *" >> ftp.sh;
+                   echo "EOF" >> ftp.sh;
+                   chmod +x ftp.sh;
+                   ./ftp.sh;
