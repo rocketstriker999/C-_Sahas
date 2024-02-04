@@ -1,6 +1,6 @@
 {
   "name": "electron_sahas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is Windows app For Sahas",
   "main": "app.js",
   "scripts": {
@@ -19,29 +19,35 @@
   ],
   "build": {
     "productName": "Sahas",
-    "appId":"com.hammerbyte.sahas",
+    "appId": "com.hammerbyte.sahas",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://sahasinstitute.com/assets"
+      }
+    ],
     "directories": {
       "output": "builds/"
     },
     "win": {
       "icon": "./assets/img/sahas.png"
     },
-    "linux":{
+    "linux": {
       "icon": "./assets/img/sahas.png",
-      "category":"Utility",
-      "target":"deb"
+      "category": "Utility",
+      "target": "deb"
     }
   },
   "author": "HammerByte",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rocketstriker999/electron_Sahas/issues"
-    },
+  },
   "homepage": "https://github.com/rocketstriker999/electron_Sahas#readme",
   "devDependencies": {
     "@electron/packager": "^18.0.0",
-    "electron-builder": "^24.9.1",
     "electron": "^27.1.0",
+    "electron-builder": "^24.9.1",
     "electron-updater": "^5.3.0"
   }
 }

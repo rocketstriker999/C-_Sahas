@@ -20,7 +20,7 @@ jobs:
     - run: npm run build
       name: Build Electron app
 
-    - run: Compress-Archive -Path builds/. -Destination sahas.zip
+    - run: Compress-Archive -Path builds/*.* -Destination sahas.zip
       name: Zipping App
 
     - name: 'Upload Artifact'
