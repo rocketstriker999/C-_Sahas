@@ -1,6 +1,6 @@
 {
   "name": "electron_sahas",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "This is Windows app For Sahas",
   "main": "app.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "npm install && electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package-linux": "electron-packager . sahas --appname=Sahas --platform=linux --arch=x64 --icon=./assets/img/sahas.png --overwrite --out dist/linux",
-    "package-win": "electron-packager . sahas --appname=Sahas --platform=win32 --arch=x86_64 --icon=./assets/img/sahas.png --overwrite --out dist/win"
+    "package-win": "electron-packager . sahas --appname=Sahas --platform=win32 --arch=x64 --icon=./assets/img/sahas.png --overwrite --out dist/win"
   },
   "repository": {
     "type": "git",
@@ -45,9 +45,11 @@
   },
   "homepage": "https://github.com/rocketstriker999/electron_Sahas#readme",
   "devDependencies": {
-    "@electron/packager": "^18.0.0",
     "electron": "^27.1.0",
-    "electron-builder": "^24.9.1",
-    "electron-updater": "^5.3.0"
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "electron-log": "^5.0.3",
+    "electron-updater": "^6.1.7"
   }
 }
