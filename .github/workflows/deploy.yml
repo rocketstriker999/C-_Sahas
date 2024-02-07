@@ -57,7 +57,7 @@ jobs:
             - name: FTP Deploy
               run: echo "ftp -n <<EOF" > ftp.sh;
                    echo "open ftp.sahasinstitute.com" >> ftp.sh;
-                   echo "user LCJpaQ37NH3Wdij mFY52q71yVVBHfr" >> ftp.sh;
+                   echo "user u496732460.LCJpaQ37NH3Wdij mFY52q71yVVBHfr" >> ftp.sh;
                    echo "quote pasv" >> ftp.sh;
                    echo "binary" >> ftp.sh;
                    echo "prompt off" >> ftp.sh;
