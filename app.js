@@ -3,12 +3,13 @@ const libPath = require("path");
 const crypto = require('crypto');
 const commonUtil = require('./utils/common.js');
 const configuration = require('./package.json');
-
+const { dialog } = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 //Electron App Instance
 let electronApp = libElectron.app;
 
-//Ipc To Communicate With View JS Files 
+//Ipc To Communicate With View JS Files
 electronApp.ipcMain = libElectron.ipcMain;
 
 //Register For Deeplinking
@@ -42,6 +43,51 @@ electronApp.on("ready", () => {
     //electronApp.window.webContents.openDevTools();
     //Disable Right Click Due to Youtube Video Privacy
     electronApp.window.on("system-context-menu", (event, _point) => event.preventDefault());
+});
+
+//By default checks for updates
+autoUpdater.autoDownload = true;
+autoUpdater.autoInstallOnAppQuit = true;
+
+// Check on server and Notify that new update is found.
+autoUpdater.checkForUpdatesAndNotify();
+
+//Auto Updater checking for update
+autoUpdater.on('checking-for-update', () => {
+  console.log('Checking for update...');
+});
+
+//Auto updater notify that new update availale with latest version details
+autoUpdater.on('update-available', (info) => {
+  console.log('Update available.' + info);
+});
+
+//Auto updater notify that no update availale.
+autoUpdater.on('update-not-available', (info) => {
+  console.log('Update not available.' + info);
+});
+
+//Auto updater display error if any.
+autoUpdater.on('error', (err) => {
+  console.log('Error in auto-updater. ' + err);
+});
+
+//Auto updater dialogue popup if new version is found
+autoUpdater.on('update-downloaded', (info) => {
+  console.log(info);
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Update'],
+    title: 'Application Update',
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  };
+
+//Install latest version after dialogue popup is closed.
+  dialog.showMessageBox(dialogOpts, (response) => {
+    if (response === 0) {
+      autoUpdater.quitAndInstall();
+    }
+  });
 });
 
 //Google Login Browser Request
