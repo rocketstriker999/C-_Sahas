@@ -3,7 +3,7 @@ const libPath = require("path");
 const crypto = require('crypto');
 const commonUtil = require('./utils/common.js');
 const configuration = require('./package.json');
-const updater = require('./package.json');
+const updater = require('./updater');
 
 
 //Electron App Instance
