@@ -18,17 +18,17 @@ jobs:
       name: Checkout repository
 
     - run: npm run build
-      name: Build Electron app
+      name: Build Sahas App
 
-    - run: Compress-Archive -Path builds/. -Destination sahas.zip
+    - run: Compress-Archive -Path builds/*.* -Destination sahas.zip
       name: Zipping App
 
-    - name: 'Upload Artifact'
+    - name: 'Preparing Deployables'
       uses: actions/upload-artifact@v3
       with:
          name: sahas.zip
          path: sahas.zip
-         retention-days: 5
+         retention-days: 1
 
   deploy:
         name: deploy
@@ -37,28 +37,24 @@ jobs:
         runs-on: ubuntu-latest
         steps:
 
-            - uses: actions/checkout@v2
-              name: Checkout repository
-
-            - name: Download math result for job 2
+            - name: Downloading Deployables
               uses: actions/download-artifact@v3
               with:
                   name: sahas.zip
 
-            - name: Unzipping
-              run: unzip sahas.zip
+            - name: Starting Deployments
+              run: unzip sahas.zip -d deploymentFiles
 
-            - name: list
-              run: ls
-
-            - name: FTP Deploy
+            - name: Deploying
               run: echo "ftp -n <<EOF" > ftp.sh;
                    echo "open ftp.sahasinstitute.com" >> ftp.sh;
-                   echo "user u496732460.HToru kDDYWRsDE1umBNv" >> ftp.sh;
+                   echo "user u496732460.LCJpaQ37NH3Wdij mFY52q71yVVBHfr" >> ftp.sh;
                    echo "quote pasv" >> ftp.sh;
                    echo "binary" >> ftp.sh;
                    echo "prompt off" >> ftp.sh;
                    echo "mput *" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
-                   ./ftp.sh;
+                   cd deploymentFiles;
+                   ls;                   
+                   ../ftp.sh;
