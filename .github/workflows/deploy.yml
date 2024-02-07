@@ -64,6 +64,6 @@ jobs:
                    echo "mput *" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
-                   cd temp
-                   ls                   
+                   cd temp;
+                   ls;                   
                    ../ftp.sh;
