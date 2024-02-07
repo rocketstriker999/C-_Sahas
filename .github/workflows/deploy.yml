@@ -61,7 +61,9 @@ jobs:
                    echo "quote pasv" >> ftp.sh;
                    echo "binary" >> ftp.sh;
                    echo "prompt off" >> ftp.sh;
-                   echo "mput temp/*" >> ftp.sh;
+                   echo "mput *" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
-                   ./ftp.sh;
+                   cd temp
+                   ls                   
+                   ../ftp.sh;
