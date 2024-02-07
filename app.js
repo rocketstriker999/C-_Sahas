@@ -9,6 +9,13 @@ const updater = require('./updater');
 //Electron App Instance
 let electronApp = libElectron.app;
 
+//Considering this as production build
+Object.defineProperty(electronApp, 'isPackaged', {
+  get() {
+    return true;
+  }
+});
+
 //Ipc To Communicate With View JS Files
 electronApp.ipcMain = libElectron.ipcMain;
 
