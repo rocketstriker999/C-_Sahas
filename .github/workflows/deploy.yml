@@ -46,7 +46,10 @@ jobs:
                   name: sahas.zip
 
             - name: Unzipping
-              run: unzip sahas.zip
+              run: unzip sahas.zip -d temp
+
+            - name: Move to temp
+              run: cd temp
 
             - name: list
               run: ls
