@@ -46,10 +46,10 @@ jobs:
                   name: sahas.zip
 
             - name: Unzipping
-              run: unzip sahas.zip -d temp
+              run: unzip sahas.zip -d updateFiles
 
-            - name: Move to temp
-              run: cd temp
+            - name: Move to updateFiles
+              run: cd updateFiles
 
             - name: list
               run: ls
@@ -64,6 +64,6 @@ jobs:
                    echo "mput *" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
-                   cd temp;
+                   cd updateFiles;
                    ls;                   
                    ../ftp.sh;
