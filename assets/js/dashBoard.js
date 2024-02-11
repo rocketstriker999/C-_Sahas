@@ -119,6 +119,7 @@ dashBoardHandler.loadCourses=(coursesData)=>{
             const coursePrice = document.createElement("p");
             coursePrice.classList.add("course_price");
             coursePrice.classList.add("margin_top");
+            course.coursePrice = Number(course.coursePrice);
             coursePrice.innerHTML= `${course.std_price} rs.`;
     
             //Course Number of Subject
@@ -141,6 +142,7 @@ dashBoardHandler.loadCourses=(coursesData)=>{
             divCourse.addEventListener("click",(e)=>{
                 //Redirect To Course Content Page
                 window.location.href = `course.html?${new URLSearchParams(course).toString()}`;
+                
             });
     
             //Add Card For Course In Container
