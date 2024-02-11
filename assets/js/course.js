@@ -63,7 +63,7 @@ courseHandler.containerTabs.forEach((tab) => {
     });
 });
 
-courseHandler.showNoDemoContentFound=()=>{
+courseHandler.showNoDemoContentFound = () => {
     const noContentFound = document.createElement("p");
     noContentFound.classList.add("title_secondary");
     noContentFound.classList.add("padding_2");
@@ -74,47 +74,47 @@ courseHandler.showNoDemoContentFound=()=>{
 
 courseHandler.showDemoVideos = () => {
 
-    if(courseHandler.demoVideos.length>0){
+    if (courseHandler.demoVideos.length > 0) {
 
         courseHandler.demoVideos.forEach(video => {
 
             const containerVideo = document.createElement("div");
             containerVideo.classList.add("container_content_item");
-    
+
             //Image Of The Course
             const videoImage = document.createElement("img");
             videoImage.classList.add("content_item_image");
             videoImage.src = `http://img.youtube.com/vi/${video.vid_file}/0.jpg`;
-    
+
             //container of video text
             const containerVideoInfo = document.createElement("div");
             containerVideoInfo.classList.add("container_content_item_info");
-    
+
             //Video Title
             const videoTitle = document.createElement("p");
             videoTitle.classList.add("content_item_title");
             videoTitle.innerText = video.vid_name
-    
+
             //Video Text
             const videoDescription = document.createElement("p");
             videoDescription.classList.add("margin_top");
             videoDescription.innerText = video.vid_desc
-    
+
             //Adding text into video text container
             containerVideoInfo.appendChild(videoTitle)
             containerVideoInfo.appendChild(videoDescription)
-    
+
             containerVideo.appendChild(videoImage);
             containerVideo.appendChild(containerVideoInfo);
-    
+
             //Add Video To Container
             courseHandler.containerDemoData.appendChild(containerVideo);
 
             //click handler
-            containerVideo.addEventListener("click",(e)=>{
+            containerVideo.addEventListener("click", (e) => {
                 window.location.href = `videoPlayer.html?${new URLSearchParams(video).toString()}`;
             })
-    
+
         });
     }
     else
@@ -122,47 +122,47 @@ courseHandler.showDemoVideos = () => {
 }
 
 courseHandler.showDemoPDFs = () => {
-    if(courseHandler.demoPdfs.length>0){
+    if (courseHandler.demoPdfs.length > 0) {
 
         courseHandler.demoPdfs.forEach(pdf => {
 
             const containerPdf = document.createElement("div");
             containerPdf.classList.add("container_content_item");
-    
+
             //Image Of The Course
             const pdfImage = document.createElement("img");
             pdfImage.classList.add("content_item_image");
             pdfImage.src = `../img/pdf.png`;
-    
+
             //container of pdf text
             const containerPdfInfo = document.createElement("div");
             containerPdfInfo.classList.add("container_content_item_info");
-    
+
             //pdf Title
             const pdfTitle = document.createElement("p");
             pdfTitle.classList.add("content_item_title");
             pdfTitle.innerText = pdf.pdf_name
-    
+
             //pdf Text
             const pdfDescription = document.createElement("p");
             pdfDescription.classList.add("margin_top");
             pdfDescription.innerText = pdf.pdf_desc
-    
+
             //Adding text into pdf text container
             containerPdfInfo.appendChild(pdfTitle)
             containerPdfInfo.appendChild(pdfDescription)
-    
+
             containerPdf.appendChild(pdfImage);
             containerPdf.appendChild(containerPdfInfo);
-    
+
             //Add pdf To Container
             courseHandler.containerDemoData.appendChild(containerPdf);
 
             //click handler
-            containerPdf.addEventListener("click",(e)=>{
+            containerPdf.addEventListener("click", (e) => {
                 window.location.href = `pdfPlayer.html?${new URLSearchParams(pdf).toString()}`;
             })
-    
+
         });
     }
     else
@@ -171,52 +171,52 @@ courseHandler.showDemoPDFs = () => {
 
 courseHandler.showDemoAudios = () => {
 
-    if(courseHandler.demoAudios.length>0){
+    if (courseHandler.demoAudios.length > 0) {
 
         courseHandler.demoAudios.forEach(audio => {
 
             const containerAudio = document.createElement("div");
             containerAudio.classList.add("container_content_item");
-    
+
             //Image Of The Course
             const audioImage = document.createElement("img");
             audioImage.classList.add("content_item_image");
             audioImage.src = `../img/audio.png`;
-    
+
             //container of audio text
             const containerAudioInfo = document.createElement("div");
             containerAudioInfo.classList.add("container_content_item_info");
-    
+
             //audio Title
             const audioTitle = document.createElement("p");
             audioTitle.classList.add("content_item_title");
             audioTitle.innerText = audio.aud_name
-    
+
             //audio Text
             const audioDescription = document.createElement("p");
             audioDescription.classList.add("margin_top");
             audioDescription.innerText = audio.aud_desc
-    
+
             //Adding text into audio text container
             containerAudioInfo.appendChild(audioTitle)
             containerAudioInfo.appendChild(audioDescription)
-    
+
             containerAudio.appendChild(audioImage);
             containerAudio.appendChild(containerAudioInfo);
-    
+
             //Add audio To Container
             courseHandler.containerDemoData.appendChild(containerAudio);
 
             //click handler
-            containerAudio.addEventListener("click",(e)=>{
-                
+            containerAudio.addEventListener("click", (e) => {
+
             })
-    
+
         });
     }
     else
         courseHandler.showNoDemoContentFound()
-    
+
 }
 
 //Close Demo Window
@@ -226,7 +226,6 @@ courseHandler.btnCloseDemo.addEventListener("click", (e) => {
 
 //Set UserName From Storage Initially
 window.electron.getCurrentUser((currentUser) => {
-
     requestHelper.requestServer({
         requestPath: "getStdAuth.php", requestMethod: "POST", requestPostBody: {
             user_email: currentUser.user_email,
@@ -239,8 +238,9 @@ window.electron.getCurrentUser((currentUser) => {
 
         if (courseHandler.course.isCoursePurchased) {
             //User Has Already Purchased This Course
-            courseHandler.btnPurchaseCourse.style.display = "none"
             courseHandler.showPurchaseInfo(jsonResponse.purchaseData);
+            courseHandler.btnPurchaseCourse.innerHTML = "Download Receipt"
+            courseHandler.btnPurchaseCourse.addEventListener("click", () => courseHandler.downloadPurchaseReceipt(jsonResponse.purchaseData[0].receipt));
         }
         else {
             //User Has Not Purchased This Course
@@ -302,7 +302,7 @@ courseHandler.loadSubjects = () => {
                     subjectDescription.classList.add("margin_left");
                     subjectDescription.classList.add("margin_right");
                     subjectDescription.innerHTML = subject.sub_desc;
-                   
+
                     //Number Of Chapters
                     const chapters = document.createElement("p");
                     chapters.innerHTML = `${subject.chapCount} Chapters`;
@@ -324,7 +324,7 @@ courseHandler.loadSubjects = () => {
 
                     divSubject.appendChild(divSubjectInfo);
 
-                    if(!courseHandler.course.isCoursePurchased){
+                    if (!courseHandler.course.isCoursePurchased) {
 
                         const divider = document.createElement("div");
                         divider.classList.add("divider");
@@ -334,7 +334,7 @@ courseHandler.loadSubjects = () => {
                         btnShowDemo.classList.add("bold");
                         btnShowDemo.classList.add("btn_pink");
                         btnShowDemo.classList.add("btn_demo")
-    
+
                         btnShowDemo.addEventListener("click", e => {
                             courseHandler.demoVideos = subject.demoVideos;
                             courseHandler.demoPdfs = subject.demoPdfs;
@@ -363,12 +363,11 @@ courseHandler.showPurchaseInfo = (purchaseData) => {
 }
 
 //Start purchase Flow
-courseHandler.openPurchaseForm = () => {
-
+courseHandler.openPurchaseForm = () => 
     window.location.href = `purchaseForm.html?${new URLSearchParams(courseHandler.course).toString()}`;
 
-}
 
-
+courseHandler.downloadPurchaseReceipt = (receipt) => 
+    window.electron.downloadPurchaseReceipt(receipt);
 
 

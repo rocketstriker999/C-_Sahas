@@ -90,7 +90,7 @@ electronApp.on('window-all-closed', () => electronApp.quit());
 
 // --- IPC Handling Section ---//
 //User requested For Google Login
-electronApp.ipcMain.on("google_login_get", (event, data) => {
+electronApp.ipcMain.on("google_login_get", (event) => {
   libElectron.shell.openExternal("https://sahasinstitute.com/google_login.html");
   electronApp.googleLoginEvent = event;
 });
@@ -102,6 +102,7 @@ electronApp.ipcMain.on("device_id_get", (event) => {
 
 //Save The User
 electronApp.ipcMain.on("user_set", (event, userData) => {
+  userData.user_wallet = Number(userData.user_wallet);
   //save current user
   electronApp.currentUser = userData;
   //Secure Against Screenshot and Recording    
@@ -124,4 +125,8 @@ electronApp.ipcMain.on("user_logout_get", (event) => {
   //Remove Currnt User From Memory
   electronApp.currentUser = {}
   electronApp.window.webContents.goBack();
+});
+
+electronApp.ipcMain.on("receipt_get", (event, data) => {
+  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/receipts/${data}`);
 });

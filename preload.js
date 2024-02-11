@@ -23,6 +23,9 @@ contextBridge.exposeInMainWorld("electron", {
   logOutCurrentUser : ()=>{
     ipcRenderer.send("user_logout_get");
   },
+  downloadPurchaseReceipt : (receipt)=>{
+    ipcRenderer.send("receipt_get",receipt);
+  },
   back:()=>{
     ipcRenderer.send("back_get");
   }
