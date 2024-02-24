@@ -164,7 +164,7 @@ input {
 
 .btn_google{
     border-radius: 8rem;
-    padding: 8px 16px;
+    padding: 8px 1rem;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
     border: 1px solid #7D7D7D;
     display: flex;
