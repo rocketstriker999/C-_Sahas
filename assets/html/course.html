@@ -49,6 +49,46 @@
         </div>
         <p class="title_secondary padding_2">Subjects</p>
         <div id="CONTAINER_SUBJECTS" class="container_subjects"></div>
+
+        <div id="DETAILS_REQUIRED_MODAL" class="detailsRequiredModal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="mainContainer">
+                    <div class="imgContainer">
+                        <img class="logo_detailsRequired" src="../img/resume.png" alt="Sahas" />
+                    </div>
+                    <div class="detailsContent">
+                        <p class="title_primary margin_top">Details Required</p>
+                        <p class="detailsInfo margin_top">Sahas collects some of the information from user who want
+                            to purchase the course, this information are collected in order to serve other users better
+                            in future</p>
+                    </div>
+                </div>
+                <div class="container_credentials card padding_2 margin_top">
+                    
+                    <div class="container_edittext margin_top">
+                        <i class="icon_edittext fa fa-phone" aria-hidden="true"></i>
+                        <input class="edittext" type="tel" id="ETX_SECONDARYPHONE" maxlength="10" placeholder="Secondary Phone number"
+                            required />
+                        <p id="VALIDATION_PHONE" class="error"></p>
+                    </div>
+                    <div id="COUNTER_SECONDARYPHONE" class="character_counter">0 / 10 characters</div>
+
+                    <div class="container_edittext margin_top">
+                        <i class="icon_edittext fas fa-user"></i>
+                        <textarea class="edittext" id="ETX_ADDRESS" name="address" placeholder="Address / Location"
+                            required></textarea>
+                        <p id="VALIDATION_ADDRESS" class="error"></p>
+                    </div>
+                    <div id="COUNTER_ADDRESS" class="character_counter">0 / 148 characters</div>
+
+                    <div class="divider margin_top"></div>
+                    <button id="BTN_UPDATE_DETAILS" class="btn_pink margin_top">Update Details</button>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>

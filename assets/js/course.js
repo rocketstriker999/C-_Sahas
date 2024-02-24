@@ -15,6 +15,20 @@ courseHandler.containerDemo = document.getElementById("CONTAINER_DEMO");
 courseHandler.btnCloseDemo = document.getElementById("BTN_CLOSE_SHEET");
 courseHandler.containerDemoData = document.getElementById("CONTAINER_DEMO_DATA");
 
+courseHandler.detailsRequiredModal = document.getElementById('DETAILS_REQUIRED_MODAL');
+courseHandler.btnUpdateDetails = document.getElementById("BTN_UPDATE_DETAILS");
+courseHandler.counterUserName = document.getElementById("COUNTER_USERNAME");
+courseHandler.counterAddress = document.getElementById("COUNTER_ADDRESS");
+courseHandler.counterSecondaryPhone = document.getElementById("COUNTER_SECONDARYPHONE");
+courseHandler.SecondaryPhone = document.getElementById("ETX_SECONDARYPHONE");
+courseHandler.Address = document.getElementById("ETX_ADDRESS");
+courseHandler.Username = document.getElementById("ETX_USERNAME");
+courseHandler.validationPhone = document.getElementById('VALIDATION_PHONE');
+courseHandler.validationAddress = document.getElementById('VALIDATION_ADDRESS');
+courseHandler.validationUsername = document.getElementById('VALIDATION_USERNAME');
+
+// var span = document.getElementById('closeModalBtn');
+
 //extract and generate get object passed from dashboard
 courseHandler.course = Object.fromEntries(new URLSearchParams(window.location.search));
 
@@ -27,6 +41,63 @@ courseHandler.courseName.innerHTML = courseHandler.course.std_name;
 courseHandler.courseDescription.innerHTML = courseHandler.course.std_desc;
 //set number of subject
 courseHandler.courseSubjects.innerHTML = `${courseHandler.course.sub_count} Subjects`;
+
+courseHandler.Address.addEventListener("input", (e) => {
+    courseHandler.counterAddress.innerText = e.target.value.length + " / 148 characters";
+});
+
+courseHandler.SecondaryPhone.addEventListener("input", (e) => {
+    courseHandler.counterSecondaryPhone.innerText = e.target.value.length + " / 10 characters";
+});
+
+//Update Details Required Button
+courseHandler.btnUpdateDetails.addEventListener("click", (e) => {  
+    if (courseHandler.validateInputs()) { 
+        console.log(courseHandler.Address.value);     
+        requestHelper.requestServer({
+            requestPath: "getStdAuth.php", requestMethod: "POST", requestPostBody: {
+                user_phone : courseHandler.SecondaryPhone.value,
+                user_address : courseHandler.Address.value,                           
+            }
+        }).then(response=> response.json()).then(jsonResponse => {
+            //Check If data Is Been set By User
+            console.log(jsonResponse.user_address);            
+                alert("Updated Data Successful");
+        }).catch(error => {
+            console.log(error);
+        });
+        
+    }
+});
+
+//Update Details Required Modal Feild Validation
+courseHandler.validateInputs = () => {
+    // Reset previous validation messages
+    courseHandler.validationAddress.style.display = "none";
+    courseHandler.validationPhone.style.display = "none";
+
+    courseHandler.Address.classList.remove('invalid_edittext');
+    courseHandler.SecondaryPhone.classList.remove('invalid_edittext');
+    if(courseHandler.SecondaryPhone.value){
+        if (courseHandler.SecondaryPhone.value.length < 10) {
+            courseHandler.setInputError('Please enter valid phone number', courseHandler.validationPhone, courseHandler.SecondaryPhone);
+            return false;
+        }
+    }
+    
+    if (!/^[a-zA-Z0-9\s,.'-]+$/.test(courseHandler.Address.value)) {
+        courseHandler.setInputError('Please enter Valid Address', courseHandler.validationAddress, courseHandler.Address)
+        return false;
+    }
+    return true;
+}
+
+courseHandler.setInputError = (error, validationArea, invalid_SECONDARYPHONE_ADDRESS) => {
+    validationArea.innerHTML = error;
+    validationArea.style.display = 'block'
+    invalid_SECONDARYPHONE_ADDRESS.classList.add('invalid_edittext')
+}
+
 
 //Back Button Click
 courseHandler.btnBack.addEventListener("click", (e) => {
@@ -233,14 +304,23 @@ window.electron.getCurrentUser((currentUser) => {
             std_name: courseHandler.course.std_name,
             is_combo: courseHandler.course.combo_id
         }
+        
     }).then(response => response.json()).then(jsonResponse => {
         //Check If Course Is Been Purchased By User
         courseHandler.course.isCoursePurchased = jsonResponse.isTaskSuccess == 'true';
 
         if (courseHandler.course.isCoursePurchased) {
             //User Has Already Purchased This Course
-            courseHandler.btnPurchaseCourse.style.display = "none"
+            courseHandler.btnPurchaseCourse.style.display = "none";
             courseHandler.showPurchaseInfo(jsonResponse.purchaseData);
+            //ShowDialogue Form Details  userdata
+            console.log(currentUser);
+            if(currentUser.user_secondary_phone =='' || currentUser.user_address == ''){
+                courseHandler.detailsRequiredModal.style.display = 'block';
+                courseHandler.SecondaryPhone.value = currentUser.user_secondary_phone;
+                courseHandler.Address.value = currentUser.user_address;
+                                
+            }     
         }
         else {
             //User Has Not Purchased This Course
@@ -255,7 +335,17 @@ window.electron.getCurrentUser((currentUser) => {
         console.warn(error);
     })
 });
+// When the user clicks on <span> (x), close the modal
+// span.addEventListener('click', function () {
+//     modal.style.display = 'none';
+//   });
 
+  // When the user clicks anywhere outside of the modal, close it
+  window.addEventListener('click', function (event) {
+    if (event.target === courseHandler.detailsRequiredModal) {
+        courseHandler.detailsRequiredModal.style.display = 'none';
+    }
+  });
 //Get Subject List
 courseHandler.loadSubjects = () => {
 
