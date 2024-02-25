@@ -1,49 +1,31 @@
 .container_profile {
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    gap: 2rem;
+    margin: 5% auto;
 }
 .container_profile_info{
     padding: 2rem;
     width: 28rem;
 }
-.profile-photo-container {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin-right: 20px;
+.container_profile_info h4{
+    text-align: center;
 }
-
+.profile-photo{
+    width: 8rem;
+}
 .edittext {
-    display: block;
     width: 100%;
 }
-
-.profile-header {
+.profile_header {
     display: flex;
     align-items: center;
-    margin-bottom: 10%;
+    gap: 2rem;
 }
-
-.profile_Device_details {
-    display: inline-block;
-    align-items: center;
-
-}
-
-/* .container_credentials{
-    width: 30rem;
-} */
-
 .btn_purple {
     width: 32%;
     border-radius: 15px;
     padding: 10px 16px;
 }
-
 .container_device {
     display: flex;
     align-items: center;
@@ -51,16 +33,10 @@
     gap: 0.5rem;
     font-weight: bold;
 }
-
 .error {
     display: none;
 }
-
-#container {
-    position: relative;
-}
-
-#label {
+.container_label{
     position: absolute;
     top: -6px;
     left: 20px;
@@ -73,19 +49,12 @@
     color: grey;
     font-weight: bold;
 }
-
-.icon_edittext {
-    left: 0px;
-}
-
 .btnApplyDetails {
     text-align: center;
 }
-
 .btnWallet {
     text-align: right;
 }
-
 .icon_edit {
     position: absolute;
     top: 50%;
