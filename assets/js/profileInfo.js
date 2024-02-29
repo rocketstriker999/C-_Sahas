@@ -32,7 +32,7 @@ profileInfoHandler.deviceId.innerHTML = `Your Device Id : ${requestHelper.getDat
 //Set UserName From Storage Initially
 window.electron.getCurrentUser((currentUser) => {
   profileInfoHandler.profilePhoto.src = `${requestHelper.serverAddress}/mobileApis/userImgs/${currentUser.user_img}`;
-  profileInfoHandler.extUsername.value = currentUser.user_name;
+  profileInfoHandler.extUsername.value = currentUser.user_full_name;
   profileInfoHandler.emailId.innerHTML = currentUser.user_email;
   profileInfoHandler.extPhone.value = currentUser.user_phone;
   profileInfoHandler.extPassword.value = currentUser.user_pass;
@@ -80,7 +80,7 @@ profileInfoHandler.btnAppyDetails.addEventListener("click", (e) => {
       requestHelper.requestServer({
         requestPath: "userUpdateProfile.php", requestMethod: "POST", requestPostBody: {
           user_email: currentUser.user_email,
-          user_name: profileInfoHandler.extUsername.value,
+          user_full_name: profileInfoHandler.extUsername.value,
           user_phone: profileInfoHandler.extPhone.value,
         }
       }).then(response => response.json()).then(jsonResponse => {
