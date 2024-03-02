@@ -39,9 +39,7 @@ window.electron.getCurrentUser((currentUser) => {
 
 //User Logout    
 dashBoardHandler.btnLogOut.addEventListener("click",(e)=>{
-    //remove user data from electron window
-    requestHelper.saveData("LOGGEDINUSEREMAIL","");
-    requestHelper.saveData("LOGGEDINUSERPASSWORD","");
+    //Logout user from electron window
     window.electron.logOutCurrentUser();
 });
 
