@@ -68,7 +68,7 @@ loginHandler.btnGoogleLogin.addEventListener("click", (e) => {
     window.electron.googleLogin((currentUser) => {
 
         requestHelper.requestServer({
-            requestPath: "googleSignIn.php", requestMethod: "POST", requestPostBody: {
+            requestPath: "userAccAuthGoogle.php", requestMethod: "POST", requestPostBody: {
                 user_name: currentUser.user_name,
                 user_email: currentUser.user_email,
                 user_phone: currentUser.user_phone,
