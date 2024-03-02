@@ -125,8 +125,10 @@ electronApp.ipcMain.on("user_logout_get", (event) => {
   //Remove Currnt User From Memory
   electronApp.currentUser = {}
   electronApp.window.webContents.goBack();
+  electronApp.window.webContents.executeJavaScript('localStorage.setItem("LOGGEDINUSEREMAIL", "");', true);
+  electronApp.window.webContents.executeJavaScript('localStorage.setItem("LOGGEDINUSERPASSWORD", "");', true);
 });
 
 electronApp.ipcMain.on("receipt_get", (event, data) => {
-  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/receipts/${data}`);
+  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/mobileApis/generateReceipt.php?transaction_id=${data}`);
 });
