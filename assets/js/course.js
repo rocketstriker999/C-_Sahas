@@ -240,7 +240,7 @@ window.electron.getCurrentUser((currentUser) => {
             //User Has Already Purchased This Course
             courseHandler.showPurchaseInfo(jsonResponse.purchaseData);
             courseHandler.btnPurchaseCourse.innerHTML = "Download Receipt"
-            courseHandler.btnPurchaseCourse.addEventListener("click", () => courseHandler.downloadPurchaseReceipt(jsonResponse.purchaseData[0].receipt));
+            courseHandler.btnPurchaseCourse.addEventListener("click", () => courseHandler.downloadPurchaseReceipt(jsonResponse.purchaseData[0].purchase_id));
         }
         else {
             //User Has Not Purchased This Course
@@ -367,7 +367,7 @@ courseHandler.openPurchaseForm = () =>
     window.location.href = `purchaseForm.html?${new URLSearchParams(courseHandler.course).toString()}`;
 
 
-courseHandler.downloadPurchaseReceipt = (receipt) => 
-    window.electron.downloadPurchaseReceipt(receipt);
+courseHandler.downloadPurchaseReceipt = (transactionId) => 
+    window.electron.downloadPurchaseReceipt(transactionId);
 
 

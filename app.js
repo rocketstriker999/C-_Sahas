@@ -130,5 +130,5 @@ electronApp.ipcMain.on("user_logout_get", (event) => {
 });
 
 electronApp.ipcMain.on("receipt_get", (event, data) => {
-  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/receipts/${data}`);
+  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/mobileApis/generateReceipt.php?transaction_id=${data}`);
 });
