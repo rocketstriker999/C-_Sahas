@@ -367,7 +367,7 @@ courseHandler.openPurchaseForm = () =>
     window.location.href = `purchaseForm.html?${new URLSearchParams(courseHandler.course).toString()}`;
 
 
-courseHandler.downloadPurchaseReceipt = (transactionId) => 
-    window.electron.downloadPurchaseReceipt(transactionId);
+courseHandler.downloadPurchaseReceipt = (purchaseId) => 
+    window.electron.downloadPurchaseReceipt(purchaseId);
 
 

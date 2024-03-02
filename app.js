@@ -129,6 +129,6 @@ electronApp.ipcMain.on("user_logout_get", (event) => {
   electronApp.window.webContents.executeJavaScript('localStorage.setItem("LOGGEDINUSERPASSWORD", "");', true);
 });
 
-electronApp.ipcMain.on("receipt_get", (event, data) => {
-  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/mobileApis/generateReceipt.php?transaction_id=${data}`);
+electronApp.ipcMain.on("receipt_get", (event, purchaseId) => {
+  libElectron.shell.openExternal(`https://sahasinstitute.com/adminportal/mobileApis/generateReceipt.php?purchase_id=${purchaseId}`);
 });
