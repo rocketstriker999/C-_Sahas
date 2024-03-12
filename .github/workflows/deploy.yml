@@ -17,12 +17,12 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
-      name: Checkout repository
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - run: npm run build
-      name: Build Sahas App
-
+    - name: Build Sahas App
+      run: npm run build
+      
     - run: Compress-Archive -Path builds/*.* -Destination sahas.zip
       name: Zipping App
 
@@ -47,6 +47,12 @@ jobs:
 
             - name: Starting Deployments
               run: unzip sahas.zip -d deploymentFiles
+
+            - name: Show Files
+              run: cd deploymentFiles
+
+            - name: ls
+              run: ls -a
 
             - name: Deploying
               run: echo "ftp -n <<EOF" > ftp.sh;
