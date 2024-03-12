@@ -48,12 +48,6 @@ jobs:
             - name: Starting Deployments
               run: unzip sahas.zip -d deploymentFiles
 
-            - name: Show Files
-              run: cd deploymentFiles
-
-            - name: ls
-              run: ls -a
-
             - name: Deploying
               run: echo "ftp -n <<EOF" > ftp.sh;
                    echo "open ftp.sahasinstitute.com" >> ftp.sh;
