@@ -5,23 +5,23 @@ let loginHandler = {};
 
 loginHandler.deviceId = document.getElementById("DEVICE_ID");
 
-//loginHandler.etxEmail = document.getElementById("ETX_EMAIL");
-//loginHandler.etxPassWord = document.getElementById("ETX_PASSWORD");
+loginHandler.etxEmail = document.getElementById("ETX_EMAIL");
+loginHandler.etxPassWord = document.getElementById("ETX_PASSWORD");
 loginHandler.error = document.getElementById("ERROR");
 
-//loginHandler.counterEmail = document.getElementById("COUNTER_EMAIL");
-//loginHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD");
+loginHandler.counterEmail = document.getElementById("COUNTER_EMAIL");
+loginHandler.counterPassWord = document.getElementById("COUNTER_PASSWORD");
 
-//loginHandler.btnLogin = document.getElementById("BTN_LOGIN");
+loginHandler.btnLogin = document.getElementById("BTN_LOGIN");
 loginHandler.btnGoogleLogin = document.getElementById("BTN_GOOGLE_LOGIN");
 loginHandler.btnCreateAccout = document.getElementById("BTN_CREATE_ACCOUNT");
-//loginHandler.validationEmail = document.getElementById('VALIDATION_EMAIL');
-//loginHandler.validationPassword = document.getElementById('VALIDATION_PASSWORD');
+loginHandler.validationEmail = document.getElementById('VALIDATION_EMAIL');
+loginHandler.validationPassword = document.getElementById('VALIDATION_PASSWORD');
 
 //Set Device Id From Storage Initially
 loginHandler.deviceId.innerHTML = `Your Device Id : ${requestHelper.getData("DEVICEID")}`;
 
-/*loginHandler.etxEmail.addEventListener("input", (e) => {
+loginHandler.etxEmail.addEventListener("input", (e) => {
     loginHandler.counterEmail.innerText = e.target.value.length + " / 32 characters";
 });
 
@@ -56,7 +56,7 @@ loginHandler.setInputError=(error,validationArea,etx)=>{
     etx.classList.add('invalid_edittext')
 }
 
-*/
+
 
 loginHandler.setAuthenticationError = (error) => {
     loginHandler.error.style.display = "block";
@@ -93,7 +93,7 @@ loginHandler.btnGoogleLogin.addEventListener("click", (e) => {
     });
 });
 
-/*
+
 loginHandler.btnLogin.addEventListener("click", (e) => {
     e.preventDefault(); //Stop Form Submission
 
@@ -120,7 +120,7 @@ loginHandler.btnLogin.addEventListener("click", (e) => {
         }).catch(error => loginHandler.setAuthenticationError(error));
 
     }
-});*/
+});
 
 loginHandler.btnCreateAccout.addEventListener("click", (e) => {
     e.preventDefault(); //Stop Form Submission
