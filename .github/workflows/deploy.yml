@@ -51,11 +51,13 @@ jobs:
             - name: Deploying
               run: echo "ftp -n <<EOF" > ftp.sh;
                    echo "open ftp.sahasinstitute.com" >> ftp.sh;
-                   echo "user u496732460.LCJpaQ37NH3Wdij mFY52q71yVVBHfr" >> ftp.sh;
+                   echo "user u496732460.C0mpl3xU3rnme R3nD0mK3yW0rd" >> ftp.sh;
                    echo "quote pasv" >> ftp.sh;
                    echo "binary" >> ftp.sh;
                    echo "prompt off" >> ftp.sh;
-                   echo "mput *" >> ftp.sh;
+                   echo "cd assets/win_updates" >> ftp.sh;
+                   echo "mput latest.yml" >> ftp.sh;
+                   echo "mput *.exe*" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
                    cd deploymentFiles;
