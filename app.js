@@ -3,9 +3,17 @@ const libPath = require("path");
 const crypto = require('crypto');
 const commonUtil = require('./utils/common.js');
 const configuration = require('./package.json');
-const updater = require('./updater');
+// const updater = require('./updater');
+const { autoUpdater } = require('electron-updater');
+const electron = require('electron');
+const Notification = electron.Notification;
+const ProgressBar = require('electron-progressbar');
 
-
+// log.transports.file.level = 'debug';
+autoUpdater.autoDownload = false;
+// autoUpdater.logger = log;
+let progressBar;
+let notification;
 //Electron App Instance
 let electronApp = libElectron.app;
 
@@ -50,10 +58,86 @@ electronApp.on("ready", () => {
   //electronApp.window.webContents.openDevTools();
   //Disable Right Click Due to Youtube Video Privacy
   electronApp.window.on("system-context-menu", (event, _point) => event.preventDefault());
-  //check for update
-  updater.init();
-  updater.checkUpdates()
+  // //check for update
+  //  updater.init();
+  //  updater.checkUpdates();
+  autoUpdater.checkForUpdates();
 });
+//Check update available.
+autoUpdater.on('update-available', (info) => {
+      notification = new Notification({ 
+          title: 'A new version is ready to download',
+          body: `${electronApp.getName()} version ${info.version} can be downloaded and installed`
+      });
+      notification.show();
+      progressBar = new ProgressBar({
+        indeterminate: false,
+        value : 0,
+        text: 'Updating Sahas Smart Studies.',
+        detail: 'Downloading the latest version. Please wait..',
+        title: 'Sahas Auto Updater',
+        browserWindow: {
+            backgroundColor: '#eee'
+        },
+        style: {
+            bar: {
+                'height': '10px',
+                'box-shadow': 'none',
+                'border-radius': '2px'
+            }
+        }
+    });
+    autoUpdater.downloadUpdate();    
+});
+
+// Download progress show the percentage of download is completed.
+autoUpdater.on('download-progress', (progressObj) => {
+  progressBar.value = progressObj.percent;
+  progressBar.detail =  `Downloading the latest version. Please wait   ${(progressObj.bytesPerSecond / 1000).toFixed(2)} KB/s (${(progressObj.transferred / 1000000).toFixed(2)} MB / ${(progressObj.total / 1000000).toFixed(2)} MB)`;
+});
+
+// The update is downloaded
+autoUpdater.on('update-downloaded', () => {
+  progressBar.setCompleted();
+  progressBar.close();  
+  // dialog.showMessageBox({
+  //     title: 'Ready to Install',
+  //     message: 'The software has been downloaded. Click Restart to relaunch the new version...',
+  //     buttons: ['Restart']
+  // })
+  autoUpdater.quitAndInstall();
+});
+
+// function createUpdateDialog(info) {
+//       // dialog.showMessageBox({
+//       //     type: 'info',
+//       //     title: 'Software Update',
+//       //     message: 'A new version of Sahas is available.',
+//       //     detail: `Sahas ${info.version} is now available & you have ${autoUpdater.currentVersion} installed. Would you like to download it now?`,
+//       //     buttons: ['Yes']
+//       // })
+//       startDownload();
+// }
+
+// function startDownload() {
+//   progressBar = new ProgressBar({
+//       indeterminate: false,
+//       text: 'Updating Sahas Smart Studies.',
+//       detail: 'Downloading the latest version. Please wait..',
+//       title: 'Sahas Auto Updater',
+//       browserWindow: {
+//           backgroundColor: '#eee'
+//       },
+//       style: {
+//           bar: {
+//               'height': '10px',
+//               'box-shadow': 'none',
+//               'border-radius': '2px'
+//           }
+//       }
+//   });
+//   autoUpdater.downloadUpdate();
+// }
 
 //Google Login Browser Request
 //Try To Acquire Single Instance Lock
