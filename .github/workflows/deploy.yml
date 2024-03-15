@@ -49,7 +49,7 @@ jobs:
               run: unzip sahas.zip -d deploymentFiles
 
             - name: Prepare Direct Download File
-              run : file=$(ls *.exe); zip -r "$file.zip" "$file"
+              run : cd deploymentFiles;file=$(ls *.exe); zip -r "$file.zip" "$file"
 
             - name: Deploy Updates
               run: echo "ftp -n <<EOF" > ftp.sh;
@@ -65,6 +65,5 @@ jobs:
                    echo "mput *.exe*" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
-                   cd deploymentFiles;
                    ls;                   
                    ../ftp.sh;
