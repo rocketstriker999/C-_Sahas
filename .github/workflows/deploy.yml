@@ -66,4 +66,4 @@ jobs:
                    echo "EOF" >> ftp.sh;
                    chmod +x ftp.sh;
                    ls;                   
-                   ../ftp.sh;
+                   ./ftp.sh;
