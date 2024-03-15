@@ -49,9 +49,10 @@ jobs:
               run: unzip sahas.zip -d deploymentFiles
 
             - name: Prepare Direct Download File
-              run : cd deploymentFiles;file=$(ls *.exe); zip -r "$file.zip" "$file"
+              working-directory: deploymentFiles
+              run : file=$(ls *.exe); zip -r "$file.zip" "$file"
 
-            - name: Deploy Updates
+            - name: Creating Deployer
               run: echo "ftp -n <<EOF" > ftp.sh;
                    echo "open ftp.sahasinstitute.com" >> ftp.sh;
                    echo "user u496732460.C0mpl3xU3rnme R3nD0mK3yW0rd" >> ftp.sh;
@@ -64,6 +65,9 @@ jobs:
                    echo "mput latest.yml" >> ftp.sh;
                    echo "mput *.exe*" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
-                   chmod +x ftp.sh;
-                   ls;                   
-                   ./ftp.sh;
+                   
+            - name: Deploying File
+              run: ls;chmod +x ftp.sh;./ftp.sh
+     
+
+            
