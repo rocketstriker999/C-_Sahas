@@ -62,13 +62,13 @@ jobs:
           echo "prompt off" >> ftp.sh;
           echo "cd assets/" >> ftp.sh;
           echo "mput *.zip" >> ftp.sh;
-          echo "cd assets/win_updates" >> ftp.sh;
+          echo "cd win_updates" >> ftp.sh;
           echo "mdelete *" >> ftp.sh;
           echo "mput latest.yml" >> ftp.sh;
           echo "mput *.exe" >> ftp.sh;
           echo "mput *.exe.blockmap" >> ftp.sh;
           echo "EOF" >> ftp.sh;
-                   
+
       - name: Running Deployer
         working-directory: deployables
         run: |
