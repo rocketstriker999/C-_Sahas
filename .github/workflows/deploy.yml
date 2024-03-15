@@ -68,7 +68,7 @@ jobs:
           echo "mput *.exe" >> ftp.sh;
           echo "mput *.exe.blockmap" >> ftp.sh;
           echo "EOF" >> ftp.sh;
-                   
+          
       - name: Running Deployer
         working-directory: deployables
         run: |
