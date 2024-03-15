@@ -1,73 +1,75 @@
 name: Push Updated Code
 
-on: 
-  push: 
-      branches:
-              - 'master'
+on:
+  push:
+    branches:
+      - 'master'
         
 jobs:
-
   build:
-    name: build
+    name: Build
     permissions: write-all
     runs-on: windows-latest
     
     env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Build Sahas App
-      run: npm run build
+      - name: Build Sahas App
+        run: npm run build
       
-    - run: Compress-Archive -Path builds/*.* -Destination sahas.zip
-      name: Zipping App
+      - name: Zipping Deployables
+        run: Compress-Archive -Path builds/*.* -Destination deployables.zip
 
-    - name: 'Preparing Deployables'
-      uses: actions/upload-artifact@v3
-      with:
-         name: sahas.zip
-         path: sahas.zip
-         retention-days: 1
+      - name: 'Uploading Deployables To Next Phase'
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployables.zip
+          path: deployables.zip
+          retention-days: 1
 
   deploy:
-        name: deploy
-        needs: build
-        permissions: write-all
-        runs-on: ubuntu-latest
-        steps:
+    name: Deploy
+    needs: build
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Downloading Deployables
+        uses: actions/download-artifact@v3
+        with:
+          name: deployables.zip
 
-            - name: Downloading Deployables
-              uses: actions/download-artifact@v3
-              with:
-                  name: sahas.zip
+      - name: Unzipping Deployables
+        run: unzip deployables.zip -d deployables
 
-            - name: Starting Deployments
-              run: unzip sahas.zip -d deploymentFiles
+      - name: Prepare Additional deployables
+        working-directory: deployables
+        run: |
+          file=$(ls *.exe)
+          zip -r "$file.zip" "$file"
 
-            - name: Prepare Direct Download File
-              working-directory: deploymentFiles
-              run : file=$(ls *.exe); zip -r "$file.zip" "$file"
-
-            - name: Creating Deployer
-              run: echo "ftp -n <<EOF" > ftp.sh;
-                   echo "open ftp.sahasinstitute.com" >> ftp.sh;
-                   echo "user u496732460.C0mpl3xU3rnme R3nD0mK3yW0rd" >> ftp.sh;
-                   echo "quote pasv" >> ftp.sh;
-                   echo "binary" >> ftp.sh;
-                   echo "prompt off" >> ftp.sh;
-                   echo "mput *.zip" >> ftp.sh;
-                   echo "cd assets/win_updates" >> ftp.sh;
-                   echo "mdelete *" >> ftp.sh;
-                   echo "mput latest.yml" >> ftp.sh;
-                   echo "mput *.exe*" >> ftp.sh;
-                   echo "EOF" >> ftp.sh;
+      - name: Prepare Deployer
+        working-directory: deployables
+        run: |
+          echo "ftp -n <<EOF" > ftp.sh;
+          echo "open ftp.sahasinstitute.com" >> ftp.sh;
+          echo "user u496732460.C0mpl3xU3rnme R3nD0mK3yW0rd" >> ftp.sh;
+          echo "quote pasv" >> ftp.sh;
+          echo "binary" >> ftp.sh;
+          echo "prompt off" >> ftp.sh;
+          echo "mput *.zip" >> ftp.sh;
+          echo "cd assets/win_updates" >> ftp.sh;
+          echo "mdelete *" >> ftp.sh;
+          echo "mput latest.yml" >> ftp.sh;
+          echo "mput *.exe*" >> ftp.sh;
+          echo "EOF" >> ftp.sh;
                    
-            - name: Deploying File
-              run: ls;chmod +x ftp.sh;./ftp.sh
-     
-
-            
+      - name: Running Deployer
+        working-directory: deployables
+        run: |
+          ls
+          chmod +x ftp.sh
+          ./ftp.sh
