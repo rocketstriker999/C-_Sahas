@@ -48,14 +48,19 @@ jobs:
             - name: Starting Deployments
               run: unzip sahas.zip -d deploymentFiles
 
-            - name: Deploying
+            - name: Prepare Direct Download File
+              run : file=$(ls *.exe); zip -r "$file.zip" "$file"
+
+            - name: Deploy Updates
               run: echo "ftp -n <<EOF" > ftp.sh;
                    echo "open ftp.sahasinstitute.com" >> ftp.sh;
                    echo "user u496732460.C0mpl3xU3rnme R3nD0mK3yW0rd" >> ftp.sh;
                    echo "quote pasv" >> ftp.sh;
                    echo "binary" >> ftp.sh;
                    echo "prompt off" >> ftp.sh;
+                   echo "mput *.zip" >> ftp.sh;
                    echo "cd assets/win_updates" >> ftp.sh;
+                   echo "mdelete *" >> ftp.sh;
                    echo "mput latest.yml" >> ftp.sh;
                    echo "mput *.exe*" >> ftp.sh;
                    echo "EOF" >> ftp.sh;
