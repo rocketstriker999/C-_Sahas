@@ -62,10 +62,9 @@ jobs:
           echo "quote pasv" >> ftp.sh;
           echo "binary" >> ftp.sh;
           echo "prompt off" >> ftp.sh;
-          echo "cd assets/" >> ftp.sh;
+          echo "cd assets/win_updates/" >> ftp.sh;
+          echo "mdelete *.zip" >> ftp.sh;
           echo "mput *.zip" >> ftp.sh;
-          echo "cd win_updates/" >> ftp.sh;
-          echo "mdelete *" >> ftp.sh;
           echo "mput latest.yml" >> ftp.sh;
           echo "mput *.exe" >> ftp.sh;
           echo "mput *.exe.blockmap" >> ftp.sh;
