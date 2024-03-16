@@ -48,9 +48,11 @@ jobs:
       - name: Prepare Additional deployables
         working-directory: deployables
         run: |
-          file=$(ls *.exe)
-          zip -r "$file.zip" "$file"
-
+          generatedEXE=$(ls *.exe)
+          deployableEXE=$(echo "$generatedEXE" | tr -d ' ')
+          mv "$generatedEXE" "$deployableEXE"
+          zip "$deployableEXE.zip" "$deployableEXE"
+          
       - name: Prepare Deployer
         working-directory: deployables
         run: |
