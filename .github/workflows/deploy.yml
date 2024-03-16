@@ -51,7 +51,7 @@ jobs:
           generatedEXE=$(ls *.exe)
           deployableZip=$(echo "$generatedEXE" | sed 's/.exe//g')
           deployableZip=$(echo "$generatedEXE" | tr -d ' ')
-          zip "$deployableZip" "$generatedEXE"
+          zip "$deployableZip.zip" "$generatedEXE"
           
       - name: Prepare Deployer
         working-directory: deployables
