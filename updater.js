@@ -5,45 +5,45 @@ const { autoUpdater } = require('electron-updater');
 //app updater
 let updater = {}
 
-//updater Notification
-updater.getUpdateNotification = (updateInfo) => new Notification({
-    title: 'A new version is ready to download',
-    body: `New version ${updateInfo.version} can be downloaded and installed`
-});
-
-//progressbar Notification
-/*
-updater.updateProgressBar= new electronProgressBar({
-    indeterminate: false,
-    value: 0,
-    text: 'Updating Sahas Smart Studies.',
-    detail: 'Downloading the latest version. Please wait..',
-    title: 'Sahas Auto Updater',
-    browserWindow: {
-        backgroundColor: '#eee'
-    },
-    style: {
-        bar: {
-            'height': '8px',
-            'box-shadow': 'none',
-            'border-radius': '2px'
-        }
-    }
-});*/
-
 //set app updater properties
 updater.init = () => {
     //By default checks for updates
     updater.autoUpdater = autoUpdater;
     updater.autoUpdater.autoDownload = false;
+
+    //updater Notification
+    updater.getUpdateNotification = (updateInfo) => new Notification({
+        title: 'A new version is ready to download',
+        body: `New version ${updateInfo.version} can be downloaded and installed`
+    });
+
+    //progressbar Notification
+    updater.updateProgressBar = new electronProgressBar({
+        indeterminate: false,
+        value: 0,
+        text: 'Updating Sahas Smart Studies.',
+        detail: 'Downloading the latest version. Please wait..',
+        title: 'Sahas Auto Updater',
+        browserWindow: {
+            backgroundColor: '#eee'
+        },
+        style: {
+            bar: {
+                'height': '8px',
+                'box-shadow': 'none',
+                'border-radius': '2px'
+            }
+        }
+    });
+
     updater.addListners();
 }
 
 updater.addListners = () => {
     //add listners
     autoUpdater.on('update-available', listnerUpdateAvailable);
-    //autoUpdater.on('download-progress', listnerUpdateDownloading);
-    autoUpdater.on('update-downloaded',listnerUpdateDownloaded );
+    autoUpdater.on('download-progress', listnerUpdateDownloading);
+    autoUpdater.on('update-downloaded', listnerUpdateDownloaded);
 }
 
 const listnerUpdateAvailable = (updateInfo) => {
@@ -52,14 +52,14 @@ const listnerUpdateAvailable = (updateInfo) => {
     updater.autoUpdater.downloadUpdate();
 }
 
-const listnerUpdateDownloading=(updateProgressInfo)=>{
+const listnerUpdateDownloading = (updateProgressInfo) => {
     updater.updateProgressBar.value = updateProgressInfo.percent;
-    updater.updateProgressBar.detail =  `Downloading the latest version. Please wait   ${(updateProgressInfo.bytesPerSecond / 1000).toFixed(2)} KB/s (${(updateProgressInfo.transferred / 1000000).toFixed(2)} MB / ${(updateProgressInfo.total / 1000000).toFixed(2)} MB)`;
+    updater.updateProgressBar.detail = `Downloading the latest version. Please wait   ${(updateProgressInfo.bytesPerSecond / 1000).toFixed(2)} KB/s (${(updateProgressInfo.transferred / 1000000).toFixed(2)} MB / ${(updateProgressInfo.total / 1000000).toFixed(2)} MB)`;
 }
 
-const listnerUpdateDownloaded =()=>{
+const listnerUpdateDownloaded = () => {
     autoUpdater.updateProgressBar.setCompleted();
-    autoUpdater.updateProgressBar.close();  
+    autoUpdater.updateProgressBar.close();
     autoUpdater.quitAndInstall();
 }
 
