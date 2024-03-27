@@ -17,8 +17,21 @@ updater.init = () => {
         body: `New version ${updateInfo.version} can be downloaded and installed`
     });
 
-    //progressbar Notification
-    updater.updateProgressBar = new electronProgressBar({
+    updater.addListners();
+}
+
+updater.addListners = () => {
+    //add listners
+    autoUpdater.on('update-available', listnerUpdateAvailable);
+    autoUpdater.on('download-progress', listnerUpdateDownloading);
+    autoUpdater.on('update-downloaded', listnerUpdateDownloaded);
+}
+
+const listnerUpdateAvailable = (updateInfo) => {
+    //show notification
+    updater.getUpdateNotification(updateInfo).show();
+    updater.autoUpdater.downloadUpdate();
+    updater.updateProgressBar=new electronProgressBar({
         indeterminate: false,
         value: 0,
         text: 'Updating Sahas Smart Studies.',
@@ -34,22 +47,7 @@ updater.init = () => {
                 'border-radius': '2px'
             }
         }
-    });
-
-    updater.addListners();
-}
-
-updater.addListners = () => {
-    //add listners
-    autoUpdater.on('update-available', listnerUpdateAvailable);
-    autoUpdater.on('download-progress', listnerUpdateDownloading);
-    autoUpdater.on('update-downloaded', listnerUpdateDownloaded);
-}
-
-const listnerUpdateAvailable = (updateInfo) => {
-    //show notification
-    updater.getUpdateNotification(updateInfo).show();
-    updater.autoUpdater.downloadUpdate();
+    })
 }
 
 const listnerUpdateDownloading = (updateProgressInfo) => {
