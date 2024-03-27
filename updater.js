@@ -10,28 +10,13 @@ updater.init = () => {
     //By default checks for updates
     updater.autoUpdater = autoUpdater;
     updater.autoUpdater.autoDownload = false;
-
-    //updater Notification
-    updater.getUpdateNotification = (updateInfo) => new Notification({
-        title: 'A new version is ready to download',
-        body: `New version ${updateInfo.version} can be downloaded and installed`
-    });
-
+    //start listners
     updater.addListners();
 }
 
-updater.addListners = () => {
-    //add listners
-    autoUpdater.on('update-available', listnerUpdateAvailable);
-    autoUpdater.on('download-progress', listnerUpdateDownloading);
-    autoUpdater.on('update-downloaded', listnerUpdateDownloaded);
-}
-
-const listnerUpdateAvailable = (updateInfo) => {
-    //show notification
-    updater.getUpdateNotification(updateInfo).show();
-    updater.autoUpdater.downloadUpdate();
-    updater.updateProgressBar=new electronProgressBar({
+ //setup progressbar
+ updater.createProgressBar =() => {
+    return new electronProgressBar({
         indeterminate: false,
         value: 0,
         text: 'Updating Sahas Smart Studies.',
@@ -47,7 +32,35 @@ const listnerUpdateAvailable = (updateInfo) => {
                 'border-radius': '2px'
             }
         }
-    })
+    });
+}
+
+
+
+updater.showNotification = (notificationTitle,notificationBody) => {
+    
+    if(updater.updateNotification!=null){
+        updater.updateNotification.dismiss();
+    }
+    
+    updater.updateNotification= new Notification({title: notificationTitle,body: notificationBody});
+    updater.updateNotification.show();
+     
+}
+
+updater.addListners = () => {
+    //add listners
+    updater.autoUpdater.on('update-available', listnerUpdateAvailable);
+    updater.autoUpdater.on('download-progress', listnerUpdateDownloading);
+    updater.autoUpdater.on('update-downloaded', listnerUpdateDownloaded);
+    updater.autoUpdater.on('error',listnerUpdateFailed);
+}
+
+
+const listnerUpdateAvailable = (updateInfo) => {
+    updater.autoUpdater.downloadUpdate();
+    //create a progressbar
+    updater.updateProgressBar = createProgressBar();
 }
 
 const listnerUpdateDownloading = (updateProgressInfo) => {
@@ -56,10 +69,17 @@ const listnerUpdateDownloading = (updateProgressInfo) => {
 }
 
 const listnerUpdateDownloaded = () => {
-    autoUpdater.updateProgressBar.setCompleted();
-    autoUpdater.updateProgressBar.close();
-    autoUpdater.quitAndInstall();
+    updater.updateProgressBar.setCompleted();
+    updater.updateProgressBar.close();
+    updater.autoUpdater.quitAndInstall();
 }
+
+const listnerUpdateFailed =  (error) => {
+    updater.autoUpdater.getUpdateprogressBar.setCompleted();
+    updater.autoUpdater.getUpdateprogressBar.close();
+    updater.showNotification("Failed To Update",`Failed To Update Sahas Smart Studies : ${error}`)
+};
+
 
 
 //Check updates
