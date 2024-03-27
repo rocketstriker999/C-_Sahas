@@ -61,7 +61,7 @@ updater.addListners = () => {
 
 const listnerUpdateAvailable = (updateInfo) => {
     //create a progressbar
-    updater.updateProgressBar = createProgressBar();
+    updater.updateProgressBar = updater.createProgressBar();
     //start update download
     updater.autoUpdater.downloadUpdate();
     
