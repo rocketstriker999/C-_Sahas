@@ -1,6 +1,6 @@
 {
   "name": "electron_sahas",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "This is Windows app For Sahas",
   "main": "app.js",
   "scripts": {

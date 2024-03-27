@@ -39,10 +39,12 @@ updater.init = () => {
 
 updater.showNotification = (notificationTitle,notificationBody) => {
     
-    if(updater.updateNotification!=null){
+    //dismiss if current notification bar is there
+    if(updater.updateNotification){
         updater.updateNotification.dismiss();
+        delete updater.updateNotification
     }
-    
+    //create a new notification
     updater.updateNotification= new Notification({title: notificationTitle,body: notificationBody});
     updater.updateNotification.show();
      
@@ -58,9 +60,11 @@ updater.addListners = () => {
 
 
 const listnerUpdateAvailable = (updateInfo) => {
-    updater.autoUpdater.downloadUpdate();
     //create a progressbar
     updater.updateProgressBar = createProgressBar();
+    //start update download
+    updater.autoUpdater.downloadUpdate();
+    
 }
 
 const listnerUpdateDownloading = (updateProgressInfo) => {
