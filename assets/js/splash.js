@@ -13,7 +13,7 @@ splashHandler.autoLogin = (email, password, deviceId) => {
 
   //Check If Credentials Exist - If Yes Check Login
   requestHelper.requestServer({
-    requestPath: "userAccAuth.php", requestMethod: "POST", requestPostBody: {
+    requestPath: "userAccAuth.php?platform=windows", requestMethod: "POST", requestPostBody: {
       user_email: email,
       user_pass: password,
       user_device: deviceId

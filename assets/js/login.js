@@ -56,8 +56,6 @@ loginHandler.setInputError=(error,validationArea,etx)=>{
     etx.classList.add('invalid_edittext')
 }
 
-
-
 loginHandler.setAuthenticationError = (error) => {
     loginHandler.error.style.display = "block";
     loginHandler.error.innerHTML = error;
@@ -68,7 +66,7 @@ loginHandler.btnGoogleLogin.addEventListener("click", (e) => {
     window.electron.googleLogin((currentUser) => {
 
         requestHelper.requestServer({
-            requestPath: "userAccAuthGoogle.php", requestMethod: "POST", requestPostBody: {
+            requestPath: "userAccAuthGoogle.php?platform=windows", requestMethod: "POST", requestPostBody: {
                 user_name: currentUser.user_name,
                 user_email: currentUser.user_email,
                 user_phone: currentUser.user_phone,
@@ -100,12 +98,14 @@ loginHandler.btnLogin.addEventListener("click", (e) => {
     if (loginHandler.validateInputs()) {
 
         requestHelper.requestServer({
-            requestPath: "userAccAuth.php", requestMethod: "POST", requestPostBody: {
+            requestPath: "userAccAuth.php?platform=windows", requestMethod: "POST", requestPostBody: {
                 user_email: loginHandler.etxEmail.value,
                 user_pass: loginHandler.etxPassWord.value,
                 user_device: requestHelper.getData("DEVICEID")
             }
         }).then(response => response.json()).then(jsonResponse => {
+            console.log(jsonResponse)
+
             if (jsonResponse.isTaskSuccess == 'true') {
                 //save current user for next app run
                 requestHelper.saveData("LOGGEDINUSEREMAIL",loginHandler.etxEmail.value);
@@ -126,4 +126,5 @@ loginHandler.btnCreateAccout.addEventListener("click", (e) => {
     e.preventDefault(); //Stop Form Submission
     window.location.href = 'createAccount.html'
 });
+
 
