@@ -6,6 +6,7 @@ dashBoardHandler.loggedInUserEmail = null;
 dashBoardHandler.userName = document.getElementById("USER_NAME");
 dashBoardHandler.courseContainer = document.getElementById("CONTAINER_COURSES");
 dashBoardHandler.btnLogOut = document.getElementById("BTN_LOG_OUT");
+dashBoardHandler.btnProfileInfo = document.getElementById("BTN_PROFILE_INFO");
 dashBoardHandler.containerTabs = document.querySelectorAll('.tab');
 
 //Tab click Handler
@@ -181,6 +182,11 @@ dashBoardHandler.showNoCoursesFound = () => {
     noContentFound.innerText = "No Content Found Here"
     dashBoardHandler.courseContainer.appendChild(noContentFound)
 }
+
+//Redirect to User Profile Info    
+dashBoardHandler.btnProfileInfo.addEventListener("click", (e) => {
+    window.location.href = 'profileInfo.html';
+});
 
 //Select All Courses Defaultly
 dashBoardHandler.containerTabs[0].click();
