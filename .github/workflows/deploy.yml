@@ -57,7 +57,7 @@ jobs:
         working-directory: deployables
         run: |
           echo "ftp -n <<EOF" > ftp.sh;
-          echo "open ftp.sahasinstitute.com" >> ftp.sh;
+          echo "open ftp://93.127.208.111" >> ftp.sh;
           echo "user u496732460.C0mpl3xU3rnme R3nD0mK3yW0rd" >> ftp.sh;
           echo "quote pasv" >> ftp.sh;
           echo "binary" >> ftp.sh;
