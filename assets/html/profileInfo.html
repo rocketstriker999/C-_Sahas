@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile</title>
+    <!--Common CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <!--Page Specific CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/profileInfo.css">
+    <!--Font Awesome CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!--File Specific JS-->
+    <script type="module" src="../js/helper.js"></script>
+    <script type="module" src="../js/profileInfo.js"></script>
+</head>
+
+<body>
+    <div class="container_profile">
+        <div class="container_profile_info card">
+            <h4 class="title_secondary">Profile</h4>
+            <div class="profile_header">
+                <img id="PROFILE_PHOTO" src="" alt="Profile Picture" class="profile-photo">
+                <!-- <i id="BTN_EDIT_PROFILE_PHOTO" style="position: relative;" class="icon_edit fas fa-pencil" aria-hidden="true"></i> -->
+                <div class="profile_Device_details">
+                    <div class="container_device margin_top">
+                        <img src="../img/device.png" alt="Device" />
+                        <p id="DEVICE_ID">Your Device Id : 75daw2423</p>
+                    </div>
+                    <div class="container_device margin_top">
+                        <img src="../img/device.png" alt="Device" />
+                        <p id="EMAIL_ID"></p>
+                    </div>
+                </div>
+            </div>
+            <form>
+                <div class="container_edittext margin_top">
+                    <div class="container_label">Name</div>
+                    <i class="icon_edittext fas fa-user"></i>
+                    <input class="edittext" type="text" id="ETX_USERNAME" readonly>
+                    <i id="BTN_EDIT_USERNAME" class="icon_edit fas fa-pencil" aria-hidden="true"></i>
+                    <p id="VALIDATION_USERNAME" class="error"></p>
+                </div>
+                <div class="container_edittext margin_top">
+                    <div class="container_label">Phone</div>
+                    <i class="icon_edittext fas fa-phone"></i>
+                    <input class="edittext" type="text" id="ETX_PHONE" readonly>
+                    <i id="BTN_EDIT_PHONE" class="icon_edit fas fa-pencil" aria-hidden="true"></i>
+                    <p id="VALIDATION_PHONE" class="error"></p>
+                </div>
+                <div class="container_edittext margin_top">
+                    <div class="container_label">Password</div>
+                    <i class="icon_edittext fas fa-lock"></i>
+                    <input class="edittext" type="password" id="ETX_PASSWORD" readonly>
+                    <span toggle="ETX_PASSWORD" id="BTN_EDIT_PASSWORD" class="icon_edit fa fa-eye"></span>
+                    <p id="VALIDATION_PASSWORD" class="error"></p>
+                </div>
+                <div class="btnApplyDetails margin_top">
+                    <button id="BTN_APPLYDETAILS" class="btn_purple" type="submit">Apply Details</button>
+                </div>
+                <br>
+                <div class="container_edittext margin_top">
+                    <div class="container_label">Wallet</div>
+                    <i class="icon_edittext fas fa-wallet"></i>
+                    <p class="edittext" type="text" id="ETX_WALLET">
+                        <i class="icon_edit fas fa-plus" aria-hidden="true"></i>
+                </div>
+                <div class="btnWallet">
+                    <button id="BTN_WIDTHDRAW" class="btn_purple margin_top" type="button">Withdraw</button>
+                </div>
+                <button id="BTN_BACK_TO_DASHBOARD" class="btn_purple" type="button">Back To Dashboard</button>
+            </form>
+        </div>
+
+        <div id="WIDTHDRAW_MODEL" class="withdraw_modal">
+            <!-- Modal content -->
+            <div class="modal-content container_profile_info">
+                <h4 class="title_secondary">Withdraw</h4>                
+                <div class="container card padding_2 margin_top">
+                    <div class="imgContainer">
+                        <img class="logo_bankIcon" src="../img/bankIcon.png" alt="Sahas" />
+                    </div>
+                    <div class="detailsContent">
+                        <p class="text_normal margin_top">In order to Withdraw your Wallet Money to your Bank Acoount
+                            fill below
+                            details. It can take few business days to Transfer the Funds.
+                        </p>
+                        <p class="text_normal amountText margin_top" id="AVAILABLE_AMOUNT">Available Amounts : 0 Rs
+                        </p>
+                    </div>
+                </div>
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext fas fa-lock"></i>
+                    <input class="edittext" type="text" id="ETX_ACCOUNT_HOLDER_NAME" maxlength="16"
+                        placeholder="Account Holder's Name" required />
+                        <p id="VALIDATION_ACCOUNT_HOLDER_NAME" class="error"></p>
+
+                </div>
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext fa-solid fa-building-columns"></i>
+                    <input class="edittext" type="text" id="ETX_ACCOUNT_NUMBER" maxlength="16"
+                        placeholder="Account Number" required />
+                        <p id="VALIDATION_ACCOUNT_NUMBER" class="error"></p>
+
+                </div>
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext fa-solid fa-list-ol"></i>
+                    <input class="edittext" type="text" id="ETX_IFSC_CODE" maxlength="16" placeholder="IFSC Code"
+                        required />
+                        <p id="VALIDATION_IFSC_CODE" class="error"></p>
+
+                </div>
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext fa-solid fa-indian-rupee-sign"></i>
+                    <input class="edittext" type="text" id="ETX_WITHDRAW_AMOUNT" maxlength="16"
+                        placeholder="Withdraw Amount" required />
+                        <p id="VALIDATION_WITHDRAW_AMOUNT" class="error"></p>
+
+                </div>
+                <div class="btnWithdraw">
+                    <button id="BTN_WIDTHDRAW_TO_ACCOUNT" class="btn_pink margin_top">Withdraw</button>
+                    <button id="BTN_BACK_TO_PROFILEINFO" class="btn_pink margin_top">Back</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

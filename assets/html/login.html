@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <!--Page Specific CSS-->
     <link rel="stylesheet" type="text/css" href="../css/login.css">
-     <!--Font Awesome CSS-->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!--Font Awesome CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!--File Speicifc JS-->
     <script type="module" src="../js/helper.js"></script>
     <script type="module" src="../js/login.js"></script>
@@ -20,50 +20,138 @@
 
         <div class="container_info">
 
-            <img class="logo_sahas" src = "../img/sahas.png" alt="Sahas"/>
+            <img class="logo_sahas" src="../img/sahas.png" alt="Sahas" />
 
             <p class="title_primary margin_top">Welcome Back !</p>
             <p class="title_secondary margin_top">Sign in to continue</p>
             <div class="container_device margin_top">
-                <img src = "../img/device.png" alt="Device"/>
+                <img src="../img/device.png" alt="Device" />
                 <p id="DEVICE_ID"></p>
             </div>
-            
+
 
         </div>
 
-        <div class = "container_credentials card padding_2">
+        <div class="container_credentials card padding_2">
             <form>
                 <h4 class="title_secondary">Login</h4>
                 <div class="container_edittext margin_top">
                     <i class="icon_edittext fas fa-envelope"></i>
-                    <input class="edittext" type="email" id="ETX_EMAIL" maxlength="32" placeholder="Email" required/>
+                    <input class="edittext" type="email" id="ETX_EMAIL" maxlength="32" placeholder="Email" required />
                     <p id="VALIDATION_EMAIL" class="error"></p>
-                 </div>
-                 <div id="COUNTER_EMAIL" class="character_counter">0 / 32 characters</div>
-                 <div class="container_edittext margin_top">
+                </div>
+                <div id="COUNTER_EMAIL" class="character_counter">0 / 32 characters</div>
+                <div class="container_edittext margin_top">
                     <i class="icon_edittext fas fa-lock"></i>
-                    <input class="edittext" type="password" id="ETX_PASSWORD" maxlength="16" placeholder="Password" required/>
+                    <input class="edittext" type="password" id="ETX_PASSWORD" maxlength="16" placeholder="Password"
+                        required />
                     <p id="VALIDATION_PASSWORD" class="error"></p>
-                 </div>
-                 <div id="COUNTER_PASSWORD" class="character_counter">0 / 16 characters</div>
+                </div>
+                <div id="COUNTER_PASSWORD" class="character_counter">0 / 16 characters</div>
+                <div class="forget_password_container">
+                    <button id="BTN_FORGET_PASSWORD" class="btnForgetPassword margin_top">Forget Password ?</button>
+                </div>
                 <button id="BTN_LOGIN" class="btn_purple margin_top" type="submit">Login</button>
                 <div id="BTN_GOOGLE_LOGIN" class="btn_google margin_top center_horizontal">
-                    <img src = "../img/google.png" alt="Google"/>
+                    <img src="../img/google.png" alt="Google" />
                     Sign in with Google
                 </div>
                 <p id="ERROR" class="error margin_top"></p>
                 <div class="divider margin_top"></div>
                 <button id="BTN_CREATE_ACCOUNT" class="btn_pink margin_top">Create Account</button>
-                
+
+
             </form>
         </div>
 
+        <!-- Forget Passwrod Model -->
+        <div id="FORGET_PASSWORD_MODAL" class="forgetPasswordModal">
+            <div class="modal-content">
+                <div class="mainContainer">
+                    <div class="detailsContent">
+                        <p class="title_primary margin_top">Let Us Get You In !</p>
+                        <p class="title_secondary margin_top">Reset Your Password</p>
+                    </div>
+                </div>
+                <div class="container card padding_2 margin_top">
+                    <div class="imgContainer">
+                        <img class="logo_emailVerification" src="../img/emailVerification.png" alt="Sahas" />
+                    </div>
+                    <div class="detailsContent">
+                        <p class="text_normal margin_top">Step -1:</p>
+                        <p class="text_normal margin_top">Reset Your Password</p>
+                        <p class="text_normal margin_top">Enter the Email Address Associated with your Sahas
+                            Account !!</p>
+                    </div>
+                </div>
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext fas fa-envelope"></i>
+                    <input class="edittext" type="email" id="ETX_EMAIL_SEND_OTP" maxlength="32" placeholder="Email"
+                        required />
+                    <p id="VALIDATION_EMAIL_SEND_OTP" class="error"></p>
+                </div>
+                <div class="divider margin_top"></div>
+                <button id="BTN_SEND_OTP" class="btn_pink margin_top">Send OTP</button>
+            </div>
+        </div>
 
+        <!-- OTP Verification Model -->
+        <div id="OTP_VERIFICATION_MODAL" class="forgetPasswordModal">
+            <div class="modal-content">
+                <div class="container_otpVerification card padding_2 margin_top">
+                    <img class="logo_emailVerification" src="../img/emailOtpVerificationLogo.png" alt="Sahas" />
 
+                    <div class="detailsContent">
+                        <p class="title_primary margin_top">OTP Verification</p>
+                        <p class="text_normal margin_top">OTP was send to</p>
+                    </div>
+                    <div class="container_edittext margin_top otp-container">
+                        <input type="text" maxlength="4" class="edittext otp-input" id="OTP_NUMBER">
+                    </div>
+                    <div>
+                        <p id="VALIDATION_OTP_NUMBER" class="error"></p>
+                    </div>
+                    <div class="divider margin_top"></div>
+                    <div class="container_buttons">
+                        <button id="BTN_RESEND" class="btn_pink margin_top">Resend</button>
+                        <button id="BTN_VERIFY" class="btn_pink margin_top">Verify</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset Passwrod Model -->
+        <div id="RESET_PASSWORD_MODAL" class="forgetPasswordModal">
+            <div class="modal-content">
+                <div class="mainContainer">
+                    <div class="detailsContent">
+                        <p class="title_primary margin_top">Let Us Get You In !</p>
+                        <p class="title_secondary margin_top">Reset Your Password</p>
+                    </div>
+                </div>
+                <div class="container card padding_2 margin_top">
+                    <div class="imgContainer">
+                        <img class="logo_emailVerification" src="../img/resetPassword.png" alt="Sahas" />
+                    </div>
+                    <div class="detailsContent">
+                        <p class="text_normal margin_top">Step -2:</p>
+                        <p class="text_normal margin_top">Enter New Password</p>
+                        <p class="text_normal margin_top">Enter The New Password That You Want To Change. Make Sure
+                            That You Note It Somewhere For The Future Usage.
+                        </p>
+                    </div>
+                </div>
+                <div class="container_edittext margin_top">
+                    <i class="icon_edittext fas fa-lock"></i>
+                    <input class="edittext" type="password" id="ETX_RESET_PASSWORD" maxlength="16"
+                        placeholder="Password" required />
+                    <p id="VALIDATION_RESET_PASSWORD" class="error"></p>
+                </div>
+                <div class="divider margin_top"></div>
+                <button id="BTN_CHANGE_PASSWORD" class="btn_pink margin_top">Change Password</button>
+            </div>
+        </div>
     </div>
-
-
 </body>
 
 </html>

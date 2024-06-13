@@ -6,7 +6,9 @@ dashBoardHandler.loggedInUserEmail = null;
 dashBoardHandler.userName = document.getElementById("USER_NAME");
 dashBoardHandler.courseContainer = document.getElementById("CONTAINER_COURSES");
 dashBoardHandler.btnLogOut = document.getElementById("BTN_LOG_OUT");
+dashBoardHandler.btnProfileInfo = document.getElementById("BTN_PROFILE_INFO");
 dashBoardHandler.containerTabs = document.querySelectorAll('.tab');
+dashBoardHandler.carouselImages = document.getElementById('CAROUSEL_IMAGES');
 
 //Tab click Handler
 dashBoardHandler.containerTabs.forEach((tab) => {
@@ -62,6 +64,45 @@ window.electron.getCurrentUser((currentUser) => {
 
                 }
 
+            }
+            if (jsonResponse.caroUselData) {
+                const data = jsonResponse.caroUselData;
+                const slideContainer = dashBoardHandler.carouselImages;
+                let slideContainerHtml = '';
+
+                data.forEach((img, index) => {
+                    slideContainerHtml += `
+                    <div class="carousel_item ${index === 0 ? 'active' : ''}">
+                        <img src="${requestHelper.serverAddress}/thumbnails/${img.carousel_img}">
+                    </div>`;
+                });
+
+                slideContainer.innerHTML = slideContainerHtml;
+
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel_item');
+                const totalSlides = slides.length;
+
+                const showSlide = (index) => {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                };
+
+                const nextSlide = () => {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    showSlide(currentSlide);
+                };
+
+                const prevSlide = () => {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    showSlide(currentSlide);
+                };
+
+                setInterval(nextSlide, 10000);
+
+                window.nextSlide = nextSlide;
+                window.prevSlide = prevSlide;
             }
         }
         else
@@ -181,6 +222,11 @@ dashBoardHandler.showNoCoursesFound = () => {
     noContentFound.innerText = "No Content Found Here"
     dashBoardHandler.courseContainer.appendChild(noContentFound)
 }
+
+//Redirect to User Profile Info    
+dashBoardHandler.btnProfileInfo.addEventListener("click", (e) => {
+    window.location.href = 'profileInfo.html';
+});
 
 //Select All Courses Defaultly
 dashBoardHandler.containerTabs[0].click();

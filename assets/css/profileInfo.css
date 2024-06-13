@@ -1,0 +1,101 @@
+.container_profile {
+    display: flex;
+    justify-content: center;
+    margin: 5% auto;
+}
+.container_profile_info{
+    padding: 2rem;
+    width: 28rem;
+}
+.container_profile_info h4{
+    text-align: center;
+}
+.profile-photo{
+    width: 8rem;
+}
+.edittext {
+    width: 100%;
+}
+.profile_header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.btn_purple {
+    width: 35%;
+    border-radius: 15px;
+    padding: 10px 16px;
+}
+.container_device {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+.error {
+    display: none;
+}
+.container_label{
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    padding: 4px;
+    width: auto;
+    background-color: #FAFAFA;
+    border-radius: 4px;
+    text-align: center;
+    padding-top: 0px;
+    color: grey;
+    font-weight: bold;
+}
+.btnApplyDetails {
+    text-align: center;
+}
+.btnWallet {
+    text-align: right;
+}
+.icon_edit {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #673AB7;
+}
+.withdraw_modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 32%;
+    border-radius: 1rem;
+}
+.title_primary {
+    font-size: 2rem;
+}
+.logo_bankIcon{
+    width: 100%;
+    height: 100%;
+}
+.container{
+    display: flex;
+    gap: 2rem;
+}
+.amountText{
+    color: #E91E63;
+}
+.btnWithdraw{
+    text-align: center;
+}
