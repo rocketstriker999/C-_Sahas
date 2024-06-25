@@ -11,3 +11,171 @@
 .title_chapter , .chapter_description{
     color: #FAFAFA;
 }
+
+.card, .question-container{
+    margin-top: 1rem;
+    padding: 30px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background-color: #FAFAFA;
+    border: 1px solid #E1E1E1;
+}
+
+.card div, .question p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.card i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+.card .chapter-name i {
+    color: #2c3e50;
+}
+.card .quiz-questions i {
+    color: #e74c3c;
+}
+.card .correct-answers i {
+    color: #27ae60;
+}
+.card .time-remaining i {
+    color: #2980b9;
+}
+.question-container {
+    display: none; /* Hide initially */
+}
+
+.start-btn {
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+}
+.start-btn:hover {
+    background-color: #1f639a;
+}
+
+.question-container .question p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.question-container .question button {
+    display: block;
+    width: 100%;
+    background-color: #f4f4f4;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.question-container .question button:hover {
+    background-color: #ddd;
+}
+.question-container .submit-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.question-container .submit-btn:hover {
+    background-color: #c0392b;
+}
+
+.selected {
+    background-color: #007bff !important; /* Blue background for selected */
+    color: white !important; /* White text color */
+}
+
+/* Style for correct answer */
+.correct {
+    background-color: #28a745 !important; /* Green background for correct */
+    color: white !important; /* White text color */
+}
+
+/* Style for incorrect answer */
+.incorrect {
+    background-color: #dc3545 !important; /* Red background for incorrect */
+    color: white !important; /* White text color */
+}
+
+
+/* Style for the popup */
+.score-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style for the popup content */
+  .score-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Style for the image */
+  .score-image {
+    width: 100px;
+    height: 100px;
+    background-image: url('../img/quizCompleted.png'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the header */
+  .score-popup h2 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Style for the paragraph */
+  .score-popup p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Style for the close button */
+  .close-btn {
+    background-color: #f05454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Close button hover effect */
+  .close-btn:hover {
+    background-color: #d94343;
+  }
