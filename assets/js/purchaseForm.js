@@ -187,7 +187,7 @@ purchaseHandler.handleCouponCode = (e) => {
                 course_original_price: purchaseHandler.course.std_price
             }
         }).then(response => response.json()).then(jsonResponse => {
-            purchaseHandler.course.discount = (jsonResponse.isTaskSuccess == "true" && jsonResponse.referal_discount > 0) ? jsonResponse.referal_discount : 0;
+            purchaseHandler.course.discount = (jsonResponse.isTaskSuccess == "true" && jsonResponse.discount_percent > 0) ? jsonResponse.discount_percent : 0;
             purchaseHandler.updatePayPrice()
         }).catch(error => {
             purchaseHandler.course.discount = 0;
