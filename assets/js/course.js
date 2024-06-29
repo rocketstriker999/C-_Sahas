@@ -14,6 +14,28 @@ courseHandler.containerTabs = document.querySelectorAll('.tab');
 courseHandler.containerDemo = document.getElementById("CONTAINER_DEMO");
 courseHandler.btnCloseDemo = document.getElementById("BTN_CLOSE_SHEET");
 courseHandler.containerDemoData = document.getElementById("CONTAINER_DEMO_DATA");
+courseHandler.containerAdditionalDetails = document.getElementById("CONTAINER_ADDITIONAL_DETILS");
+courseHandler.btnCloseModal = document.getElementById("BTN_CLOSE_MODAL");
+courseHandler.containerAdditionalDetails = document.getElementById("CONTAINER_ADDITIONAL_DETAILS");
+courseHandler.btnUpdateDetails = document.getElementById("BTN_UPDATE_DETAILS");
+courseHandler.counterUserName = document.getElementById("COUNTER_USERNAME");
+courseHandler.counterAddress = document.getElementById("COUNTER_ADDRESS");
+courseHandler.counterPhone = document.getElementById("COUNTER_PHONE");
+courseHandler.counterSecondaryPhone = document.getElementById("COUNTER_SECONDARYPHONE");
+courseHandler.Phone = document.getElementById("ETX_PHONE");
+courseHandler.secondaryPhone = document.getElementById("ETX_SECONDARY_PHONE");
+courseHandler.Address = document.getElementById("ETX_ADDRESS");
+courseHandler.Username = document.getElementById("ETX_USERNAME");
+courseHandler.Branch = document.getElementById("SELECT_BRANCH");
+courseHandler.validationPhone = document.getElementById('VALIDATION_PHONE');
+courseHandler.validationSecondaryPhone = document.getElementById('VALIDATION_SECONDARY_PHONE');
+courseHandler.validationAddress = document.getElementById('VALIDATION_ADDRESS');
+courseHandler.validationUsername = document.getElementById('VALIDATION_USERNAME');
+courseHandler.containerPhone = document.getElementById("CONTAINER_ETX_PHONE");
+courseHandler.containerSecondaryPhone = document.getElementById("CONTAINER_ETX_SECONDARY_PHONE");
+courseHandler.containerAddress = document.getElementById("CONTAINER_ETX_ADDRESS");
+courseHandler.containerUsername = document.getElementById("CONTAINER_ETX_USERNAME");
+courseHandler.containerBranch = document.getElementById("CONTAINER_SELECT_BRANCH");
 
 //extract and generate get object passed from dashboard
 courseHandler.course = Object.fromEntries(new URLSearchParams(window.location.search));
@@ -32,6 +54,97 @@ courseHandler.courseSubjects.innerHTML = `${courseHandler.course.sub_count} Subj
 courseHandler.btnBack.addEventListener("click", (e) => {
     window.electron.back();
 });
+
+courseHandler.btnCloseModal.addEventListener("click", (e) => {
+    courseHandler.containerAdditionalDetails.style.display = 'none';
+});
+
+courseHandler.Username.addEventListener("input", (e) => {
+    courseHandler.counterUserName.innerText = e.target.value.length + " / 22 characters";
+});
+
+courseHandler.Address.addEventListener("input", (e) => {
+    courseHandler.counterAddress.innerText = e.target.value.length + " / 148 characters";
+});
+
+courseHandler.Phone.addEventListener("input", (e) => {
+    courseHandler.counterPhone.innerText = e.target.value.length + " / 10 characters";
+});
+
+courseHandler.secondaryPhone.addEventListener("input", (e) => {
+    courseHandler.counterSecondaryPhone.innerText = e.target.value.length + " / 10 characters";
+});
+
+//Update Details Required Modal Feild Validation
+courseHandler.validateInputs = () => {
+        // Reset previous validation messages
+        courseHandler.validationUsername.style.display = "none";
+        courseHandler.validationAddress.style.display = "none";
+        courseHandler.validationPhone.style.display = "none";
+        courseHandler.validationSecondaryPhone.style.display = "none";
+
+        courseHandler.Username.classList.remove('invalid_edittext');
+        courseHandler.Address.classList.remove('invalid_edittext');
+        courseHandler.Phone.classList.remove('invalid_edittext');
+        courseHandler.secondaryPhone.classList.remove('invalid_edittext');
+
+
+        if (courseHandler.Username.value.length < 3) {
+                courseHandler.setInputError('Please enter Valid Username', courseHandler.validationUsername, courseHandler.Username)
+                return false;
+            }
+        
+        if (courseHandler.Phone.value.length < 10) {
+                courseHandler.setInputError('Please enter valid phone number', courseHandler.validationPhone, courseHandler.Phone);
+                return false;
+            }
+        
+        if (courseHandler.secondaryPhone.value.length > 0 && courseHandler.secondaryPhone.value.length < 10) {
+            courseHandler.setInputError('Please enter valid phone number', courseHandler.validationSecondaryPhone, courseHandler.secondaryPhone);
+            return false;
+            }
+        
+            if (!/^[a-zA-Z0-9\s,.'-]+$/.test(courseHandler.Address.value)) {
+                courseHandler.setInputError('Please enter Valid Address', courseHandler.validationAddress, courseHandler.Address)
+                return false;
+            }
+    
+    return true;
+}
+
+courseHandler.setInputError = (error, validationArea, invalid_USERNAME_PHONE_ADDRESS) => {
+    validationArea.innerHTML = error;
+    validationArea.style.display = 'block'
+    invalid_USERNAME_PHONE_ADDRESS.classList.add('invalid_edittext')
+}
+
+//Update Details Required Button
+courseHandler.btnUpdateDetails.addEventListener("click", (e) => {
+    window.electron.getCurrentUser((currentUser) => {
+        if (courseHandler.validateInputs()) {
+            requestHelper.requestServer({
+                requestPath: "userUpdateProfile.php", requestMethod: "POST", requestPostBody: {
+                    user_email: currentUser.user_email,
+                    user_full_name: courseHandler.Username.value,
+                    user_phone: courseHandler.Phone.value,
+                    user_secondary_phone: courseHandler.secondaryPhone.value,
+                    user_address: courseHandler.Address.value,
+                    ask_extra_info : "0"
+                }
+            }).then(response => response.json()).then(jsonResponse => {
+                console.log(jsonResponse);
+                if (jsonResponse.isTaskSuccess == 'true') {
+                    //save into current app memory
+                    window.electron.setCurrentUser(jsonResponse.userAccData);                    
+                    courseHandler.containerAdditionalDetails.style.display = 'none';
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    });
+});
+
 
 //Tab click Handler
 courseHandler.containerTabs.forEach((tab) => {
@@ -241,6 +354,20 @@ window.electron.getCurrentUser((currentUser) => {
             courseHandler.showPurchaseInfo(jsonResponse.purchaseData);
             courseHandler.btnPurchaseCourse.innerHTML = "Download Receipt"
             courseHandler.btnPurchaseCourse.addEventListener("click", () => courseHandler.downloadPurchaseReceipt(jsonResponse.purchaseData[0].purchase_id));
+        
+             //If course is purchased then check for additional Information
+            courseHandler.Username.value = currentUser.user_full_name;
+            courseHandler.Branch.value = (!!currentUser.user_branch) ? currentUser.user_branch : 'Waghodia Road';
+            courseHandler.Phone.value = currentUser.user_phone;
+            courseHandler.secondaryPhone.value = currentUser.user_secondary_phone;
+            courseHandler.Address.value = currentUser.user_address;
+
+            courseHandler.containerBranch.style.display = (!!currentUser.user_branch) ? 'none' : (jsonResponse.purchaseData[0].study_mode == 'App' ? 'none' : 'flex');
+            
+
+            if(jsonResponse.userAccData.ask_extra_info == "1"){
+                courseHandler.containerAdditionalDetails.style.display = 'block'
+            }
         }
         else {
             //User Has Not Purchased This Course
