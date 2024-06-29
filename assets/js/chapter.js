@@ -220,7 +220,7 @@ chapterHandler.showSelfTest = () => {
         let remainingTime = chapterHandler.chapter.quiz_mins * 60; // Assuming quiz_mins is in minutes
         let selectedAnswer = null;
         let questionAnswered = false; // Flag to track if question has been answered
-        let questionDisplayed = false; // Flag to track if question has been displayed initially
+        let timerInterval; // Make timerInterval accessible
 
         const updateTimer = () => {
             const minutes = Math.floor(remainingTime / 60);
@@ -230,7 +230,7 @@ chapterHandler.showSelfTest = () => {
 
         const startTimer = () => {
             updateTimer();
-            const timerInterval = setInterval(() => {
+            timerInterval = setInterval(() => {
                 if (remainingTime > 0) {
                     remainingTime--;
                     updateTimer();
@@ -321,6 +321,7 @@ chapterHandler.showSelfTest = () => {
         };
 
         const showFinalScore = () => {
+            clearInterval(timerInterval); // Stop the timer
             const scorePercentage = ((correctAnswersCount / chapterHandler.selfTest.length) * 100).toFixed(2); // Round to two decimal places
             const scorePopup = document.createElement('div');
             scorePopup.className = 'score-popup';
