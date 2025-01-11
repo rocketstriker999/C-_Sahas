@@ -148,7 +148,7 @@ purchaseHandler.requestForHash = (currentUser) => {
 
             <div class="container_edittext margin_top">
                 <i class="icon_edittext fa fa-phone" aria-hidden="true"></i>
-                <input class="edittext" name="phone" type="tel" maxlength="10" placeholder="Phone number" pattern="[789][0-9]{9}" oninvalid="this.setCustomValidity('Invlid Phone Number')"  required/>
+                <input class="edittext" name="phone" type="tel" maxlength="10" placeholder="Phone number" pattern="[789][0-9]{9}" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Invlid Phone Number')" required/>
             </div>
             
             <input type="submit" class="margin_top btn_pink" value="Continue">`
